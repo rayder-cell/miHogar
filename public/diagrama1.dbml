@@ -1,0 +1,51 @@
+// ============================================================
+// SCHEMA DBML - Inmobiliaria miHogar
+// ============================================================
+
+Table usuarios {
+  id_usuario        int           [pk, increment]
+  dni               varchar(20)   [not null, unique]
+  telefono          varchar(20)
+  correo            varchar(150)  [not null, unique]
+  contrasena        varchar(255)  [not null]
+  nombre            varchar(100)  [not null]
+  comentario        text
+  titulo_comentario varchar(200)
+}
+
+Table proyectos {
+  id_proyecto     int           [pk, increment]
+  nombre_proyecto varchar(200)  [not null, unique, note: 'clave candidata']
+  distrito        varchar(100)
+  direccion       varchar(255)
+  descripcion     text
+  fotos           text
+  videos          text
+}
+
+Table asesores_venta {
+  id_asesor  int           [pk, increment]
+  nombre     varchar(100)  [not null]
+  foto       text
+  contacto   varchar(150)
+}
+
+Table usuarios_proyectos {
+  id_usuario   int       [not null, ref: > usuarios.id_usuario]
+  id_proyecto  int       [not null, ref: > proyectos.id_proyecto]
+  fecha_acceso timestamp [default: `now()`]
+
+  indexes {
+    (id_usuario, id_proyecto) [pk]
+  }
+}
+
+Table asesores_proyectos {
+  id_asesor    int       [not null, ref: > asesores_venta.id_asesor]
+  id_proyecto  int       [not null, ref: > proyectos.id_proyecto]
+  fecha_acceso timestamp [default: `now()`]
+
+  indexes {
+    (id_asesor, id_proyecto) [pk]
+  }
+}
