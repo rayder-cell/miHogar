@@ -9,9 +9,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table      = 'usuarios';
-    protected $primaryKey = 'id_usuario';
-    public $timestamps    = false;
+    protected $table          = 'usuarios';
+    protected $primaryKey     = 'id_usuario';
+    public $timestamps        = false;
+    protected $authPasswordName = 'contrasena'; // ← esta línea
 
     protected $fillable = [
         'nombre',
@@ -26,24 +27,6 @@ class User extends Authenticatable
     protected $hidden = [
         'contrasena',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'contrasena' => 'hashed',
-        ];
-    }
-
-    // ← Agrega estos métodos
-    public function getEmailAttribute()
-    {
-        return $this->correo;
-    }
-
-    public function setEmailAttribute($value)
-    {
-        $this->correo = $value;
-    }
 
     public function getAuthPassword()
     {

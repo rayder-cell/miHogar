@@ -12,6 +12,7 @@ class Proyecto extends Model
 
     protected $fillable = [
         'nombre_proyecto',
+        'precio',
         'distrito',
         'direccion',
         'descripcion',
@@ -19,7 +20,6 @@ class Proyecto extends Model
         'videos',
         'mapa',
     ];
-
     public function usuarios()
     {
         return $this->belongsToMany(
@@ -37,6 +37,6 @@ class Proyecto extends Model
             'asesores_proyectos',
             'id_proyecto',
             'id_asesor'
-        )->withPivot('fecha_acceso');
+        )->withPivot('fecha_asignacion');
     }
 }

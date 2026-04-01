@@ -9,6 +9,25 @@ use Illuminate\Support\Facades\Storage;
 
 class ProyectoAdminController extends Controller
 {
+    private function convertirYoutubeEmbed($url)
+    {
+        if (!$url) return null;
+
+        if (str_contains($url, 'youtube.com/embed/')) {
+            return preg_replace('/\?.*/', '', $url);
+        }
+
+        if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $url, $m)) {
+            return 'https://www.youtube.com/embed/' . $m[1];
+        }
+
+        if (preg_match('/youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]+)/', $url, $m)) {
+            return 'https://www.youtube.com/embed/' . $m[1];
+        }
+
+        return $url;
+    }
+
     public function index()
     {
         $proyectos = Proyecto::all();
@@ -44,7 +63,7 @@ class ProyectoAdminController extends Controller
                 'direccion'       => $request->direccion,
                 'descripcion'     => $request->descripcion,
                 'fotos'           => $ruta ? 'storage/' . $ruta : null,
-                'videos'          => $request->videos,
+                'videos'          => $this->convertirYoutubeEmbed($request->videos),
                 'mapa'            => $request->mapa,
             ]);
 
@@ -74,6 +93,7 @@ class ProyectoAdminController extends Controller
             'mapa'            => 'nullable|string',
         ]);
 
+        // Foto: solo actualiza si se sube una nueva
         if ($request->hasFile('foto')) {
             $ruta = $request->file('foto')->store('images/proyectos', 'public');
             $proyecto->fotos = 'storage/' . $ruta;
@@ -83,8 +103,17 @@ class ProyectoAdminController extends Controller
         $proyecto->distrito        = $request->distrito;
         $proyecto->direccion       = $request->direccion;
         $proyecto->descripcion     = $request->descripcion;
-        $proyecto->videos          = $request->videos;
-        $proyecto->mapa            = $request->mapa;
+
+        // ✅ Video: solo actualiza si el usuario envió algo
+        if ($request->filled('videos')) {
+            $proyecto->videos = $this->convertirYoutubeEmbed($request->videos);
+        }
+
+        // ✅ Mapa: solo actualiza si el usuario envió algo
+        if ($request->filled('mapa')) {
+            $proyecto->mapa = $request->mapa;
+        }
+
         $proyecto->save();
 
         return redirect()->route('admin.proyectos.index')

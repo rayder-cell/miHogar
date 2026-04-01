@@ -14,6 +14,7 @@
             <th>Nombre</th>
             <th>Distrito</th>
             <th>Dirección</th>
+            <th>Precio</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -24,6 +25,7 @@
             <td>{{ $proyecto->nombre_proyecto }}</td>
             <td>{{ $proyecto->distrito }}</td>
             <td>{{ $proyecto->direccion }}</td>
+            <td>{{ $proyecto->precio ?? 'No especificado' }}</td>
             <td style="display:flex; gap:8px;">
                 <a href="{{ route('admin.proyectos.edit', $proyecto->id_proyecto) }}" class="btn-secondary">✏️ Editar</a>
                 <form method="POST" action="{{ route('admin.proyectos.destroy', $proyecto->id_proyecto) }}"
@@ -36,7 +38,7 @@
         </tr>
         @empty
         <tr>
-            <td colspan="5" style="text-align:center; color:#aaa; padding:30px;">No hay proyectos registrados.</td>
+            <td colspan="6" style="text-align:center; color:#aaa; padding:30px;">No hay proyectos registrados.</td>
         </tr>
         @endforelse
     </tbody>
