@@ -141,6 +141,7 @@
             <span><img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar"><small style="color:#aaa; font-size:0.75rem;"></small></span>
         </div>
         <ul>
+            <li><a href="{{ route('admin.proyectos.index') }}" class="{{ request()->is('admin') ? 'active' : '' }}">🏠 Inicio</a></li>
             <li><a href="{{ route('admin.proyectos.index') }}" class="{{ request()->is('admin/proyectos*') ? 'active' : '' }}">🏗️ Proyectos</a></li>
             <li><a href="{{ route('admin.asesores.index') }}" class="{{ request()->is('admin/asesores*') ? 'active' : '' }}">👥 Asesores</a></li>
             <li><a href="{{ url('/') }}">🌐 Ver sitio web</a></li>

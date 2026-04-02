@@ -68,7 +68,11 @@
         <!-- MENÚ + LOGIN a la derecha -->
         <div style="display:flex; align-items:center; gap:35px; margin-left:auto;">
             <ul>
+                <!-- 🔍 LUPA -->
                 <li><a href="#"><i class="fas fa-search"></i></a></li>
+
+                <!-- INICIO -->
+                <li><a href="{{ url('/') }}">Inicio</a></li>
 
                 <!-- DROPDOWN PROYECTOS -->
                 <li class="menu-item-proyectos">

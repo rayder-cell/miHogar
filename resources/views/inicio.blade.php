@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!-- ===== HERO (sin cambios) ===== -->
+<!-- ===== HERO ===== -->
 <section style="position:relative; min-height:90vh; overflow:hidden; background:#000;">
 
     @foreach($proyectos as $index => $proyecto)
@@ -83,41 +83,101 @@
             </p>
         </div>
 
-        <!-- FORMULARIO DERECHA -->
-        <div style="background:#c9a84c; border-radius:12px; padding:35px; width:360px; flex-shrink:0;">
+        <!-- FORMULARIO PASO 1 -->
+        <div id="form-paso1" style="background:#c9a84c; border-radius:12px; padding:35px; width:400px; flex-shrink:0; box-sizing:border-box;">
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-                <div style="width:28px; height:28px; background:#000; color:#c9a84c; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.85rem;">1</div>
+                <div style="width:28px; height:28px; background:#000; color:#c9a84c; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">1</div>
                 <div style="flex:1; height:2px; background:#000; opacity:0.3;"></div>
-                <div style="width:28px; height:28px; background:#fff; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.85rem; border:2px solid #000;">2</div>
+                <div style="width:28px; height:28px; background:#fff; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; border:2px solid #000;">2</div>
             </div>
             <h3 style="color:#000; font-weight:900; font-size:1.1rem; margin-bottom:20px; text-align:center;">Quiero recibir información</h3>
             <div style="display:flex; flex-direction:column; gap:12px;">
                 <div style="display:flex; gap:10px;">
-                    <input type="text" placeholder="Nombre*" style="flex:1; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none;">
-                    <input type="text" placeholder="Apellidos*" style="flex:1; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none;">
+                    <input id="nombre" type="text" placeholder="Nombre*"
+                           style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000;">
+                    <input id="apellidos" type="text" placeholder="Apellidos*"
+                           style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000;">
                 </div>
-                <input type="text" placeholder="DNI*" style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                <input type="tel" placeholder="Teléfono*" style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                <input type="email" placeholder="Correo electrónico*" style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                <select style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                <input id="dni" type="text" placeholder="DNI*"
+                       style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000;">
+                <input id="telefono" type="tel" placeholder="Teléfono*"
+                       style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000;">
+                <input id="correo" type="email" placeholder="Correo electrónico*"
+                       style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000;">
+                <select id="proyecto" style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000;">
                     <option value="">Proyecto de interés</option>
                     @foreach($proyectos as $p)
-                    <option value="{{ $p->id_proyecto }}">{{ $p->nombre_proyecto }}</option>
+                    <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
                     @endforeach
                 </select>
                 <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#000; cursor:pointer;">
-                    <input type="checkbox" style="margin-top:2px;">
+                    <input type="checkbox" id="acepto" style="margin-top:2px;">
                     Acepto el tratamiento de mis datos personales.
                 </label>
-                <button style="background:#000; color:#c9a84c; padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%;"
-                    onmouseover="this.style.background='#222'"
-                    onmouseout="this.style.background='#000'">
+                <button onclick="enviarFormulario()"
+                        style="background:#000; color:#c9a84c; padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%;">
                     Solicitar información
                 </button>
+                <p id="msg-error" style="color:red; font-size:0.8rem; display:none; text-align:center;"></p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- MODAL VERIFICACIÓN PASO 2 -->
+<div id="modal-verificacion" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#1a1a1a; border:2px solid #c9a84c; border-radius:16px; padding:35px; width:380px; text-align:center;">
+
+        <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:20px;">
+            <div style="width:28px; height:28px; background:#c9a84c; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">✓</div>
+            <div style="flex:1; height:2px; background:#c9a84c; max-width:80px;"></div>
+            <div style="width:28px; height:28px; background:#c9a84c; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">2</div>
+        </div>
+
+        <p style="color:#fff; font-size:0.95rem; margin-bottom:5px;">Hemos enviado un código de 4 dígitos a tu correo:</p>
+        <p id="correo-mostrado" style="color:#c9a84c; font-size:1rem; font-weight:bold; margin-bottom:20px;"></p>
+
+        <div style="display:flex; gap:10px; justify-content:center; margin-bottom:20px;">
+            <input id="c1" type="text" maxlength="1"
+                   style="width:60px; height:60px; text-align:center; font-size:1.5rem; font-weight:bold; border:2px solid #c9a84c; border-radius:10px; outline:none; background:#fff; color:#000;"
+                   oninput="moverFoco(this, 'c2')">
+            <input id="c2" type="text" maxlength="1"
+                   style="width:60px; height:60px; text-align:center; font-size:1.5rem; font-weight:bold; border:2px solid #c9a84c; border-radius:10px; outline:none; background:#fff; color:#000;"
+                   oninput="moverFoco(this, 'c3')">
+            <input id="c3" type="text" maxlength="1"
+                   style="width:60px; height:60px; text-align:center; font-size:1.5rem; font-weight:bold; border:2px solid #c9a84c; border-radius:10px; outline:none; background:#fff; color:#000;"
+                   oninput="moverFoco(this, 'c4')">
+            <input id="c4" type="text" maxlength="1"
+                   style="width:60px; height:60px; text-align:center; font-size:1.5rem; font-weight:bold; border:2px solid #c9a84c; border-radius:10px; outline:none; background:#fff; color:#000;"
+                   oninput="moverFoco(this, null)">
+        </div>
+
+        <p style="color:#aaa; font-size:0.82rem; margin-bottom:15px;">
+            ¿No recibiste el código?
+            <a href="#" onclick="reenviarCodigo()" style="color:#c9a84c; font-weight:bold;">Reenviar</a>
+        </p>
+
+        <p style="color:#fff; font-size:0.9rem; margin-bottom:8px; text-align:left;">¿En qué horario prefieres que te llamemos?</p>
+        <select id="horario" style="width:100%; padding:10px 14px; border:2px solid #c9a84c; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000; margin-bottom:15px;">
+            <option value="">Elige el horario de tu preferencia</option>
+            <option value="Mañana (8am - 12pm)">Mañana (8am - 12pm)</option>
+            <option value="Tarde (12pm - 6pm)">Tarde (12pm - 6pm)</option>
+            <option value="Noche (6pm - 9pm)">Noche (6pm - 9pm)</option>
+        </select>
+
+        <p id="msg-verificacion" style="color:red; font-size:0.82rem; margin:10px 0; display:none;"></p>
+        <p id="msg-exito" style="color:#4caf50; font-size:0.82rem; margin:10px 0; display:none;"></p>
+
+        <button onclick="verificarCodigo()"
+                style="background:#c9a84c; color:#000; padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%; margin-top:5px;">
+            Enviar
+        </button>
+        <button onclick="cerrarModal()"
+                style="background:transparent; color:#aaa; padding:10px; border:none; font-size:0.85rem; cursor:pointer; width:100%; margin-top:5px;">
+            Cancelar
+        </button>
+    </div>
+</div>
 
 <!-- ===== TESTIMONIOS ===== -->
 <section style="background:#fff; padding:70px 20px;">
@@ -164,29 +224,136 @@
     </div>
 </section>
 
-<!-- SCRIPT SLIDER -->
+<!-- TODOS LOS SCRIPTS AL FINAL -->
 <script>
-    let actual = 0;
-    const slides = document.querySelectorAll('.slide');
-    const puntos = document.querySelectorAll('.punto');
-    const infos  = document.querySelectorAll('.info-slide');
+function enviarFormulario() {
+    const nombre    = document.getElementById('nombre').value.trim();
+    const apellidos = document.getElementById('apellidos').value.trim();
+    const dni       = document.getElementById('dni').value.trim();
+    const telefono  = document.getElementById('telefono').value.trim();
+    const correo    = document.getElementById('correo').value.trim();
+    const proyecto  = document.getElementById('proyecto').value;
+    const acepto    = document.getElementById('acepto').checked;
+    const error     = document.getElementById('msg-error');
 
-    function mostrarSlide(n) {
-        if (!slides.length) return;
-        slides.forEach(s => s.style.opacity = '0');
-        puntos.forEach(p => p.style.background = 'rgba(255,255,255,0.5)');
-        infos.forEach(i => i.style.display = 'none');
-        actual = (n + slides.length) % slides.length;
-        slides[actual].style.opacity = '1';
-        puntos[actual].style.background = '#c9a84c';
-        if (infos[actual]) infos[actual].style.display = 'block';
+    if (!nombre || !apellidos || !dni || !telefono || !correo || !proyecto) {
+        error.textContent = 'Por favor completa todos los campos.';
+        error.style.display = 'block';
+        return;
     }
-    function cambiarSlide(dir) { mostrarSlide(actual + dir); }
-    function irASlide(n) { mostrarSlide(n); }
-    if (slides.length > 0) {
-        mostrarSlide(0);
-        setInterval(() => cambiarSlide(1), 5000);
+    if (!acepto) {
+        error.textContent = 'Debes aceptar el tratamiento de datos.';
+        error.style.display = 'block';
+        return;
     }
+
+    error.style.display = 'none';
+
+    fetch('{{ route("contacto.enviar") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ nombre, apellidos, dni, telefono, correo, proyecto })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('correo-mostrado').textContent = correo;
+            document.getElementById('modal-verificacion').style.display = 'flex';
+        } else {
+            error.textContent = data.message || 'Error al enviar. Intenta de nuevo.';
+            error.style.display = 'block';
+        }
+    })
+    .catch(() => {
+        error.textContent = 'Error de conexión. Intenta de nuevo.';
+        error.style.display = 'block';
+    });
+}
+
+function moverFoco(actual, siguienteId) {
+    if (actual.value && siguienteId) {
+        document.getElementById(siguienteId).focus();
+    }
+}
+
+function verificarCodigo() {
+    const msg     = document.getElementById('msg-verificacion');
+    const exito   = document.getElementById('msg-exito');
+    const horario = document.getElementById('horario').value;
+
+    if (!horario) {
+        msg.textContent = '⚠️ Por favor elige un horario de llamada.';
+        msg.style.display = 'block';
+        return;
+    }
+
+    fetch('{{ route("contacto.verificar") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            codigo1: document.getElementById('c1').value,
+            codigo2: document.getElementById('c2').value,
+            codigo3: document.getElementById('c3').value,
+            codigo4: document.getElementById('c4').value,
+            horario: horario
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            msg.style.display = 'none';
+            exito.textContent = '✅ ¡Verificación exitosa! Nos contactaremos contigo pronto.';
+            exito.style.display = 'block';
+            setTimeout(() => cerrarModal(), 2500);
+        } else {
+            exito.style.display = 'none';
+            msg.textContent = '❌ Código incorrecto. Intenta de nuevo.';
+            msg.style.display = 'block';
+        }
+    });
+}
+
+function cerrarModal() {
+    document.getElementById('modal-verificacion').style.display = 'none';
+    ['c1','c2','c3','c4'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('msg-verificacion').style.display = 'none';
+    document.getElementById('msg-exito').style.display = 'none';
+    document.getElementById('horario').value = '';
+}
+
+function reenviarCodigo() {
+    cerrarModal();
+    setTimeout(() => enviarFormulario(), 300);
+}
+
+// SLIDER
+let actual = 0;
+const slides = document.querySelectorAll('.slide');
+const puntos = document.querySelectorAll('.punto');
+const infos  = document.querySelectorAll('.info-slide');
+
+function mostrarSlide(n) {
+    if (!slides.length) return;
+    slides.forEach(s => s.style.opacity = '0');
+    puntos.forEach(p => p.style.background = 'rgba(255,255,255,0.5)');
+    infos.forEach(i => i.style.display = 'none');
+    actual = (n + slides.length) % slides.length;
+    slides[actual].style.opacity = '1';
+    puntos[actual].style.background = '#c9a84c';
+    if (infos[actual]) infos[actual].style.display = 'block';
+}
+function cambiarSlide(dir) { mostrarSlide(actual + dir); }
+function irASlide(n) { mostrarSlide(n); }
+if (slides.length > 0) {
+    mostrarSlide(0);
+    setInterval(() => cambiarSlide(1), 5000);
+}
 </script>
 
 @endsection

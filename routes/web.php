@@ -6,12 +6,13 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\Admin\ProyectoAdminController;
 use App\Http\Controllers\Admin\AsesorAdminController;
+use App\Http\Controllers\ContactoController;
 
-// Página principal con proyectos
+// Página principal (hero/slider)
 Route::get('/', [ProyectoController::class, 'index']);
 
 // Páginas públicas
-Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos.index');
+Route::get('/proyectos', [ProyectoController::class, 'lista'])->name('proyectos.index');
 Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
 Route::get('/asesores', [AsesorController::class, 'index'])->name('asesores.index');
 Route::get('/nosotros', function () {
@@ -38,5 +39,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('proyectos', ProyectoAdminController::class);
     Route::resource('asesores', AsesorAdminController::class);
 });
+Route::post('/contacto/enviar', [ContactoController::class, 'enviar'])->name('contacto.enviar');
+Route::post('/contacto/verificar', [ContactoController::class, 'verificar'])->name('contacto.verificar');
 
 require __DIR__.'/auth.php';

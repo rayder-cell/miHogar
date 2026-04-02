@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+class ContactoController extends Controller
+{
+    public function enviar(Request $request)
+    {
+        $request->validate([
+            'nombre'    => 'required|string',
+            'apellidos' => 'required|string',
+            'dni'       => 'required|string',
+            'telefono'  => 'required|string',
+            'correo'    => 'required|email',
+            'proyecto'  => 'required|string',
+        ]);
+
+        // Generar código de 4 dígitos
+        $codigo = rand(1000, 9999);
+
+        // Guardar en sesión
+        session([
+            'codigo_verificacion' => $codigo,
+            'correo_cliente'      => $request->correo,
+            'datos_contacto'      => $request->all(),
+        ]);
+
+        // Email a la EMPRESA con datos del cliente
+        Mail::raw(
+            "📋 NUEVO CONTACTO - Inmobiliaria Mi Hogar\n\n" .
+                "Nombre: {$request->nombre} {$request->apellidos}\n" .
+                "DNI: {$request->dni}\n" .
+                "Teléfono: {$request->telefono}\n" .
+                "Correo: {$request->correo}\n" .
+                "Proyecto de interés: {$request->proyecto}",
+            function ($message) {
+                $message->to(env('EMAIL_EMPRESA'))
+                    ->subject('Nuevo contacto - Mi Hogar');
+            }
+        );
+
+        // Email al CLIENTE con código
+        Mail::raw(
+            "Hola {$request->nombre},\n\n" .
+                "Tu código de verificación de Inmobiliaria Mi Hogar es:\n\n" .
+                "🔐 {$codigo}\n\n" .
+                "Este código es válido por 10 minutos.\n\n" .
+                "Si no solicitaste este código, ignora este mensaje.",
+            function ($message) use ($request) {
+                $message->to($request->correo)
+                    ->subject('Tu código de verificación - Mi Hogar');
+            }
+        );
+
+        return response()->json(['success' => true]);
+    }
+
+    public function verificar(Request $request)
+    {
+        $codigoIngresado = $request->codigo1 . $request->codigo2 . $request->codigo3 . $request->codigo4;
+        $codigoGuardado  = session('codigo_verificacion');
+        $datos           = session('datos_contacto');
+        $horario         = $request->horario;
+
+        if ($codigoIngresado == $codigoGuardado) {
+            // Notificar a la empresa con el horario elegido
+            try {
+                Mail::raw(
+                    "✅ CLIENTE VERIFICADO - Inmobiliaria Mi Hogar\n\n" .
+                        "Nombre: {$datos['nombre']} {$datos['apellidos']}\n" .
+                        "DNI: {$datos['dni']}\n" .
+                        "Teléfono: {$datos['telefono']}\n" .
+                        "Correo: {$datos['correo']}\n" .
+                        "Proyecto: {$datos['proyecto']}\n\n" .
+                        "📞 Horario preferido para llamar: {$horario}",
+                    function ($message) {
+                        $message->to(env('EMAIL_EMPRESA'))
+                            ->subject('✅ Cliente verificado - Llamar a ' . request('horario'));
+                    }
+                );
+            } catch (\Exception $e) {
+                Log::error('Error email verificacion: ' . $e->getMessage());
+            }
+
+            session()->forget(['codigo_verificacion', 'correo_cliente', 'datos_contacto']);
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Código incorrecto']);
+    }
+}

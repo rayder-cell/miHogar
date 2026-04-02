@@ -7,20 +7,25 @@ use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
 {
-    public function index(Request $request)
+    // Página principal → hero/slider
+    public function index()
+    {
+        $proyectos = Proyecto::all();
+        return view('inicio', compact('proyectos'));
+    }
+
+    // Página lista de proyectos
+    public function lista(Request $request)
     {
         $query = Proyecto::query();
-
-        // Filtro por distrito si viene desde el dropdown
-        if ($request->has('distrito') && $request->distrito != '') {
+        if ($request->distrito) {
             $query->where('distrito', $request->distrito);
         }
-
         $proyectos = $query->get();
-
         return view('proyectos.index', compact('proyectos'));
     }
 
+    // Detalle de proyecto
     public function show($id)
     {
         $proyecto = Proyecto::findOrFail($id);
