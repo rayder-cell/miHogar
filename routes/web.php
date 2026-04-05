@@ -43,4 +43,16 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('asesores', AsesorAdminController::class);
 });
 
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/migrar-todo-ya', function () {
+    try {
+        // Esto creará todas las tablas desde cero
+        Artisan::call('migrate', ['--force' => true]);
+        return "Tablas creadas con éxito: " . Artisan::output();
+    } catch (\Exception $e) {
+        return "Error al migrar: " . $e->getMessage();
+    }
+});
+
 require __DIR__.'/auth.php';
