@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inmobiliaria Mi Hogar</title>
-    <meta name="google-site-verification" content="google10ea8e5eeda7ff88" />
+    <meta name="google-site-verification" content="vh_cpn_wDt5ohlM4p3vrSAd2WJ451l59Mo6tf_cvRZY" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
