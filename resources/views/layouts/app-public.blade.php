@@ -146,7 +146,7 @@
                 </li>
 
                 <li><a href="{{ route('asesores.index') }}">Asesores de Venta</a></li>
-                <li><a href="#">Nosotros</a></li>
+                <li><a href="{{ route('nosotros') }}">Nosotros</a></li>
             </ul>
 
             <!-- LOGIN -->
@@ -204,7 +204,7 @@
                 <ul style="list-style:none; padding:0; margin:0;">
                     <li style="margin-bottom:8px;"><a href="{{ route('proyectos.index') }}" style="color:#aaa; text-decoration:none; font-size:0.85rem;">Nuestros Proyectos</a></li>
                     <li style="margin-bottom:8px;"><a href="{{ route('asesores.index') }}" style="color:#aaa; text-decoration:none; font-size:0.85rem;">Asesores de Venta</a></li>
-                    <li style="margin-bottom:8px;"><a href="#" style="color:#aaa; text-decoration:none; font-size:0.85rem;">Nosotros</a></li>
+                    <li><a href="{{ route('nosotros') }}">Nosotros</a></li>
                 </ul>
             </div>
         </div>

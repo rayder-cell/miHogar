@@ -6,9 +6,10 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\Admin\ProyectoAdminController;
 use App\Http\Controllers\Admin\AsesorAdminController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ContactoController;
 
-// Página principal (hero/slider)
+// Página principal
 Route::get('/', [ProyectoController::class, 'index']);
 
 // Páginas públicas
@@ -18,6 +19,10 @@ Route::get('/asesores', [AsesorController::class, 'index'])->name('asesores.inde
 Route::get('/nosotros', function () {
     return view('nosotros');
 })->name('nosotros');
+
+// Contacto
+Route::post('/contacto/enviar', [ContactoController::class, 'enviar'])->name('contacto.enviar');
+Route::post('/contacto/verificar', [ContactoController::class, 'verificar'])->name('contacto.verificar');
 
 // Dashboard de Breeze
 Route::get('/dashboard', function () {
@@ -33,13 +38,9 @@ Route::middleware('auth')->group(function () {
 
 // Panel de administración
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('admin.proyectos.index');
-    });
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('proyectos', ProyectoAdminController::class);
     Route::resource('asesores', AsesorAdminController::class);
 });
-Route::post('/contacto/enviar', [ContactoController::class, 'enviar'])->name('contacto.enviar');
-Route::post('/contacto/verificar', [ContactoController::class, 'verificar'])->name('contacto.verificar');
 
 require __DIR__.'/auth.php';
