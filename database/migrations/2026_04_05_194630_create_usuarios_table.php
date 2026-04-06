@@ -1,23 +1,27 @@
 <?php
 
-namespace Database\Seeders;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-
-class DatabaseSeeder extends Seeder
+return new class extends Migration
 {
-    public function run(): void
+    public function up(): void
     {
-        DB::table('usuarios')->updateOrInsert(
-            ['correo' => 'mrayderalfredo@gmail.com'],
-            [
-                'dni'        => '00000000',
-                'correo'     => 'mrayderalfredo@gmail.com',
-                'contrasena' => Hash::make('123456'),
-                'nombre'     => 'Admin',
-            ]
-        );
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->increments('id_usuario');
+            $table->string('dni', 20)->unique();
+            $table->string('telefono', 20)->nullable();
+            $table->string('correo', 150)->unique();
+            $table->string('contrasena', 255);
+            $table->string('nombre', 100);
+            $table->text('comentario')->nullable();
+            $table->string('titulo_comentario', 200)->nullable();
+        });
     }
-}
+
+    public function down(): void
+    {
+        Schema::dropIfExists('usuarios');
+    }
+};

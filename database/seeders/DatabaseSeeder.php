@@ -10,12 +10,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'mrayderalfredo@gmail.com',
-            'password' => Hash::make('123456'),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        DB::table('usuarios')->updateOrInsert(
+            ['correo' => 'mrayderalfredo@gmail.com'],
+            [
+                'dni'        => '00000000',
+                'correo'     => 'mrayderalfredo@gmail.com',
+                'contrasena' => Hash::make('123456'),
+                'nombre'     => 'Admin',
+            ]
+        );
     }
 }
