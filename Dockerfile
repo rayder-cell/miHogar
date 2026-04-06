@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_pgsql
 
 # 2. INSTALAR NODE.JS Y NPM (Necesario para compilar el CSS/JS)
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
 # 3. Habilitar mod_rewrite de Apache
