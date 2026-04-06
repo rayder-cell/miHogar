@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if (config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
+
         Auth::provider('custom', function ($app, array $config) {
             return new CustomUserProvider(
                 $app['hash'],
