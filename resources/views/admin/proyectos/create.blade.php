@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label>Foto del Proyecto</label>
                 <input type="file" name="foto" accept="image/*">
-                <small style="color:#888;">Formatos: jpg, jpeg, png. Máx 2MB</small>
+                <small style="color:#888;">Formatos: jpg, jpeg, webp, png. Máx 2MB</small>
             </div>
 
             <div class="form-group">
