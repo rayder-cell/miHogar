@@ -47,32 +47,24 @@ class ProyectoAdminController extends Controller
                 'distrito'        => 'required|string|max:100',
                 'direccion'       => 'required|string|max:255',
                 'descripcion'     => 'nullable|string',
-                'foto'            => 'nullable|image|max:51200',
+                'fotos'           => 'nullable|string', // URL de Cloudinary
                 'videos'          => 'nullable|string',
                 'mapa'            => 'nullable|string',
             ]);
-
-            $ruta = null;
-            if ($request->hasFile('foto')) {
-                $resultado = Cloudinary::upload($request->file('foto')->getRealPath(), [
-                    'folder' => 'mihogar/proyectos'
-                ]);
-                $ruta = $resultado->getSecurePath();
-            }
 
             Proyecto::create([
                 'nombre_proyecto' => $request->nombre_proyecto,
                 'distrito'        => $request->distrito,
                 'direccion'       => $request->direccion,
                 'descripcion'     => $request->descripcion,
-                'fotos'           => $ruta,
+                'fotos'           => $request->fotos, // URL directa de Cloudinary
                 'videos'          => $this->convertirYoutubeEmbed($request->videos),
                 'mapa'            => $request->mapa,
             ]);
 
             return redirect('/admin/proyectos');
         } catch (\Exception $e) {
-            dd('ERROR: ' . $e->getMessage() . ' en línea ' . $e->getLine() . ' de ' . $e->getFile());
+            dd('ERROR: ' . $e->getMessage());
         }
     }
 
@@ -91,16 +83,13 @@ class ProyectoAdminController extends Controller
             'distrito'        => 'required|string|max:100',
             'direccion'       => 'required|string|max:255',
             'descripcion'     => 'nullable|string',
-            'foto'            => 'nullable|image|max:51200',
+            'fotos'           => 'nullable|string',
             'videos'          => 'nullable|string',
             'mapa'            => 'nullable|string',
         ]);
 
-        if ($request->hasFile('foto')) {
-            $resultado = Cloudinary::upload($request->file('foto')->getRealPath(), [
-                'folder' => 'mihogar/proyectos'
-            ]);
-            $proyecto->fotos = $resultado->getSecurePath();
+        if ($request->filled('fotos')) {
+            $proyecto->fotos = $request->fotos;
         }
 
         $proyecto->nombre_proyecto = $request->nombre_proyecto;

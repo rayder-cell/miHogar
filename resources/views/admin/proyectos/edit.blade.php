@@ -69,4 +69,53 @@
             </div>
         </form>
     </div>
+
+    <script>
+        const CLOUDINARY_CLOUD_NAME = '{{ env('CLOUDINARY_CLOUD_NAME') }}';
+        const CLOUDINARY_UPLOAD_PRESET = '{{ env('CLOUDINARY_UPLOAD_PRESET') }}';
+
+        document.getElementById('foto_input').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Mostrar preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('foto_preview').src = e.target.result;
+                document.getElementById('preview_container').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+
+            // Subir a Cloudinary
+            document.getElementById('upload_status').textContent = '⏳ Subiendo imagen...';
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+            formData.append('folder', 'mihogar/proyectos');
+
+            try {
+                const response = await fetch(
+                    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                        method: 'POST',
+                        body: formData
+                    }
+                );
+
+                const data = await response.json();
+
+                if (data.secure_url) {
+                    document.getElementById('fotos_url').value = data.secure_url;
+                    document.getElementById('upload_status').textContent = '✅ Imagen subida correctamente';
+                    document.getElementById('upload_status').style.color = '#28a745';
+                } else {
+                    document.getElementById('upload_status').textContent = '❌ Error al subir la imagen';
+                    document.getElementById('upload_status').style.color = '#dc3545';
+                }
+            } catch (error) {
+                document.getElementById('upload_status').textContent = '❌ Error de conexión';
+                document.getElementById('upload_status').style.color = '#dc3545';
+            }
+        });
+    </script>
 @endsection
