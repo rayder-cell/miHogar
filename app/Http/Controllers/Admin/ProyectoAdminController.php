@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProyectoAdminController extends Controller
 {
@@ -54,7 +54,10 @@ class ProyectoAdminController extends Controller
 
             $ruta = null;
             if ($request->hasFile('foto')) {
-                $ruta = $request->file('foto')->store('images/proyectos', 'public');
+                $resultado = Cloudinary::upload($request->file('foto')->getRealPath(), [
+                    'folder' => 'mihogar/proyectos'
+                ]);
+                $ruta = $resultado->getSecurePath();
             }
 
             Proyecto::create([
@@ -62,7 +65,7 @@ class ProyectoAdminController extends Controller
                 'distrito'        => $request->distrito,
                 'direccion'       => $request->direccion,
                 'descripcion'     => $request->descripcion,
-                'fotos'           => $ruta ? 'storage/' . $ruta : null,
+                'fotos'           => $ruta,
                 'videos'          => $this->convertirYoutubeEmbed($request->videos),
                 'mapa'            => $request->mapa,
             ]);
@@ -93,10 +96,11 @@ class ProyectoAdminController extends Controller
             'mapa'            => 'nullable|string',
         ]);
 
-        // Foto: solo actualiza si se sube una nueva
         if ($request->hasFile('foto')) {
-            $ruta = $request->file('foto')->store('images/proyectos', 'public');
-            $proyecto->fotos = 'storage/' . $ruta;
+            $resultado = Cloudinary::upload($request->file('foto')->getRealPath(), [
+                'folder' => 'mihogar/proyectos'
+            ]);
+            $proyecto->fotos = $resultado->getSecurePath();
         }
 
         $proyecto->nombre_proyecto = $request->nombre_proyecto;
@@ -104,12 +108,10 @@ class ProyectoAdminController extends Controller
         $proyecto->direccion       = $request->direccion;
         $proyecto->descripcion     = $request->descripcion;
 
-        // ✅ Video: solo actualiza si el usuario envió algo
         if ($request->filled('videos')) {
             $proyecto->videos = $this->convertirYoutubeEmbed($request->videos);
         }
 
-        // ✅ Mapa: solo actualiza si el usuario envió algo
         if ($request->filled('mapa')) {
             $proyecto->mapa = $request->mapa;
         }

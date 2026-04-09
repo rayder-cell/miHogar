@@ -9,7 +9,7 @@
     <div class="slide" style="
         position:absolute; top:0; left:0;
         width:100%; height:100%;
-        background: {{ $proyecto->fotos ? 'url('.asset($proyecto->fotos).') center/cover no-repeat' : '#1a1a1a' }};
+        background: {{ $proyecto->fotos ? 'url('.$proyecto->fotos.') center/cover no-repeat' : '#1a1a1a' }};
         opacity: {{ $index === 0 ? '1' : '0' }};
         transition: opacity 1s ease;">
         <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);"></div>
