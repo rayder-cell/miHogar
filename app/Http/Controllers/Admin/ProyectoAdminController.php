@@ -72,7 +72,7 @@ class ProyectoAdminController extends Controller
 
             return redirect('/admin/proyectos');
         } catch (\Exception $e) {
-            dd('ERROR: ' . $e->getMessage());
+            dd('ERROR: ' . $e->getMessage() . ' en línea ' . $e->getLine() . ' de ' . $e->getFile());
         }
     }
 
