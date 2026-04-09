@@ -71,8 +71,8 @@
     </div>
 
     <script>
-        const CLOUDINARY_CLOUD_NAME = '{{ env('CLOUDINARY_CLOUD_NAME') }}';
-        const CLOUDINARY_UPLOAD_PRESET = '{{ env('CLOUDINARY_UPLOAD_PRESET') }}';
+        const CLOUDINARY_CLOUD_NAME = '{{ config('services.cloudinary.cloud_name') }}';
+        const CLOUDINARY_UPLOAD_PRESET = '{{ config('services.cloudinary.upload_preset') }}';
 
         document.getElementById('foto_input').addEventListener('change', async function(e) {
             const file = e.target.files[0];
