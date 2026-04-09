@@ -9,62 +9,37 @@ class ContactoController extends Controller
 {
     public function enviar(Request $request)
     {
-        $request->validate([
-            'nombre'    => 'required|string',
-            'apellidos' => 'required|string',
-            'dni'       => 'required|string',
-            'telefono'  => 'required|string',
-            'correo'    => 'required|email',
-            'proyecto'  => 'required|string',
-        ]);
+        $request->validate([...]);
 
-        // Generar código de 4 dígitos
         $codigo = rand(1000, 9999);
 
-        // Guardar en sesión
-        session([
-            'codigo_verificacion' => $codigo,
-            'correo_cliente'      => $request->correo,
-            'datos_contacto'      => $request->all(),
-        ]);
-
-        // Email a la EMPRESA con datos del cliente
-        Mail::raw(
-            "📋 NUEVO CONTACTO - Inmobiliaria Mi Hogar\n\n" .
-                "Nombre: {$request->nombre} {$request->apellidos}\n" .
-                "DNI: {$request->dni}\n" .
-                "Teléfono: {$request->telefono}\n" .
-                "Correo: {$request->correo}\n" .
-                "Proyecto de interés: {$request->proyecto}",
-            function ($message) {
-                $message->to(config('services.email_empresa'))
-                    ->subject('Nuevo contacto - Mi Hogar');
-            }
-        );
-
-        // Email al CLIENTE con código
-        Mail::raw(
-            "Hola {$request->nombre},\n\n" .
-                "Tu código de verificación de Inmobiliaria Mi Hogar es:\n\n" .
-                "🔐 {$codigo}\n\n" .
-                "Este código es válido por 10 minutos.\n\n" .
-                "Si no solicitaste este código, ignora este mensaje.",
-            function ($message) use ($request) {
-                $message->to($request->correo)
-                    ->subject('Tu código de verificación - Mi Hogar');
-            }
-        );
+        session([...]);
 
         try {
-            Mail::raw(...);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
-        }
+            Mail::raw(
+                "📋 NUEVO CONTACTO...",
+                function ($message) {
+                    $message->to(config('services.email_empresa'))
+                        ->subject('Nuevo contacto - Mi Hogar');
+                }
+            );
 
-        return response()->json(['success' => true]);
+            Mail::raw(
+                "Hola...",
+                function ($message) use ($request) {
+                    $message->to($request->correo)
+                        ->subject('Tu código de verificación - Mi Hogar');
+                }
+            );
+
+            return response()->json(['success' => true]);
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 
-    public function verificar(Request $request)
+    public function verificar(Request $request) 
     {
         $codigoIngresado = $request->codigo1 . $request->codigo2 . $request->codigo3 . $request->codigo4;
         $codigoGuardado  = session('codigo_verificacion');
