@@ -37,7 +37,7 @@ class ContactoController extends Controller
                 "Correo: {$request->correo}\n" .
                 "Proyecto de interés: {$request->proyecto}",
             function ($message) {
-                $message->to(env('EMAIL_EMPRESA'))
+                $message->to(config('services.email_empresa'))
                     ->subject('Nuevo contacto - Mi Hogar');
             }
         );
@@ -54,6 +54,12 @@ class ContactoController extends Controller
                     ->subject('Tu código de verificación - Mi Hogar');
             }
         );
+
+        try {
+            Mail::raw(...);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
 
         return response()->json(['success' => true]);
     }

@@ -40,4 +40,6 @@ return [
         'upload_preset' => env('CLOUDINARY_UPLOAD_PRESET'),
     ],
 
+    'email_empresa' => env('EMAIL_EMPRESA'),
+
 ];
