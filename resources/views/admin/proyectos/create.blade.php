@@ -3,6 +3,16 @@
 
 @section('content')
     <div class="card">
+
+        {{-- MENSAJE DE ERROR --}}
+        @if($errors->any())
+        <div style="background:#fee2e2; border:1px solid #ef4444; border-radius:8px; padding:15px; margin-bottom:20px;">
+            @foreach($errors->all() as $error)
+            <p style="color:#dc2626; margin:0; font-size:0.9rem;">⚠️ {{ $error }}</p>
+            @endforeach
+        </div>
+        @endif
+
         <form method="POST" action="{{ route('admin.proyectos.store') }}" enctype="multipart/form-data">
             @csrf
 
@@ -78,7 +88,6 @@
             const file = e.target.files[0];
             if (!file) return;
 
-            // Mostrar preview
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('foto_preview').src = e.target.result;
@@ -86,7 +95,6 @@
             };
             reader.readAsDataURL(file);
 
-            // Subir a Cloudinary
             document.getElementById('upload_status').textContent = '⏳ Subiendo imagen...';
 
             const formData = new FormData();

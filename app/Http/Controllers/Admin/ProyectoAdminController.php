@@ -38,7 +38,7 @@ class ProyectoAdminController extends Controller
     {
         return view('admin.proyectos.create');
     }
-    
+
     public function show($id)
     {
         $proyecto = Proyecto::findOrFail($id);
@@ -70,7 +70,10 @@ class ProyectoAdminController extends Controller
 
             return redirect('/admin/proyectos');
         } catch (\Exception $e) {
-            dd('ERROR: ' . $e->getMessage());
+            if (str_contains($e->getMessage(), 'unique constraint') || str_contains($e->getMessage(), 'duplicate key')) {
+                return back()->withErrors(['nombre_proyecto' => 'Ya existe un proyecto con ese nombre. Por favor usa un nombre diferente.'])->withInput();
+            }
+            return back()->withErrors(['nombre_proyecto' => 'Error al guardar el proyecto: ' . $e->getMessage()])->withInput();
         }
     }
 
