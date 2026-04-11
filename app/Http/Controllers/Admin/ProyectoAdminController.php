@@ -38,6 +38,12 @@ class ProyectoAdminController extends Controller
     {
         return view('admin.proyectos.create');
     }
+    
+    public function show($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+        return view('admin.proyectos.show', compact('proyecto'));
+    }
 
     public function store(Request $request)
     {
