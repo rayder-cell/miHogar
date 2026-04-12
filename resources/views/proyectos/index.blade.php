@@ -22,14 +22,14 @@
         @endforeach
     </div>
 
-    <!-- TARJETAS -->
-    <div style="display:flex; flex-wrap:wrap; gap:25px;">
+    <!-- TARJETAS CON GRID -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:25px;">
         @forelse($proyectos as $proyecto)
-        <div class="proyecto-card" style="width:280px;"
+        <div class="proyecto-card"
              onmouseover="this.style.transform='translateY(-6px)'; this.style.borderColor='var(--color-gold)';"
              onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#222';">
 
-            <div style="height:200px; overflow:hidden; position:relative;">
+            <div style="height:220px; overflow:hidden; position:relative;">
                 @if($proyecto->fotos)
                 <img src="{{ $proyecto->fotos }}" alt="{{ $proyecto->nombre_proyecto }}"
                      style="width:100%; height:100%; object-fit:cover;">
@@ -56,7 +56,7 @@
                 </p>
                 @endif
                 <a href="{{ route('proyectos.show', $proyecto->id_proyecto) }}" class="btn-gold"
-                   style="display:block; text-align:center; padding:9px; font-size:0.85rem; border-radius:4px;">
+                   style="display:block; text-align:center; padding:10px; font-size:0.85rem; border-radius:4px; width:100%; box-sizing:border-box;">
                     Ver Proyecto
                 </a>
             </div>
