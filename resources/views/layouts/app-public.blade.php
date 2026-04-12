@@ -65,6 +65,169 @@
     </style>
 </head>
 
+<!-- ===== CHAT FLOTANTE ===== -->
+<div id="chat-flotante" style="position:fixed; bottom:20px; right:20px; z-index:9999;">
+
+    <!-- BOTÓN -->
+    <button onclick="toggleChat()"
+        style="background:#c9a84c; color:#000; border:none; padding:14px 20px;
+               border-radius:50px; font-weight:900; font-size:0.9rem; cursor:pointer;
+               box-shadow:0 4px 15px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px;
+               transition:all 0.3s;"
+        onmouseover="this.style.background='#b8962a'"
+        onmouseout="this.style.background='#c9a84c'">
+        💬 <span id="btn-texto">Déjanos un mensaje</span>
+    </button>
+
+    <!-- FORMULARIO DESPLEGABLE -->
+    <div id="chat-form"
+        style="display:none; position:absolute; bottom:60px; right:0;
+               width:320px; background:#fff; border-radius:12px;
+               box-shadow:0 8px 30px rgba(0,0,0,0.2); overflow:hidden;
+               border:2px solid #c9a84c;">
+
+        <!-- HEADER -->
+        <div style="background:#c9a84c; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <h4 style="color:#000; margin:0; font-size:1rem; font-weight:900;">💬 Déjanos un mensaje</h4>
+                <p style="color:#000; margin:0; font-size:0.75rem; opacity:0.7;">Te responderemos pronto</p>
+            </div>
+            <button onclick="toggleChat()"
+                style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#000;">✕</button>
+        </div>
+
+        <!-- IMAGEN -->
+        <div style="height:100px; overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80"
+                 alt="Contacto" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+
+        <!-- CUERPO -->
+        <div style="padding:20px;">
+            <p style="color:#555; font-size:0.82rem; margin-bottom:15px; line-height:1.5;">
+                Gracias por contactarte con nosotros. Para agendar tu visita, por favor ingresa la siguiente información:
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <input id="chat-nombre" type="text" placeholder="Nombre y Apellidos *"
+                    style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
+                           font-size:0.85rem; outline:none; box-sizing:border-box;"
+                    onfocus="this.style.borderColor='#c9a84c'"
+                    onblur="this.style.borderColor='#ddd'">
+
+                <input id="chat-correo" type="email" placeholder="Correo electrónico *"
+                    style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
+                           font-size:0.85rem; outline:none; box-sizing:border-box;"
+                    onfocus="this.style.borderColor='#c9a84c'"
+                    onblur="this.style.borderColor='#ddd'">
+
+                <select id="chat-proyecto"
+                    style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
+                           font-size:0.85rem; outline:none; box-sizing:border-box; background:#fff; color:#555;"
+                    onfocus="this.style.borderColor='#c9a84c'"
+                    onblur="this.style.borderColor='#ddd'">
+                    <option value="">Proyecto de interés</option>
+                    @php $proyectosChat = App\Models\Proyecto::all(); @endphp
+                    @foreach($proyectosChat as $p)
+                        <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
+                    @endforeach
+                </select>
+
+                <input id="chat-asunto" type="text" placeholder="Asunto"
+                    style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
+                           font-size:0.85rem; outline:none; box-sizing:border-box;"
+                    onfocus="this.style.borderColor='#c9a84c'"
+                    onblur="this.style.borderColor='#ddd'">
+
+                <textarea id="chat-mensaje" placeholder="Mensaje" rows="3"
+                    style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
+                           font-size:0.85rem; outline:none; box-sizing:border-box; resize:none;"
+                    onfocus="this.style.borderColor='#c9a84c'"
+                    onblur="this.style.borderColor='#ddd'"></textarea>
+
+                <p id="chat-error" style="color:red; font-size:0.78rem; display:none;"></p>
+                <p id="chat-exito" style="color:green; font-size:0.78rem; display:none;"></p>
+
+                <button onclick="enviarChat()"
+                    style="background:#c9a84c; color:#000; border:none; padding:12px;
+                           border-radius:8px; font-weight:900; font-size:0.9rem; cursor:pointer;
+                           text-transform:uppercase; letter-spacing:1px; width:100%;
+                           transition:background 0.3s;"
+                    onmouseover="this.style.background='#b8962a'"
+                    onmouseout="this.style.background='#c9a84c'">
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleChat() {
+        const form = document.getElementById('chat-form');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function enviarChat() {
+        const nombre  = document.getElementById('chat-nombre').value.trim();
+        const correo  = document.getElementById('chat-correo').value.trim();
+        const proyecto = document.getElementById('chat-proyecto').value;
+        const asunto  = document.getElementById('chat-asunto').value.trim();
+        const mensaje = document.getElementById('chat-mensaje').value.trim();
+        const error   = document.getElementById('chat-error');
+        const exito   = document.getElementById('chat-exito');
+
+        if (!nombre || !correo) {
+            error.textContent = 'Por favor completa nombre y correo.';
+            error.style.display = 'block';
+            return;
+        }
+
+        error.style.display = 'none';
+
+        fetch('{{ route('contacto.enviar') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                apellidos: '',
+                dni: '',
+                telefono: '',
+                correo: correo,
+                proyecto: proyecto || asunto || 'Consulta general',
+                mensaje: mensaje
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                exito.textContent = '✅ Mensaje enviado. Te contactaremos pronto.';
+                exito.style.display = 'block';
+                error.style.display = 'none';
+                setTimeout(() => {
+                    toggleChat();
+                    exito.style.display = 'none';
+                    document.getElementById('chat-nombre').value = '';
+                    document.getElementById('chat-correo').value = '';
+                    document.getElementById('chat-proyecto').value = '';
+                    document.getElementById('chat-asunto').value = '';
+                    document.getElementById('chat-mensaje').value = '';
+                }, 2500);
+            } else {
+                error.textContent = data.message || 'Error al enviar.';
+                error.style.display = 'block';
+            }
+        })
+        .catch(() => {
+            error.textContent = 'Error de conexión.';
+            error.style.display = 'block';
+        });
+    }
+</script>
+
 <body>
 
     <!-- NAVBAR -->
