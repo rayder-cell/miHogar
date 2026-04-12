@@ -266,8 +266,47 @@
         </div>
     </section>
 
-    <!-- SCRIPTS -->
     <script>
+        // ===== SLIDER =====
+        let actual = 0;
+        const slides = document.querySelectorAll('.slide');
+        const puntos = document.querySelectorAll('.slider-punto');
+        const infos = document.querySelectorAll('.info-slide');
+
+        function mostrarSlide(n) {
+            if (!slides.length) return;
+
+            slides.forEach(s => {
+                if (s) s.style.opacity = '0';
+            });
+            puntos.forEach(p => {
+                if (p) p.style.background = 'rgba(255,255,255,0.5)';
+            });
+            infos.forEach(i => {
+                if (i) i.style.display = 'none';
+            });
+
+            actual = (n + slides.length) % slides.length;
+
+            if (slides[actual]) slides[actual].style.opacity = '1';
+            if (puntos[actual]) puntos[actual].style.background = 'var(--color-gold)';
+            if (infos[actual]) infos[actual].style.display = 'block';
+        }
+
+        function cambiarSlide(dir) {
+            mostrarSlide(actual + dir);
+        }
+
+        function irASlide(n) {
+            mostrarSlide(n);
+        }
+
+        if (slides.length > 0) {
+            mostrarSlide(0);
+            setInterval(() => cambiarSlide(1), 5000);
+        }
+
+        // ===== FORMULARIO =====
         function enviarFormulario() {
             const nombre = document.getElementById('nombre').value.trim();
             const apellidos = document.getElementById('apellidos').value.trim();
@@ -379,81 +418,6 @@
         function reenviarCodigo() {
             cerrarModal();
             setTimeout(() => enviarFormulario(), 300);
-        }
-
-        // SLIDER
-        let actual = 0;
-        const slides = document.querySelectorAll('.slide');
-        const puntos = document.querySelectorAll('.punto');
-        const infos = document.querySelectorAll('.info-slide');
-
-        function mostrarSlide(n) {
-            if (!slides.length) return;
-            slides.forEach(s => s.style.opacity = '0');
-            puntos.forEach(p => p.style.background = 'rgba(255,255,255,0.5)');
-            infos.forEach(i => i.style.display = 'none');
-            actual = (n + slides.length) % slides.length;
-            slides[actual].style.opacity = '1';
-            puntos[actual].style.background = 'var(--color-gold)';
-            if (infos[actual]) infos[actual].style.display = 'block';
-        }
-
-        function cambiarSlide(dir) {
-            mostrarSlide(actual + dir);
-        }
-
-        function irASlide(n) {
-            mostrarSlide(n);
-        }
-        if (slides.length > 0) {
-            mostrarSlide(0);
-            setInterval(() => cambiarSlide(1), 5000);
-        }
-    </script>
-
-    <script>
-        let actual = 0;
-        const slides = document.querySelectorAll('.slide');
-        const puntos = document.querySelectorAll('.punto');
-        const infos = document.querySelectorAll('.info-slide');
-
-        function mostrarSlide(n) {
-            if (slides.length === 0) return;
-
-            slides.forEach(s => {
-                if (s) s.style.opacity = '0';
-            });
-
-            if (puntos.length > 0) {
-                puntos.forEach(p => {
-                    if (p) p.style.background = 'rgba(255,255,255,0.5)';
-                });
-            }
-
-            if (infos.length > 0) {
-                infos.forEach(i => {
-                    if (i) i.style.display = 'none';
-                });
-            }
-
-            actual = (n + slides.length) % slides.length;
-
-            if (slides[actual]) slides[actual].style.opacity = '1';
-            if (puntos[actual]) puntos[actual].style.background = '#c9a84c';
-            if (infos[actual]) infos[actual].style.display = 'block';
-        }
-
-        function cambiarSlide(dir) {
-            mostrarSlide(actual + dir);
-        }
-
-        function irASlide(n) {
-            mostrarSlide(n);
-        }
-
-        if (slides.length > 0) {
-            mostrarSlide(0);
-            setInterval(() => cambiarSlide(1), 5000);
         }
     </script>
 @endsection
