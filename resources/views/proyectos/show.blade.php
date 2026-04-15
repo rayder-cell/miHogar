@@ -36,13 +36,21 @@
         @endif
 
         <!-- MAPA -->
-        @if ($proyecto->mapa)
-            <div style="margin-bottom:30px;">
-                <h2 class="text-gold" style="margin-bottom:15px;">📍 Ubicación</h2>
-                <a href="{{ $proyecto->mapa }}" target="_blank" class="btn-gold" style="border-radius:6px;">
-                    🌍 Ver ubicación en Google Earth
-                </a>
+        @if($proyecto->mapa)
+        <div style="margin-bottom:30px;">
+            <h2 class="text-gold" style="margin-bottom:15px;">📍 Ubicación</h2>
+            <div class="border-gold" style="overflow:hidden; border-radius:8px;">
+                <iframe
+                    src="{{ $proyecto->mapa }}"
+                    width="100%"
+                    height="450"
+                    style="border:0; display:block;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
+        </div>
         @endif
 
         <!-- BOTÓN VOLVER -->
