@@ -5,12 +5,12 @@
     <div class="card">
 
         {{-- MENSAJE DE ERROR --}}
-        @if($errors->any())
-        <div style="background:#fee2e2; border:1px solid #ef4444; border-radius:8px; padding:15px; margin-bottom:20px;">
-            @foreach($errors->all() as $error)
-            <p style="color:#dc2626; margin:0; font-size:0.9rem;">⚠️ {{ $error }}</p>
-            @endforeach
-        </div>
+        @if ($errors->any())
+            <div style="background:#fee2e2; border:1px solid #ef4444; border-radius:8px; padding:15px; margin-bottom:20px;">
+                @foreach ($errors->all() as $error)
+                    <p style="color:#dc2626; margin:0; font-size:0.9rem;">⚠️ {{ $error }}</p>
+                @endforeach
+            </div>
         @endif
 
         <form method="POST" action="{{ route('admin.proyectos.store') }}" enctype="multipart/form-data">
@@ -27,7 +27,14 @@
             <div style="display:flex; gap:20px;">
                 <div class="form-group" style="flex:1;">
                     <label>Distrito *</label>
-                    <input type="text" name="distrito" value="{{ old('distrito') }}" required>
+                    <select name="distrito" required>
+                        <option value="">Selecciona un distrito</option>
+                        <option value="Andahuaylas" {{ old('distrito') == 'Andahuaylas' ? 'selected' : '' }}>Andahuaylas
+                        </option>
+                        <option value="San Jerónimo" {{ old('distrito') == 'San Jerónimo' ? 'selected' : '' }}>San Jerónimo
+                        </option>
+                        <option value="Talavera" {{ old('distrito') == 'Talavera' ? 'selected' : '' }}>Talavera</option>
+                    </select>
                 </div>
                 <div class="form-group" style="flex:1;">
                     <label>Dirección *</label>

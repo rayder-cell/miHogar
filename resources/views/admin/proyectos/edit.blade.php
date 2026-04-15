@@ -19,7 +19,17 @@
             <div style="display:flex; gap:20px;">
                 <div class="form-group" style="flex:1;">
                     <label>Distrito *</label>
-                    <input type="text" name="distrito" value="{{ old('distrito', $proyecto->distrito) }}" required>
+                    <select name="distrito" required>
+                        <option value="">Selecciona un distrito</option>
+                        <option value="Andahuaylas"
+                            {{ old('distrito', $proyecto->distrito) == 'Andahuaylas' ? 'selected' : '' }}>Andahuaylas
+                        </option>
+                        <option value="San Jerónimo"
+                            {{ old('distrito', $proyecto->distrito) == 'San Jerónimo' ? 'selected' : '' }}>San Jerónimo
+                        </option>
+                        <option value="Talavera" {{ old('distrito', $proyecto->distrito) == 'Talavera' ? 'selected' : '' }}>
+                            Talavera</option>
+                    </select>
                 </div>
                 <div class="form-group" style="flex:1;">
                     <label>Dirección *</label>
