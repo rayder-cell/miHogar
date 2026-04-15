@@ -81,13 +81,15 @@
 
     <!-- FORMULARIO DESPLEGABLE -->
     <div id="chat-form"
-        style="display:none; position:absolute; bottom:60px; right:0;
-               width:320px; background:#fff; border-radius:12px;
-               box-shadow:0 8px 30px rgba(0,0,0,0.2); overflow:hidden;
-               border:2px solid #c9a84c;">
+        style="display:none; position:fixed; bottom:80px; right:20px;
+               width:min(320px, calc(100vw - 40px));
+               max-height:calc(100vh - 120px);
+               background:#fff; border-radius:12px;
+               box-shadow:0 8px 30px rgba(0,0,0,0.2); overflow-y:auto;
+               border:2px solid #c9a84c; z-index:9998;">
 
         <!-- HEADER -->
-        <div style="background:#c9a84c; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
+        <div style="background:#c9a84c; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1;">
             <div>
                 <h4 style="color:#000; margin:0; font-size:1rem; font-weight:900;">💬 Déjanos un mensaje</h4>
                 <p style="color:#000; margin:0; font-size:0.75rem; opacity:0.7;">Te responderemos pronto</p>
@@ -97,7 +99,7 @@
         </div>
 
         <!-- IMAGEN -->
-        <div style="height:100px; overflow:hidden;">
+        <div style="height:90px; overflow:hidden; flex-shrink:0;">
             <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80"
                  alt="Contacto" style="width:100%; height:100%; object-fit:cover;">
         </div>
@@ -111,19 +113,22 @@
             <div style="display:flex; flex-direction:column; gap:10px;">
                 <input id="chat-nombre" type="text" placeholder="Nombre y Apellidos *"
                     style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
-                           font-size:0.85rem; outline:none; box-sizing:border-box;"
+                           font-size:0.85rem; outline:none; box-sizing:border-box;
+                           color:#333; background:#fff;"
                     onfocus="this.style.borderColor='#c9a84c'"
                     onblur="this.style.borderColor='#ddd'">
 
                 <input id="chat-correo" type="email" placeholder="Correo electrónico *"
                     style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
-                           font-size:0.85rem; outline:none; box-sizing:border-box;"
+                           font-size:0.85rem; outline:none; box-sizing:border-box;
+                           color:#333; background:#fff;"
                     onfocus="this.style.borderColor='#c9a84c'"
                     onblur="this.style.borderColor='#ddd'">
 
                 <select id="chat-proyecto"
                     style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
-                           font-size:0.85rem; outline:none; box-sizing:border-box; background:#fff; color:#555;"
+                           font-size:0.85rem; outline:none; box-sizing:border-box;
+                           background:#fff; color:#555;"
                     onfocus="this.style.borderColor='#c9a84c'"
                     onblur="this.style.borderColor='#ddd'">
                     <option value="">Proyecto de interés</option>
@@ -135,13 +140,15 @@
 
                 <input id="chat-asunto" type="text" placeholder="Asunto"
                     style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
-                           font-size:0.85rem; outline:none; box-sizing:border-box;"
+                           font-size:0.85rem; outline:none; box-sizing:border-box;
+                           color:#333; background:#fff;"
                     onfocus="this.style.borderColor='#c9a84c'"
                     onblur="this.style.borderColor='#ddd'">
 
                 <textarea id="chat-mensaje" placeholder="Mensaje" rows="3"
                     style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px;
-                           font-size:0.85rem; outline:none; box-sizing:border-box; resize:none;"
+                           font-size:0.85rem; outline:none; box-sizing:border-box; resize:none;
+                           color:#333; background:#fff;"
                     onfocus="this.style.borderColor='#c9a84c'"
                     onblur="this.style.borderColor='#ddd'"></textarea>
 
