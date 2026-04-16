@@ -120,17 +120,9 @@
 
         /* Responsive navbar */
         @media (max-width: 768px) {
-            nav {
-                flex-wrap: wrap;
-                padding: 10px 20px;
-            }
-
-            .nav-toggle {
-                display: block;
-            }
-
             nav>div {
-                display: none;
+                display: none !important;
+                /* ← agrega !important */
                 width: 100%;
                 flex-direction: column;
                 align-items: flex-start;
@@ -139,27 +131,11 @@
             }
 
             nav>div.activo {
-                display: flex;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-            }
-
-            .btn-login {
-                margin-top: 10px;
-            }
-
-            /* Chat responsivo en móvil */
-            #chat-form {
-                right: 10px !important;
-                left: 10px !important;
-                width: auto !important;
-                bottom: 70px !important;
+                display: flex !important;
+                /* ← agrega !important */
             }
         }
+        
     </style>
 </head>
 
@@ -326,11 +302,6 @@
                 error.style.display = 'block';
             });
     }
-    // Nav toggle móvil
-    document.querySelector('.nav-toggle').addEventListener('click', function() {
-        const navDiv = document.querySelector('nav > div');
-        navDiv.classList.toggle('activo');
-    });
 </script>
 
 
@@ -523,6 +494,29 @@
             if (!btnProyectos.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.style.display = 'none';
             }
+        });
+    </script>
+
+    <script>
+        // Dropdown proyectos
+        const btnProyectos = document.getElementById('btn-proyectos');
+        const dropdown = document.getElementById('dropdown-proyectos');
+
+        btnProyectos.addEventListener('click', function(e) {
+            e.preventDefault();
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!btnProyectos.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // ✅ Nav toggle móvil — aquí sí existe el DOM
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            const navDiv = document.querySelector('nav > div');
+            navDiv.classList.toggle('activo');
         });
     </script>
 
