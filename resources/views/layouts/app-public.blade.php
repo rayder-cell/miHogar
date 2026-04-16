@@ -219,7 +219,7 @@
 <!-- ===== NAVBAR ===== -->
 <nav>
     <div class="nav-logo">
-        <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar" style="height:60px;">
+        <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar" style="height:80px;">
     </div>
 
     <!-- ✅ Hamburguesa visible en móvil -->
@@ -314,7 +314,7 @@
 <footer style="background:var(--color-dark-2); color:var(--color-white); padding:50px 40px 0;">
     <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; padding-bottom:40px; border-bottom:1px solid #333;">
         <div style="min-width:200px;">
-            <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar" style="height:50px; margin-bottom:15px;">
+            <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar" style="height:65px; margin-bottom:15px;">
             <p style="font-size:0.85rem; color:var(--color-gray); line-height:1.8;">
                 Razón Social: Inmobiliaria Mi Hogar S.A.C.<br>RUC: 20XXXXXXXXX
             </p>
