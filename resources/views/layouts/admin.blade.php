@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin - Mi Hogar</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: Arial, sans-serif; background:#f0f2f5; display:flex; min-height:100vh; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            min-height: 100vh;
+        }
 
         /* SIDEBAR */
         .sidebar {
@@ -20,19 +31,25 @@
             flex-direction: column;
             border-right: 2px solid #c9a84c;
         }
+
         .sidebar .logo {
             text-align: center;
             padding: 20px;
             background: #0a0a0a;
             border-bottom: 1px solid #c9a84c;
         }
-        .sidebar .logo img { height: 60px; }
+
+        .sidebar .logo img {
+            height: 60px;
+        }
+
         .sidebar .logo-text {
             color: #c9a84c;
             font-size: 1rem;
             font-weight: bold;
             margin-top: 8px;
         }
+
         .sidebar .logo-sub {
             color: #888;
             font-size: 0.7rem;
@@ -41,7 +58,10 @@
         }
 
         /* MENÚ GRUPOS */
-        .menu-group { padding: 15px 0 5px; }
+        .menu-group {
+            padding: 15px 0 5px;
+        }
+
         .menu-label {
             color: #666;
             font-size: 0.7rem;
@@ -50,7 +70,11 @@
             padding: 0 20px;
             margin-bottom: 5px;
         }
-        .sidebar ul { list-style: none; }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
         .sidebar ul li a {
             display: flex;
             align-items: center;
@@ -62,12 +86,14 @@
             border-left: 3px solid transparent;
             transition: all 0.2s;
         }
+
         .sidebar ul li a:hover,
         .sidebar ul li a.active {
             background: #111;
             border-left: 3px solid #c9a84c;
             color: #c9a84c;
         }
+
         .sidebar ul li a .badge {
             margin-left: auto;
             background: #c9a84c;
@@ -88,6 +114,7 @@
             gap: 12px;
             border-top: 1px solid #c9a84c;
         }
+
         .sidebar-footer .avatar {
             width: 38px;
             height: 38px;
@@ -100,9 +127,22 @@
             color: #000;
             font-size: 1rem;
         }
-        .sidebar-footer .user-info { flex: 1; }
-        .sidebar-footer .user-name { color: #fff; font-size: 0.85rem; font-weight: bold; }
-        .sidebar-footer .user-role { color: #888; font-size: 0.72rem; }
+
+        .sidebar-footer .user-info {
+            flex: 1;
+        }
+
+        .sidebar-footer .user-name {
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .sidebar-footer .user-role {
+            color: #888;
+            font-size: 0.72rem;
+        }
+
         .sidebar-footer .logout-btn {
             color: #888;
             font-size: 1.1rem;
@@ -111,7 +151,10 @@
             border: none;
             padding: 0;
         }
-        .sidebar-footer .logout-btn:hover { color: #c9a84c; }
+
+        .sidebar-footer .logout-btn:hover {
+            color: #c9a84c;
+        }
 
         /* CONTENIDO */
         .main-content {
@@ -130,11 +173,25 @@
             margin-bottom: 25px;
             border-radius: 4px;
             border-bottom: 2px solid #c9a84c;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
-        .topbar h1 { font-size: 1.3rem; color: #333; font-weight: 700; }
-        .topbar small { color: #999; font-size: 0.8rem; display: block; }
-        .topbar .date { color: #666; font-size: 0.85rem; }
+
+        .topbar h1 {
+            font-size: 1.3rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .topbar small {
+            color: #999;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .topbar .date {
+            color: #666;
+            font-size: 0.85rem;
+        }
 
         /* BOTONES */
         .btn-gold {
@@ -148,7 +205,11 @@
             font-size: 0.9rem;
             border-radius: 4px;
         }
-        .btn-gold:hover { background: #b8962a; }
+
+        .btn-gold:hover {
+            background: #b8962a;
+        }
+
         .btn-danger {
             background: #dc3545;
             color: #fff;
@@ -159,6 +220,7 @@
             font-size: 0.85rem;
             border-radius: 4px;
         }
+
         .btn-secondary {
             background: #666;
             color: #fff;
@@ -170,7 +232,12 @@
         }
 
         /* TABLA */
-        table { width:100%; border-collapse:collapse; background:#fff; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
         table th {
             background: #000;
             color: #c9a84c;
@@ -180,12 +247,30 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        table td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-        table tr:hover { background: #f9f9f9; }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
 
         /* FORMULARIO */
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display:block; margin-bottom:6px; font-weight:bold; color:#333; font-size:0.9rem; }
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
         .form-group input,
         .form-group textarea,
         .form-group select {
@@ -196,11 +281,13 @@
             background: #fff;
             border-radius: 4px;
         }
+
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: #c9a84c;
         }
+
         .card {
             background: #fff;
             padding: 25px;
@@ -209,6 +296,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- SIDEBAR -->
@@ -235,13 +323,15 @@
             <div class="menu-label">Contenido</div>
             <ul>
                 <li>
-                    <a href="{{ route('admin.proyectos.index') }}" class="{{ request()->is('admin/proyectos*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.proyectos.index') }}"
+                        class="{{ request()->is('admin/proyectos*') ? 'active' : '' }}">
                         <span>🏗️</span> Proyectos
                         <span class="badge">{{ \App\Models\Proyecto::count() }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.asesores.index') }}" class="{{ request()->is('admin/asesores*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.asesores.index') }}"
+                        class="{{ request()->is('admin/asesores*') ? 'active' : '' }}">
                         <span>👥</span> Asesores
                     </a>
                 </li>
@@ -269,7 +359,14 @@
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="logout-btn" title="Cerrar sesión">🚪</button>
+                <button type="submit"
+                    style="background:#c9a84c; color:#000; border:none; padding:7px 12px;
+               border-radius:4px; font-weight:bold; font-size:0.75rem;
+               cursor:pointer; letter-spacing:0.5px; white-space:nowrap;
+               transition:background 0.2s;"
+                    onmouseover="this.style.background='#b8962a'" onmouseout="this.style.background='#c9a84c'">
+                    Cerrar sesión
+                </button>
             </form>
         </div>
     </div>
@@ -284,14 +381,16 @@
             <span class="date">{{ now()->format('d M Y') }}</span>
         </div>
 
-        @if(session('success'))
-        <div style="background:#d4edda; border:1px solid #c3e6cb; color:#155724; padding:12px 20px; margin-bottom:20px; border-radius:4px;">
-            ✅ {{ session('success') }}
-        </div>
+        @if (session('success'))
+            <div
+                style="background:#d4edda; border:1px solid #c3e6cb; color:#155724; padding:12px 20px; margin-bottom:20px; border-radius:4px;">
+                ✅ {{ session('success') }}
+            </div>
         @endif
 
         @yield('content')
     </div>
 
 </body>
+
 </html>

@@ -44,3 +44,4 @@ RUN php artisan vendor:publish --provider="CloudinaryLabs\CloudinaryLaravel\Clou
 
 # 9. Comando de inicio: limpia configuración, migra y arranca Apache
 CMD php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+CMD php artisan migrate --force && apache2-foreground
