@@ -200,7 +200,7 @@
 <body>
 
     <!-- ===== CHAT FLOTANTE ===== -->
-    <div id="chat-flotante" style="position:fixed; bottom:20px; right:20px; z-index:9999;">
+    <div id="chat-flotante" style="position:fixed; bottom:20px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:15px; align-items:flex-end;">
         <!-- BOTÓN WHATSAPP -->
         <a href="https://wa.me/51912345678?text=Hola,%20me%20interesa%20información%20sobre%20sus%20proyectos"
             target="_blank"
@@ -397,10 +397,33 @@
                     Razón Social: Inmobiliaria Mi Hogar S.A.C.<br>RUC: 20XXXXXXXXX
                 </p>
                 <div style="display:flex; gap:12px; margin-top:15px;">
-                    <a href="#" class="footer-social">f</a>
-                    <a href="#" class="footer-social">in</a>
-                    <a href="#" class="footer-social">yt</a>
-                    <a href="#" class="footer-social">tk</a>
+                    <!-- Facebook -->
+                    <a href="#" target="_blank"
+                        style="background:#1877F2; color:#fff; width:36px; height:36px; border-radius:6px;
+              display:flex; align-items:center; justify-content:center; font-weight:bold;
+              text-decoration:none; font-size:1rem; transition:opacity 0.3s;"
+                        onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">f</a>
+
+                    <!-- LinkedIn -->
+                    <a href="#" target="_blank"
+                        style="background:#0A66C2; color:#fff; width:36px; height:36px; border-radius:6px;
+              display:flex; align-items:center; justify-content:center; font-weight:bold;
+              text-decoration:none; font-size:0.85rem; transition:opacity 0.3s;"
+                        onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">in</a>
+
+                    <!-- YouTube -->
+                    <a href="#" target="_blank"
+                        style="background:#FF0000; color:#fff; width:36px; height:36px; border-radius:6px;
+              display:flex; align-items:center; justify-content:center; font-weight:bold;
+              text-decoration:none; font-size:0.75rem; transition:opacity 0.3s;"
+                        onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">yt</a>
+
+                    <!-- TikTok -->
+                    <a href="#" target="_blank"
+                        style="background:#000; color:#fff; width:36px; height:36px; border-radius:6px;
+              display:flex; align-items:center; justify-content:center; font-weight:bold;
+              text-decoration:none; font-size:0.75rem; border:1px solid #fff; transition:opacity 0.3s;"
+                        onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">tk</a>
                 </div>
             </div>
             <div style="min-width:160px;">
