@@ -86,4 +86,27 @@ class ContactoController extends Controller
 
         return response()->json(['success' => false, 'message' => 'Código incorrecto']);
     }
+
+    public function chat(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string',
+            'correo' => 'required|email',
+        ]);
+
+        \Mail::raw(
+            "📩 Nuevo mensaje desde el chat web\n\n" .
+                "👤 Nombre: " . $request->nombre . "\n" .
+                "📧 Correo: " . $request->correo . "\n" .
+                "🏠 Proyecto de interés: " . ($request->proyecto ?? 'No especificado') . "\n" .
+                "📌 Asunto: " . ($request->asunto ?? 'No especificado') . "\n" .
+                "💬 Mensaje: " . ($request->mensaje ?? 'Sin mensaje') . "\n",
+            function ($message) {
+                $message->to(config('mail.from.address'))
+                    ->subject('💬 Nuevo mensaje - Chat Web Mi Hogar');
+            }
+        );
+
+        return response()->json(['success' => true]);
+    }
 }

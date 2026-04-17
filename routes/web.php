@@ -54,5 +54,7 @@ Route::get('/migrar-todo-ya', function () {
         return "Error al migrar: " . $e->getMessage();
     }
 });
+// chat flotante
+Route::post('/contacto/chat', [ContactoController::class, 'chat'])->name('contacto.chat');
 
 require __DIR__.'/auth.php';
