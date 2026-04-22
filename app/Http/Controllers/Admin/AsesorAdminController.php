@@ -25,25 +25,17 @@ class AsesorAdminController extends Controller
         $request->validate([
             'nombre'   => 'required|string|max:100',
             'contacto' => 'required|string|max:150',
-            'foto'     => 'nullable|image|max:51200',
+            'foto_url' => 'nullable|string',
         ]);
-
-        $ruta = null;
-        if ($request->hasFile('foto')) {
-            $resultado = Cloudinary::upload($request->file('foto')->getRealPath(), [
-                'folder' => 'mihogar/asesores'
-            ]);
-            $ruta = $resultado->getSecurePath();
-        }
 
         AsesorVenta::create([
             'nombre'   => $request->nombre,
             'contacto' => $request->contacto,
-            'foto'     => $ruta,
+            'foto'     => $request->foto_url ?: null,
         ]);
 
         return redirect()->route('admin.asesores.index')
-                         ->with('success', 'Asesor creado correctamente.');
+            ->with('success', 'Asesor creado correctamente.');
     }
 
     public function edit($id)
@@ -59,14 +51,11 @@ class AsesorAdminController extends Controller
         $request->validate([
             'nombre'   => 'required|string|max:100',
             'contacto' => 'required|string|max:150',
-            'foto'     => 'nullable|image|max:51200',
+            'foto_url' => 'nullable|string',
         ]);
 
-        if ($request->hasFile('foto')) {
-            $resultado = Cloudinary::upload($request->file('foto')->getRealPath(), [
-                'folder' => 'mihogar/asesores'
-            ]);
-            $asesor->foto = $resultado->getSecurePath();
+        if ($request->filled('foto_url')) {
+            $asesor->foto = $request->foto_url;
         }
 
         $asesor->nombre   = $request->nombre;
@@ -74,7 +63,7 @@ class AsesorAdminController extends Controller
         $asesor->save();
 
         return redirect()->route('admin.asesores.index')
-                         ->with('success', 'Asesor actualizado correctamente.');
+            ->with('success', 'Asesor actualizado correctamente.');
     }
 
     public function destroy($id)
@@ -83,6 +72,6 @@ class AsesorAdminController extends Controller
         $asesor->delete();
 
         return redirect()->route('admin.asesores.index')
-                         ->with('success', 'Asesor eliminado correctamente.');
+            ->with('success', 'Asesor eliminado correctamente.');
     }
 }
