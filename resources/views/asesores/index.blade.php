@@ -23,7 +23,7 @@
         @if($asesor->foto)
         <img src="{{ $asesor->foto }}"
              alt="{{ $asesor->nombre }}"
-             style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid var(--color-gold); margin-bottom:15px;">
+             style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid var(--color-gold); margin:0 auto 15px; display:block;">
         @else
         <div style="width:120px; height:120px; border-radius:50%; background:#222; margin:0 auto 15px; display:flex; align-items:center; justify-content:center; border:3px solid var(--color-gold);">
             <span style="font-size:3rem;">👤</span>
