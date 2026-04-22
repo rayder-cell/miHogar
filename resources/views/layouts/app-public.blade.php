@@ -445,7 +445,7 @@
             <div style="min-width:160px;">
                 <h4 style="margin-bottom:15px;">Contacto</h4>
                 <p style="color:var(--color-gray); font-size:0.85rem; line-height:2;">
-                    📞 912 345 678<br>📍 Andahuaylas, Apurímac<br>✉️ info@mihogar.pe
+                    📞  932 400 015<br>📍 Andahuaylas, Apurímac<br>✉️ info@mihogar.pe
                 </p>
             </div>
             <div style="min-width:160px;">

@@ -1,47 +1,66 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Inmobiliaria Mi Hogar</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+</head>
+<body>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    <div class="login-container">
 
-        <!-- Email Address -->
-        <!-- Correo -->
-        <div>
-            <x-input-label for="correo" :value="__('Correo')" />
-            <x-text-input id="correo" class="block mt-1 w-full" type="email" name="correo" :value="old('correo')" required
-                autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('correo')" class="mt-2" />
+        <!-- LOGO -->
+        <div class="login-logo">
+            <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar">
         </div>
 
-        <!-- Contraseña -->
-        <div class="mt-4">
-            <x-input-label for="contrasena" :value="__('Contraseña')" />
-            <x-text-input id="contrasena" class="block mt-1 w-full" type="password" name="contrasena" required
-                autocomplete="current-password" />
-            <x-input-error :messages="$errors->get('contrasena')" class="mt-2" />
+        <p class="login-titulo">Panel Admin</p>
+        <p class="login-subtitulo">Ingresa tus credenciales para continuar</p>
+
+        @if ($errors->any())
+        <div class="error-msg">
+            ❌ {{ $errors->first() }}
+        </div>
+        @endif
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div class="form-group">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo"
+                       value="{{ old('correo') }}"
+                       placeholder="tu@correo.com"
+                       required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena"
+                       placeholder="••••••••"
+                       required>
+            </div>
+
+            <div class="remember-row">
+                <label>
+                    <input type="checkbox" name="remember">
+                    Recordarme
+                </label>
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+                @endif
+            </div>
+
+            <button type="submit" class="btn-login">Ingresar</button>
+        </form>
+
+        <div class="back-link">
+            <a href="{{ url('/') }}">← Volver al sitio web</a>
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox"
-                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+    </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+</html>
