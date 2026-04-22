@@ -16,7 +16,6 @@
             <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar">
         </div>
 
-        <p class="login-titulo">Panel Admin</p>
         <p class="login-subtitulo">Ingresa tus credenciales para continuar</p>
 
         @if ($errors->any())
