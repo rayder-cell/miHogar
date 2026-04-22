@@ -360,12 +360,18 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"
-                    style="background:#c9a84c; color:#000; border:none; padding:7px 12px;
-               border-radius:4px; font-weight:bold; font-size:0.75rem;
-               cursor:pointer; letter-spacing:0.5px; white-space:nowrap;
-               transition:background 0.2s;"
-                    onmouseover="this.style.background='#b8962a'" onmouseout="this.style.background='#c9a84c'">
-                    Cerrar sesión
+                    style="background:transparent; color:#c9a84c; border:1px solid #c9a84c;
+                   padding:7px 12px; border-radius:4px; font-weight:bold; font-size:0.75rem;
+                   cursor:pointer; letter-spacing:0.5px; white-space:nowrap;
+                   transition:all 0.2s; display:flex; align-items:center; gap:5px;"
+                    onmouseover="this.style.background='#c9a84c'; this.style.color='#000';"
+                    onmouseout="this.style.background='transparent'; this.style.color='#c9a84c';">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16 13v-2H7V8l-5 4 5 4v-3z" />
+                        <path
+                            d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z" />
+                    </svg>
+                    Salir
                 </button>
             </form>
         </div>
