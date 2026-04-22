@@ -35,7 +35,11 @@ body::before {
     margin-bottom: 30px;
 }
 
-.login-logo img { height: 80px; }
+.login-logo img { 
+    height: 80px; 
+    display: block; 
+    margin: 0 auto; 
+}
 
 .login-titulo {
     color: #c9a84c;
