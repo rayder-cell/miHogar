@@ -188,12 +188,13 @@
 
         .slide {
             background-size: cover !important;
+            background-position: center center !important;
         }
 
         @media (max-width: 768px) {
             .slide {
-                background-size: contain !important;
-                background-color: #000;
+                background-size: cover !important;
+                background-position: top center !important;
             }
         }
     </style>
@@ -204,9 +205,10 @@
         @foreach ($proyectos as $index => $proyecto)
             <div class="slide"
                 style="position:absolute; top:0; left:0; width:100%; height:100%;
-               background: {{ $proyecto->fotos ? 'url(' . $proyecto->fotos . ') center/cover no-repeat' : '#1a1a1a' }};
-               opacity: {{ $index === 0 ? '1' : '0' }};
-               transition: opacity 1s ease;">
+                background: {{ $proyecto->fotos ? 'url(' . $proyecto->fotos . ') center/cover no-repeat' : '#1a1a1a' }};
+                background-size: cover;
+                opacity: {{ $index === 0 ? '1' : '0' }};
+                transition: opacity 1s ease;">
                 <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
             </div>
         @endforeach
