@@ -17,6 +17,7 @@
         .hero-section {
             position: relative;
             min-height: 100vh;
+            width: 100%;
             overflow: hidden;
             background: var(--color-black);
         }
@@ -192,8 +193,7 @@
         @foreach ($proyectos as $index => $proyecto)
             <div class="slide"
                 style="position:absolute; top:0; left:0; width:100%; height:100%;
-               background: {{ $proyecto->fotos ? 'url(' . $proyecto->fotos . ') center/contain no-repeat' : '#1a1a1a' }};
-               background-color: #000;
+               background: {{ $proyecto->fotos ? 'url(' . $proyecto->fotos . ') center/cover no-repeat' : '#1a1a1a' }};
                opacity: {{ $index === 0 ? '1' : '0' }};
                transition: opacity 1s ease;">
                 <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
@@ -451,7 +451,8 @@
                 <div class="testimonio-card">
                     <div
                         style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center;">
-                        <span style="font-size:4rem;">👨</span></div>
+                        <span style="font-size:4rem;">👨</span>
+                    </div>
                     <div style="padding:18px;">
                         <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">"Un hogar
                             pensando en el futuro"</p>
@@ -465,7 +466,8 @@
                 <div class="testimonio-card">
                     <div
                         style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center;">
-                        <span style="font-size:4rem;">👩</span></div>
+                        <span style="font-size:4rem;">👩</span>
+                    </div>
                     <div style="padding:18px;">
                         <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">"Nuestro
                             mejor legado familiar"</p>
@@ -479,7 +481,8 @@
                 <div class="testimonio-card">
                     <div
                         style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center;">
-                        <span style="font-size:4rem;">👩</span></div>
+                        <span style="font-size:4rem;">👩</span>
+                    </div>
                     <div style="padding:18px;">
                         <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">"Mi casa
                             propia, un sueño cumplido"</p>
