@@ -185,6 +185,17 @@
                 display: none;
             }
         }
+
+        .slide {
+            background-size: cover !important;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                background-size: contain !important;
+                background-color: #000;
+            }
+        }
     </style>
 
     <!-- ===== HERO ===== -->
