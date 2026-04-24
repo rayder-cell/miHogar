@@ -193,8 +193,16 @@
 
         @media (max-width: 768px) {
             .slide {
-                background-size: cover !important;
-                background-position: top center !important;
+                background-size: contain !important;
+                background-position: center center !important;
+                background-color: #000;
+            }
+
+            /* Reduce la altura del hero en móvil para que se vea la imagen completa */
+            .hero-section {
+                min-height: 60vw !important;
+                /* se adapta al ancho de la imagen */
+                background: #000;
             }
         }
     </style>
@@ -205,11 +213,15 @@
         @foreach ($proyectos as $index => $proyecto)
             <div class="slide"
                 style="position:absolute; top:0; left:0; width:100%; height:100%;
-                background: {{ $proyecto->fotos ? 'url(' . $proyecto->fotos . ') center/cover no-repeat' : '#1a1a1a' }};
-                background-size: cover;
-                opacity: {{ $index === 0 ? '1' : '0' }};
-                transition: opacity 1s ease;">
-                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+               opacity: {{ $index === 0 ? '1' : '0' }};
+               transition: opacity 1s ease;
+               background:#1a1a1a;">
+                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35); z-index:1;"></div>
+                @if ($proyecto->fotos)
+                    <img src="{{ $proyecto->fotos }}"
+                        style="width:100%; height:100%; object-fit:cover; object-position:center;
+                    position:absolute; top:0; left:0; z-index:0;">
+                @endif
             </div>
         @endforeach
 
