@@ -13,7 +13,7 @@
             position: relative;
             width: 100%;
             height: 0px;
-            padding-bottom: 52%; /* Aspect ratio 16:9 */
+            padding-bottom: 56%; /* Aspect ratio 16:9 */
             overflow: hidden;
             background: #000;
         }
@@ -30,9 +30,9 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             /* ← cover en desktop, llena todo */
-            object-position: center;
+            object-position: center center;
             display: block;
             position: absolute;
             top: 0;
