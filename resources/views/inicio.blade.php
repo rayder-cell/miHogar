@@ -12,15 +12,15 @@
         .hero-section {
             position: relative;
             width: 100%;
-            height: 520px;
+            height: 0px;
+            padding-bottom: 52%; /* Aspect ratio 16:9 */
             overflow: hidden;
             background: #000;
         }
 
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             transition: opacity 1s ease;
@@ -30,7 +30,7 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             /* ← cover en desktop, llena todo */
             object-position: center;
             display: block;
