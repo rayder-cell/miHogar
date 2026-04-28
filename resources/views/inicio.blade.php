@@ -9,7 +9,7 @@
     .hero-section {
         position: relative;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         overflow: hidden;
         background: var(--color-black);
     }
