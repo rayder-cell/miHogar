@@ -8,19 +8,13 @@
             max-width: 100vw;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
         /* ===== HERO ===== */
         .hero-section {
             position: relative;
             width: 100%;
             height: 520px;
-            /* altura fija como Los Portales */
             overflow: hidden;
-            background: var(--color-black);
+            background: #000;
         }
 
         .slide {
@@ -37,13 +31,18 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* ← cover en desktop, llena todo */
             object-position: center;
             display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
 
         /* Texto hero */
         .hero-titulo {
-            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-size: clamp(1.6rem, 4vw, 3rem);
             letter-spacing: clamp(2px, 1vw, 6px);
             color: var(--color-white);
             font-weight: 900;
@@ -53,18 +52,18 @@
         }
 
         .hero-subtitulo {
-            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            font-size: clamp(0.85rem, 2vw, 1rem);
             color: var(--color-gray-light);
-            margin-bottom: 30px;
-            max-width: min(600px, 90%);
+            margin-bottom: 25px;
+            max-width: min(500px, 90%);
         }
 
         /* Info esquina */
         .hero-info-slide {
             position: absolute;
-            bottom: 80px;
+            bottom: 60px;
             left: 20px;
-            max-width: min(300px, calc(100vw - 40px));
+            max-width: min(280px, calc(100vw - 40px));
             z-index: 10;
         }
 
@@ -73,13 +72,13 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             border: 2px solid var(--color-gold);
             color: var(--color-gold);
-            width: 55px;
-            height: 55px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
             z-index: 10;
             display: flex;
@@ -94,28 +93,28 @@
         }
 
         .btn-flecha-izq {
-            left: 20px;
+            left: 15px;
         }
 
         .btn-flecha-der {
-            right: 20px;
+            right: 15px;
         }
 
         /* Puntos */
         .slider-puntos {
             position: absolute;
-            bottom: 25px;
+            bottom: 15px;
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             z-index: 10;
         }
 
         .slider-punto {
             display: inline-block;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid var(--color-gold);
@@ -125,39 +124,17 @@
         /* ===== MÓVIL ===== */
         @media (max-width: 768px) {
             .hero-section {
-                height: 100vw;
-                /* cuadrado en móvil — muestra imagen completa */
+                height: 56vw;
             }
 
             .slide img {
-                object-fit: contain;
-                object-position: center;
-                background-color: #000;
+                object-fit: cover;
+                object-position: center top;
             }
 
             .hero-info-slide {
-                bottom: 55px;
-                left: 10px;
-                max-width: calc(100vw - 20px);
-            }
-
-            .btn-flecha {
-                width: 36px;
-                height: 36px;
-                font-size: 1.3rem;
-            }
-
-            .btn-flecha-izq {
-                left: 6px;
-            }
-
-            .btn-flecha-der {
-                right: 6px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-info-slide {
+                bottom: 45px;
+                left: 8px;
                 max-width: 180px;
             }
 
@@ -167,6 +144,35 @@
 
             .hero-info-slide p {
                 font-size: 0.7rem !important;
+            }
+
+            .hero-info-slide .btn-gold {
+                padding: 5px 10px !important;
+                font-size: 0.72rem !important;
+            }
+
+            .btn-flecha {
+                width: 34px;
+                height: 34px;
+                font-size: 1.2rem;
+            }
+
+            .btn-flecha-izq {
+                left: 6px;
+            }
+
+            .btn-flecha-der {
+                right: 6px;
+            }
+
+            .hero-titulo {
+                font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                height: 58vw;
             }
         }
 
@@ -303,11 +309,12 @@
         @endforeach
 
         <!-- TEXTO CENTRAL -->
-        <div style="position:absolute; top:0; left:0; width:100%; height:100%;
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            z-index:5; text-align:center; padding:20px 20px 80px;">
+        <div
+            style="position:absolute; top:0; left:0; width:100%; height:100%;
+                display:flex; flex-direction:column; align-items:center; justify-content:center;
+                z-index:5; text-align:center; padding:20px 20px 70px;">
             <p class="text-gold"
-                style="font-size:clamp(0.7rem, 2.5vw, 1rem); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px;">
+                style="font-size:clamp(0.7rem, 2vw, 0.9rem); letter-spacing:4px; text-transform:uppercase; margin-bottom:8px;">
                 Bienvenido a
             </p>
             <h1 class="hero-titulo">Inmobiliaria Mi Hogar</h1>
@@ -335,21 +342,21 @@
         <div class="hero-info-slide">
             @foreach ($proyectos as $index => $proyecto)
                 <div class="info-slide" style="display:{{ $index === 0 ? 'block' : 'none' }};">
-                    <div class="border-left-gold" style="background:rgba(0,0,0,0.8); padding:12px 16px;">
+                    <div class="border-left-gold" style="background:rgba(0,0,0,0.8); padding:10px 14px;">
                         <h2
-                            style="color:var(--color-white); font-size:clamp(0.8rem, 2.5vw, 1rem); margin-bottom:5px; line-height:1.3;">
+                            style="color:var(--color-white); font-size:clamp(0.78rem, 2vw, 0.95rem); margin-bottom:4px; line-height:1.3;">
                             {{ $proyecto->nombre_proyecto }}
                         </h2>
-                        <p style="color:var(--color-gray-light); font-size:0.78rem; margin-bottom:4px;">
+                        <p style="color:var(--color-gray-light); font-size:0.75rem; margin-bottom:3px;">
                             📍 {{ $proyecto->distrito }} - {{ $proyecto->direccion }}
                         </p>
                         @if ($proyecto->precio)
-                            <p class="text-gold" style="font-weight:bold; font-size:0.88rem; margin-bottom:8px;">
+                            <p class="text-gold" style="font-weight:bold; font-size:0.82rem; margin-bottom:6px;">
                                 💰 S/. {{ number_format($proyecto->precio, 0, '.', ',') }}
                             </p>
                         @endif
                         <a href="{{ route('proyectos.show', $proyecto->id_proyecto) }}" class="btn-gold"
-                            style="padding:6px 14px; font-size:0.78rem; display:inline-block;">
+                            style="padding:5px 12px; font-size:0.75rem; display:inline-block;">
                             Ver más →
                         </a>
                     </div>
