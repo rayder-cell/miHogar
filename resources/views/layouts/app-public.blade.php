@@ -102,6 +102,7 @@
             border-radius: 0 0 10px 10px;
             max-height: 80vh;
             overflow-y: auto;
+            width: min(850px, 95vw);
         }
 
         /* ===== FOOTER ===== */
@@ -336,7 +337,7 @@
                                     @php $proyectosNav = App\Models\Proyecto::take(4)->get(); @endphp
                                     @foreach ($proyectosNav as $p)
                                         <a href="{{ route('proyectos.show', $p->id_proyecto) }}"
-                                            style="text-decoration:none; width:150px; flex-shrink:0;">
+                                            style="text-decoration:none; width:180px; flex-shrink:0;">
                                             <div
                                                 style="border-radius:8px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
                                                 <div style="height:110px; overflow:hidden; position:relative;">
@@ -356,7 +357,7 @@
                                                 </div>
                                                 <div style="padding:8px; background:#fff;">
                                                     <p
-                                                        style="color:#333; font-size:0.78rem; font-weight:bold; margin-bottom:4px; text-transform:uppercase; line-height:1.3;">
+                                                        style="color:#333; font-size:0.75rem; font-weight:bold; margin-bottom:4px; text-transform:uppercase; line-height:1.3; white-space:normal; word-break:break-word;">
                                                         {{ $p->nombre_proyecto }}
                                                     </p>
                                                     @if ($p->precio)
@@ -497,7 +498,7 @@
                 dropdown.style.right = '20px';
                 dropdown.style.left = 'auto';
                 dropdown.style.transform = 'none';
-                dropdown.style.width = dropdownWidth + 'px';
+                dropdown.style.width = Math.min(850, viewportWidth * 0.95) + 'px';
                 dropdown.style.display = 'block';
             }
         });
