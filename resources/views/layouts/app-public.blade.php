@@ -377,10 +377,10 @@
                 const nav = document.querySelector('nav');
                 const navBottom = nav.getBoundingClientRect().bottom;
                 dropdown.style.top = navBottom + 'px';
-                dropdown.style.left = '0';        // ← ÚNICO CAMBIO
-                dropdown.style.right = '0';       // ← ÚNICO CAMBIO
-                dropdown.style.width = '100%';    // ← ÚNICO CAMBIO
-                dropdown.style.display = 'flex';
+                dropdown.style.left = 'auto';        // ← ÚNICO CAMBIO
+                dropdown.style.right = '20px';       // ← ÚNICO CAMBIO
+                dropdown.style.width = 'min(750px, 95vw)';    // ← ÚNICO CAMBIO
+                dropdown.style.display = 'none';
             }
         });
 
