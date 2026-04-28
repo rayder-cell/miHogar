@@ -381,6 +381,7 @@
                 dropdown.style.right = '20px';       // ← ÚNICO CAMBIO
                 dropdown.style.width = 'min(750px, 95vw)';    // ← ÚNICO CAMBIO
                 dropdown.style.display = 'none';
+                dropdown.style.display = 'block';
             }
         });
 
