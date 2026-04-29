@@ -18,15 +18,16 @@
 
             <div class="form-group">
                 <label>Descripción del Asesor *</label>
-                <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia..." required>{{ old('descripcion') }}</textarea>
+                <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia..."
+                    required>{{ old('descripcion') }}</textarea>
             </div>
 
             <div class="form-group">
                 <label>Contacto (WhatsApp) *</label>
                 <input type="tel" name="contacto" value="{{ old('contacto') }}" placeholder="912345678" required
-                    pattern="[0-9]{9}" inputmode="numeric"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                    minlength="9" maxlength="9">
+                    inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="9"
+                    onblur="if(this.value.length < 9){ this.setCustomValidity('Debe tener exactamente 9 dígitos'); } else { this.setCustomValidity(''); }"
+                    oninvalid="this.setCustomValidity('Debe tener exactamente 9 dígitos')">
                 <small style="color:#888;">Solo números, exactamente 9 dígitos</small>
             </div>
 
