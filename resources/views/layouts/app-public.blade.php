@@ -441,12 +441,14 @@
             <div style="min-width:160px;">
                 <h4 style="margin-bottom:15px;">Legales</h4>
                 <ul style="list-style:none; padding:0; margin:0;">
-                    <li style="margin-bottom:8px;"><a href="#" class="footer-link">Condiciones de Uso</a></li>
-                    <li style="margin-bottom:8px;"><a href="#" class="footer-link">Políticas de Privacidad</a>
-                    </li>
-                    <li style="margin-bottom:8px;"><a href="#" class="footer-link">Financiamiento</a></li>
-                    <li style="margin-bottom:8px;"><a href="#" class="footer-link">Libro de Reclamaciones</a>
-                    </li>
+                    <li style="margin-bottom:8px;"><a href="{{ route('condiciones') }}"
+                            class="footer-link">Condiciones de Uso</a></li>
+                    <li style="margin-bottom:8px;"><a href="{{ route('privacidad') }}" class="footer-link">Políticas
+                            de Privacidad</a></li>
+                    <li style="margin-bottom:8px;"><a href="{{ route('financiamiento') }}"
+                            class="footer-link">Financiamiento</a></li>
+                    <li style="margin-bottom:8px;"><a href="{{ route('reclamaciones') }}" class="footer-link">Libro
+                            de Reclamaciones</a></li>
                 </ul>
             </div>
             <div style="min-width:160px;">
@@ -464,8 +466,8 @@
         <div style="padding:15px 0; text-align:center;">
             <p style="color:#555; font-size:0.82rem; margin:0;">
                 Copyright © 2026 Inmobiliaria Mi Hogar &nbsp;|&nbsp; Todos los derechos reservados &nbsp;|&nbsp;
-                <a href="#" class="copyright-link">Términos y condiciones</a> &nbsp;|&nbsp;
-                <a href="#" class="copyright-link">Políticas de Privacidad</a>
+                <a href="{{ route('condiciones') }}" class="copyright-link">Términos y condiciones</a>
+                <a href="{{ route('privacidad') }}" class="copyright-link">Políticas de Privacidad</a>
             </p>
         </div>
     </footer>

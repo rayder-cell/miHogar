@@ -57,4 +57,20 @@ Route::get('/migrar-todo-ya', function () {
 // chat flotante
 Route::post('/contacto/chat', [ContactoController::class, 'chat'])->name('contacto.chat');
 
+Route::get('/condiciones-de-uso', function () {
+    return view('legales.condiciones');
+})->name('condiciones');
+
+Route::get('/politicas-de-privacidad', function () {
+    return view('legales.privacidad');
+})->name('privacidad');
+
+Route::get('/financiamiento', function () {
+    return view('legales.financiamiento');
+})->name('financiamiento');
+
+Route::get('/libro-de-reclamaciones', function () {
+    return view('legales.reclamaciones');
+})->name('reclamaciones');
+
 require __DIR__.'/auth.php';
