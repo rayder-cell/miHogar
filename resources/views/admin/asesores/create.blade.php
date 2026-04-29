@@ -24,10 +24,19 @@
 
             <div class="form-group">
                 <label>Contacto (WhatsApp) *</label>
-                <input type="tel" name="contacto" value="{{ old('contacto') }}" placeholder="912345678" required
-                    inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="9"
-                    onblur="if(this.value.length < 9){ this.setCustomValidity('Debe tener exactamente 9 dígitos'); } else { this.setCustomValidity(''); }"
+                <input type="tel" name="contacto" id="contacto" value="{{ old('contacto') }}" placeholder="921 700 012"
+                    required inputmode="numeric" maxlength="11"
+                    onblur="if(this.value.replace(/\s/g,'').length < 9){ this.setCustomValidity('Debe tener exactamente 9 dígitos'); } else { this.setCustomValidity(''); }"
                     oninvalid="this.setCustomValidity('Debe tener exactamente 9 dígitos')">
+
+                <script>
+                    document.getElementById('contacto').addEventListener('input', function() {
+                        let digits = this.value.replace(/\D/g, '').substring(0, 9);
+                        let formatted = digits.match(/.{1,3}/g)?.join(' ') || '';
+                        this.value = formatted;
+                        this.setCustomValidity('');
+                    });
+                </script>
                 <small style="color:#888;">Solo números, exactamente 9 dígitos</small>
             </div>
 
