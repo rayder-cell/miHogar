@@ -56,6 +56,7 @@ class ProyectoAdminController extends Controller
                 'fotos'           => 'nullable|string', // URL de Cloudinary
                 'videos'          => 'nullable|string',
                 'mapa'            => 'nullable|string',
+
             ]);
 
             Proyecto::create([
@@ -66,6 +67,7 @@ class ProyectoAdminController extends Controller
                 'fotos'           => $request->fotos, // URL directa de Cloudinary
                 'videos'          => $this->convertirYoutubeEmbed($request->videos),
                 'mapa'            => $request->mapa,
+                'foto_slider' => $request->foto_slider ?: null,
             ]);
 
             return redirect('/admin/proyectos');
@@ -99,6 +101,10 @@ class ProyectoAdminController extends Controller
 
         if ($request->filled('fotos')) {
             $proyecto->fotos = $request->fotos;
+        }
+        
+        if ($request->filled('foto_slider')) {
+            $proyecto->foto_slider = $request->foto_slider;
         }
 
         $proyecto->nombre_proyecto = $request->nombre_proyecto;

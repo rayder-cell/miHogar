@@ -19,6 +19,7 @@ class Proyecto extends Model
         'fotos',
         'videos',
         'mapa',
+        'foto_slider',
     ];
     public function usuarios()
     {

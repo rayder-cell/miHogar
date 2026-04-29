@@ -13,14 +13,16 @@
             position: relative;
             width: 100%;
             height: 0px;
-            padding-bottom: 56%; /* Aspect ratio 16:9 */
+            padding-bottom: 56%;
+            /* Aspect ratio 16:9 */
             overflow: hidden;
             background: #000;
         }
 
         .slide {
             position: absolute;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             transition: opacity 1s ease;
@@ -300,7 +302,9 @@
         @foreach ($proyectos as $index => $proyecto)
             <div class="slide" style="opacity: {{ $index === 0 ? '1' : '0' }};">
                 <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); z-index:1;"></div>
-                @if ($proyecto->fotos)
+                @if ($proyecto->foto_slider)
+                    <img src="{{ $proyecto->foto_slider }}" alt="{{ $proyecto->nombre_proyecto }}">
+                @elseif ($proyecto->fotos)
                     <img src="{{ $proyecto->fotos }}" alt="{{ $proyecto->nombre_proyecto }}">
                 @else
                     <div style="width:100%; height:100%; background:#1a1a1a;"></div>

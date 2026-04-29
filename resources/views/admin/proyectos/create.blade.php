@@ -29,10 +29,8 @@
                     <label>Distrito *</label>
                     <select name="distrito" required>
                         <option value="">Selecciona un distrito</option>
-                        <option value="Andahuaylas" {{ old('distrito') == 'Andahuaylas' ? 'selected' : '' }}>Andahuaylas
-                        </option>
-                        <option value="San Jerónimo" {{ old('distrito') == 'San Jerónimo' ? 'selected' : '' }}>San Jerónimo
-                        </option>
+                        <option value="Andahuaylas" {{ old('distrito') == 'Andahuaylas' ? 'selected' : '' }}>Andahuaylas</option>
+                        <option value="San Jerónimo" {{ old('distrito') == 'San Jerónimo' ? 'selected' : '' }}>San Jerónimo</option>
                         <option value="Talavera" {{ old('distrito') == 'Talavera' ? 'selected' : '' }}>Talavera</option>
                     </select>
                 </div>
@@ -57,15 +55,23 @@
                 <label>Foto del Proyecto</label>
                 <input type="file" id="foto_input" accept="image/*">
                 <small style="color:#888;">Formatos: jpg, jpeg, png, webp. Sin límite de tamaño.</small>
-
-                <!-- Preview -->
                 <div id="preview_container" style="margin-top:10px; display:none;">
                     <img id="foto_preview" style="height:150px; border:2px solid #c9a84c;">
                     <p id="upload_status" style="color:#c9a84c; font-size:0.85rem; margin-top:5px;"></p>
                 </div>
-
-                <!-- Input oculto que guarda la URL de Cloudinary -->
                 <input type="hidden" name="fotos" id="fotos_url">
+            </div>
+
+            <!-- FOTO PARA EL SLIDER -->
+            <div class="form-group">
+                <label>🖼️ Foto para el Slider (página principal)</label>
+                <input type="file" id="slider_input" accept="image/*">
+                <small style="color:#888;">Esta imagen aparecerá en el slider de la página de inicio.</small>
+                <div id="slider_preview_container" style="margin-top:10px; display:none;">
+                    <img id="slider_preview" style="height:150px; border:2px solid #c9a84c;">
+                    <p id="slider_upload_status" style="color:#c9a84c; font-size:0.85rem; margin-top:5px;"></p>
+                </div>
+                <input type="hidden" name="foto_slider" id="foto_slider_url">
             </div>
 
             <div class="form-group">
@@ -91,18 +97,15 @@
         const CLOUDINARY_CLOUD_NAME = '{{ config('services.cloudinary.cloud_name') }}';
         const CLOUDINARY_UPLOAD_PRESET = '{{ config('services.cloudinary.upload_preset') }}';
 
-        document.getElementById('foto_input').addEventListener('change', async function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
+        async function subirACloudinary(file, previewId, statusId, urlInputId, previewContainerId) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('foto_preview').src = e.target.result;
-                document.getElementById('preview_container').style.display = 'block';
+                document.getElementById(previewId).src = e.target.result;
+                if (previewContainerId) document.getElementById(previewContainerId).style.display = 'block';
             };
             reader.readAsDataURL(file);
 
-            document.getElementById('upload_status').textContent = '⏳ Subiendo imagen...';
+            document.getElementById(statusId).textContent = '⏳ Subiendo imagen...';
 
             const formData = new FormData();
             formData.append('file', file);
@@ -116,21 +119,31 @@
                         body: formData
                     }
                 );
-
                 const data = await response.json();
-
                 if (data.secure_url) {
-                    document.getElementById('fotos_url').value = data.secure_url;
-                    document.getElementById('upload_status').textContent = '✅ Imagen subida correctamente';
-                    document.getElementById('upload_status').style.color = '#28a745';
+                    document.getElementById(urlInputId).value = data.secure_url;
+                    document.getElementById(statusId).textContent = '✅ Imagen subida correctamente';
+                    document.getElementById(statusId).style.color = '#28a745';
                 } else {
-                    document.getElementById('upload_status').textContent = '❌ Error al subir la imagen';
-                    document.getElementById('upload_status').style.color = '#dc3545';
+                    document.getElementById(statusId).textContent = '❌ Error al subir la imagen';
+                    document.getElementById(statusId).style.color = '#dc3545';
                 }
             } catch (error) {
-                document.getElementById('upload_status').textContent = '❌ Error de conexión';
-                document.getElementById('upload_status').style.color = '#dc3545';
+                document.getElementById(statusId).textContent = '❌ Error de conexión';
+                document.getElementById(statusId).style.color = '#dc3545';
             }
+        }
+
+        document.getElementById('foto_input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            subirACloudinary(file, 'foto_preview', 'upload_status', 'fotos_url', 'preview_container');
+        });
+
+        document.getElementById('slider_input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            subirACloudinary(file, 'slider_preview', 'slider_upload_status', 'foto_slider_url', 'slider_preview_container');
         });
     </script>
 @endsection
