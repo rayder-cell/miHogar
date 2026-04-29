@@ -52,10 +52,10 @@ class AsesorAdminController extends Controller
 
         $request->validate([
             'nombre'      => 'required|string|max:100',
-            'contacto'    => 'required|string|max:150',
+            'contacto' => 'required|numeric|digits_between:9',
             'descripcion' => 'nullable|string',
-            
-            'foto_url'    => 'nullable|string',
+            'cargo'       => 'required|string|max:100',
+            'foto_url'    => 'requiret|string',
         ]);
 
         if ($request->filled('foto_url')) {

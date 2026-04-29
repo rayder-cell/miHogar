@@ -12,23 +12,26 @@
             </div>
 
             <div class="form-group">
-                <label>Cargo</label>
+                <label>Cargo *</label>
                 <input type="text" name="cargo" value="{{ old('cargo') }}" placeholder="Ej: Asesor de Ventas" required>
             </div>
 
             <div class="form-group">
-                <label>Descripción del Asesor</label>
-                <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia...">{{ old('descripcion') }}</textarea>
+                <label>Descripción del Asesor *</label>
+                <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia..." required>{{ old('descripcion') }}</textarea>
             </div>
 
             <div class="form-group">
                 <label>Contacto (WhatsApp) *</label>
-                <input type="text" name="contacto" value="{{ old('contacto') }}" placeholder="51912345678" required>
-                <small style="color:#888;">Incluye el código de país, ej: 51912345678</small>
+                <input type="tel" name="contacto" value="{{ old('contacto') }}" placeholder="912345678" required
+                    pattern="[0-9]{9}" inputmode="numeric"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                    minlength="9" maxlength="9">
+                <small style="color:#888;">Solo números, exactamente 9 dígitos</small>
             </div>
 
             <div class="form-group">
-                <label>Foto del Asesor</label>
+                <label>Foto del Asesor *</label>
                 <input type="file" id="foto_input" accept="image/*" required>
                 <small style="color:#888;">Formatos: jpg, jpeg, png, webp.</small>
                 <div id="preview_container" style="margin-top:10px; display:none;">

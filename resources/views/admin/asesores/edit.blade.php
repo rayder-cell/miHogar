@@ -13,19 +13,24 @@
             </div>
 
             <div class="form-group">
-                <label>Cargo</label>
+                <label>Cargo *</label>
                 <input type="text" name="cargo" value="{{ old('cargo', $asesor->cargo) }}"
                     placeholder="Ej: Asesor de Ventas" required>
             </div>
 
             <div class="form-group">
-                <label>Descripción del Asesor</label>
-                <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia...">{{ old('descripcion', $asesor->descripcion) }}</textarea>
+                <label>Descripción del Asesor *</label>
+                <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia..." required>{{ old('descripcion', $asesor->descripcion) }}</textarea>
             </div>
 
             <div class="form-group">
                 <label>Contacto (WhatsApp) *</label>
-                <input type="text" name="contacto" value="{{ old('contacto', $asesor->contacto) }}" required>
+                <input type="tel" name="contacto" value="{{ old('contacto', $asesor->contacto) }}" 
+                    placeholder="912345678" required
+                    pattern="[0-9]{9}" inputmode="numeric"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                    minlength="9" maxlength="9">
+                <small style="color:#888;">Solo números, exactamente 9 dígitos</small>
             </div>
 
             <div class="form-group">
@@ -48,7 +53,7 @@
                 <p id="upload-status" style="font-size:0.82rem; margin-top:5px; color:#888;"></p>
                 <small style="color:#888;">Deja vacío para mantener la foto actual</small>
 
-                <input type="hidden" name="foto_url" id="foto_url" value="{{ $asesor->foto }}" required>
+                <input type="hidden" name="foto_url" id="foto_url" value="{{ $asesor->foto }}">
             </div>
 
             <div style="display:flex; gap:10px; margin-top:10px;">
