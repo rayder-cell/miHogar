@@ -14,7 +14,8 @@ class AsesorVenta extends Model
         'nombre',
         'foto',
         'contacto',
-        'descripcion', // ✅ agregado
+        'descripcion', // agregado
+        'cargo',
     ];
 
     public function proyectos()

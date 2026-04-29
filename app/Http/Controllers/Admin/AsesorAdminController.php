@@ -32,6 +32,7 @@ class AsesorAdminController extends Controller
             'nombre'      => $request->nombre,
             'contacto'    => $request->contacto,
             'descripcion' => $request->descripcion,
+            'cargo'       => $request->cargo,
             'foto'        => $request->foto_url ?: null,
         ]);
 
@@ -53,6 +54,7 @@ class AsesorAdminController extends Controller
             'nombre'      => 'required|string|max:100',
             'contacto'    => 'required|string|max:150',
             'descripcion' => 'nullable|string',
+            
             'foto_url'    => 'nullable|string',
         ]);
 
@@ -62,6 +64,7 @@ class AsesorAdminController extends Controller
 
         $asesor->nombre      = $request->nombre;
         $asesor->contacto    = $request->contacto;
+        $asesor->cargo       = $request->cargo;
 
         if ($request->filled('descripcion')) {
             $asesor->descripcion = $request->descripcion;
