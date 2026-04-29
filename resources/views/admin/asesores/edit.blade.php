@@ -13,6 +13,11 @@
         </div>
 
         <div class="form-group">
+            <label>Descripción del Asesor</label>
+            <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia...">{{ old('descripcion', $asesor->descripcion) }}</textarea>
+        </div>
+
+        <div class="form-group">
             <label>Contacto (WhatsApp) *</label>
             <input type="text" name="contacto" value="{{ old('contacto', $asesor->contacto) }}" required>
         </div>
@@ -36,7 +41,6 @@
             <p id="upload-status" style="font-size:0.82rem; margin-top:5px; color:#888;"></p>
             <small style="color:#888;">Deja vacío para mantener la foto actual</small>
 
-            <!-- URL de Cloudinary -->
             <input type="hidden" name="foto_url" id="foto_url" value="{{ $asesor->foto }}">
         </div>
 
@@ -59,7 +63,6 @@
         status.textContent = '⏳ Subiendo imagen...';
         status.style.color = '#c9a84c';
 
-        // Preview
         const reader = new FileReader();
         reader.onload = function(e) {
             const preview = document.getElementById('foto-preview');
@@ -71,7 +74,6 @@
         };
         reader.readAsDataURL(file);
 
-        // Subir a Cloudinary
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);

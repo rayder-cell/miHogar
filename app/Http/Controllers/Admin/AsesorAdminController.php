@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AsesorVenta;
 use Illuminate\Http\Request;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class AsesorAdminController extends Controller
 {
@@ -23,15 +22,17 @@ class AsesorAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre'   => 'required|string|max:100',
-            'contacto' => 'required|string|max:150',
-            'foto_url' => 'nullable|string',
+            'nombre'      => 'required|string|max:100',
+            'contacto'    => 'required|string|max:150',
+            'descripcion' => 'nullable|string',
+            'foto_url'    => 'nullable|string',
         ]);
 
         AsesorVenta::create([
-            'nombre'   => $request->nombre,
-            'contacto' => $request->contacto,
-            'foto'     => $request->foto_url ?: null,
+            'nombre'      => $request->nombre,
+            'contacto'    => $request->contacto,
+            'descripcion' => $request->descripcion,
+            'foto'        => $request->foto_url ?: null,
         ]);
 
         return redirect()->route('admin.asesores.index')
@@ -49,17 +50,23 @@ class AsesorAdminController extends Controller
         $asesor = AsesorVenta::findOrFail($id);
 
         $request->validate([
-            'nombre'   => 'required|string|max:100',
-            'contacto' => 'required|string|max:150',
-            'foto_url' => 'nullable|string',
+            'nombre'      => 'required|string|max:100',
+            'contacto'    => 'required|string|max:150',
+            'descripcion' => 'nullable|string',
+            'foto_url'    => 'nullable|string',
         ]);
 
         if ($request->filled('foto_url')) {
             $asesor->foto = $request->foto_url;
         }
 
-        $asesor->nombre   = $request->nombre;
-        $asesor->contacto = $request->contacto;
+        $asesor->nombre      = $request->nombre;
+        $asesor->contacto    = $request->contacto;
+
+        if ($request->filled('descripcion')) {
+            $asesor->descripcion = $request->descripcion;
+        }
+
         $asesor->save();
 
         return redirect()->route('admin.asesores.index')

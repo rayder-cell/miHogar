@@ -97,12 +97,13 @@ class ProyectoAdminController extends Controller
             'fotos'           => 'nullable|string',
             'videos'          => 'nullable|string',
             'mapa'            => 'nullable|string',
+            
         ]);
 
         if ($request->filled('fotos')) {
             $proyecto->fotos = $request->fotos;
         }
-        
+
         if ($request->filled('foto_slider')) {
             $proyecto->foto_slider = $request->foto_slider;
         }
