@@ -398,7 +398,7 @@
                     Razón Social: Inmobiliaria Mi Hogar S.A.C.<br>RUC: 20XXXXXXXXX
                 </p>
                 <div style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
-                    <a href="#" target="_blank"
+                    <a href="https://www.facebook.com/share/1AkTFM81Dk/" target="_blank"
                         style="display:flex; align-items:center; gap:6px; background:#1877F2; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.82rem; white-space:nowrap;">
                         <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
                             <path
@@ -422,7 +422,7 @@
                         </svg>
                         YouTube
                     </a>
-                    <a href="#" target="_blank"
+                    <a href="https://www.tiktok.com/@inmobiliaria.mihogar" target="_blank"
                         style="display:flex; align-items:center; gap:6px; background:#000; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.82rem; white-space:nowrap; border:1px solid #333;">
                         <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
                             <path
