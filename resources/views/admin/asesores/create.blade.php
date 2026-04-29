@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 <label>Cargo</label>
-                <input type="text" name="cargo" value="{{ old('cargo') }}" placeholder="Ej: Asesor de Ventas">
+                <input type="text" name="cargo" value="{{ old('cargo') }}" placeholder="Ej: Asesor de Ventas" required>
             </div>
 
             <div class="form-group">
@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label>Foto del Asesor</label>
-                <input type="file" id="foto_input" accept="image/*">
+                <input type="file" id="foto_input" accept="image/*" required>
                 <small style="color:#888;">Formatos: jpg, jpeg, png, webp.</small>
                 <div id="preview_container" style="margin-top:10px; display:none;">
                     <img id="foto_preview" style="height:150px; border:2px solid #c9a84c;">
