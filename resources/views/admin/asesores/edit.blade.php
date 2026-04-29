@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label>Cargo</label>
                 <input type="text" name="cargo" value="{{ old('cargo', $asesor->cargo) }}"
-                    placeholder="Ej: Asesor de Ventas">
+                    placeholder="Ej: Asesor de Ventas" required>
             </div>
 
             <div class="form-group">
@@ -48,7 +48,7 @@
                 <p id="upload-status" style="font-size:0.82rem; margin-top:5px; color:#888;"></p>
                 <small style="color:#888;">Deja vacío para mantener la foto actual</small>
 
-                <input type="hidden" name="foto_url" id="foto_url" value="{{ $asesor->foto }}">
+                <input type="hidden" name="foto_url" id="foto_url" value="{{ $asesor->foto }}" required>
             </div>
 
             <div style="display:flex; gap:10px; margin-top:10px;">
