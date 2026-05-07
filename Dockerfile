@@ -19,13 +19,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html
 WORKDIR /var/www/html
 
-# 6. Instalar dependencias PHP v2
+# 6. Instalar dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # 7. Instalar dependencias JS y compilar
 RUN npm install && npm run build
 
-# 8. Permisosa
+# 8. Permisos
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
@@ -39,8 +39,10 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
         /etc/apache2/apache2.conf \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# 10. Script de inicio
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 80
 
-CMD php artisan config:clear \
-    && php artisan migrate --force \
-    && apache2-foreground
+CMD ["docker-entrypoint.sh"]
