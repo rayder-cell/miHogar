@@ -25,7 +25,7 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 # 7. Instalar dependencias JS y compilar
 RUN npm install && npm run build
 
-# 8. Permisos
+# 8. Permisosa
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
@@ -43,5 +43,4 @@ EXPOSE 80
 
 CMD php artisan config:clear \
     && php artisan migrate --force \
-    && php artisan db:seed --force \
     && apache2-foreground
