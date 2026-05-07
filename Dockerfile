@@ -1,46 +1,47 @@
 FROM php:8.2-apache
 
-# 1. Instalar extensiones de PHP y dependencias del sistema
+# 1. Dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    unzip \
-    curl \
+    libpq-dev unzip curl git \
     && docker-php-ext-install pdo pdo_pgsql
 
-# 2. INSTALAR NODE.JS Y NPM (Necesario para compilar el CSS/JS)
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+# 2. Node.js 20
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
-# 3. Habilitar mod_rewrite de Apache
+# 3. Apache mod_rewrite
 RUN a2enmod rewrite
 
-# 4. Copiar el código al contenedor
-COPY . /var/www/html
-
-# 5. Configurar Apache para que apunte a /public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-# NUEVO: Permitir .htaccess y AllowOverride
-RUN sed -ri -e 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-# 6. Instalar dependencias de PHP (Composer)
+# 4. Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 5. Copiar código
+COPY . /var/www/html
+WORKDIR /var/www/html
+
+# 6. Instalar dependencias PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# 7. INSTALAR DEPENDENCIAS DE JS Y COMPILAR VITE
-# Esto creará el archivo manifest.json que falta
+# 7. Instalar dependencias JS y compilar
 RUN npm install && npm run build
 
-# 8. Dar permisos a las carpetas necesarias
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# 8. Permisos
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# 9. Configurar Apache → /public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+        /etc/apache2/sites-available/*.conf \
+        /etc/apache2/apache2.conf \
+        /etc/apache2/conf-available/*.conf \
+    && sed -ri -e 's/AllowOverride None/AllowOverride All/g' \
+        /etc/apache2/apache2.conf \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 EXPOSE 80
 
-# 10. Publicar configuración de Cloudinary
-RUN php artisan vendor:publish --provider="CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider" --tag="cloudinary-laravel-config"
-
-# 9. Comando de inicio: limpia configuración, migra y arranca Apache
-CMD php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+CMD php artisan config:clear \
+    && php artisan migrate --force \
+    && php artisan db:seed --force \
+    && apache2-foreground
