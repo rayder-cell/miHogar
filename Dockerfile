@@ -20,7 +20,8 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 
 # 6. Instalar dependencias PHP
-RUN composer install --no-dev --optimize-autoloader
+# 6. Instalar dependencias PHP (ignorar .env para el build)
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # 7. Instalar dependencias JS y compilar
 RUN npm install && npm run build
