@@ -35,9 +35,9 @@
                         <span style="font-size:2rem;">👤</span>
                     @endif
                 </td>
-                <td style="padding:12px; color:#fff;">{{ $t->nombre }}</td>
-                <td style="padding:12px; color:#888;">{{ $t->ubicacion }}</td>
-                <td style="padding:12px; color:#888;">{{ Str::limit($t->titulo, 40) }}</td>
+                <td style="padding:12px; color:#000000;">{{ $t->nombre }}</td>
+                <td style="padding:12px; color:#000000;">{{ $t->ubicacion }}</td>
+                <td style="padding:12px; color:#000000;">{{ Str::limit($t->titulo, 40) }}</td>
                 <td style="padding:12px;">
                     <span style="background:{{ $t->activo ? '#28a745' : '#dc3545' }}; color:#fff; padding:3px 10px; border-radius:20px; font-size:0.75rem;">
                         {{ $t->activo ? 'Activo' : 'Inactivo' }}
