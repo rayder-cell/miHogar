@@ -35,7 +35,8 @@ class TestimonioAdminController extends Controller
             'titulo'     => $request->titulo,
             'comentario' => $request->comentario,
             'foto'       => $request->foto,
-            'activo'     => $request->has('activo') ? true : false,
+            // En store y update
+            'activo' => $request->activo == '1' ? true : false,
         ]);
 
         return redirect()->route('admin.testimonios.index')
