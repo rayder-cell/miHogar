@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProyectoAdminController;
 use App\Http\Controllers\Admin\AsesorAdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\Admin\TestimonioAdminController;
 
 // Página principal
 Route::get('/', [ProyectoController::class, 'index']);
@@ -41,6 +42,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('proyectos', ProyectoAdminController::class);
     Route::resource('asesores', AsesorAdminController::class);
+    Route::resource('testimonios', TestimonioAdminController::class);
 });
 
 use Illuminate\Support\Facades\Artisan;

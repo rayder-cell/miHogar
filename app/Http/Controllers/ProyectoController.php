@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use App\Models\Testimonio;
 
 class ProyectoController extends Controller
 {
@@ -30,5 +31,12 @@ class ProyectoController extends Controller
     {
         $proyecto = Proyecto::findOrFail($id);
         return view('proyectos.show', compact('proyecto'));
+    }
+
+    public function index()
+    {
+        $proyectos   = Proyecto::all();
+        $testimonios = Testimonio::where('activo', true)->get();
+        return view('inicio', compact('proyectos', 'testimonios'));
     }
 }

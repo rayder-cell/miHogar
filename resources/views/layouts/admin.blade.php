@@ -335,6 +335,12 @@
                         <span>👥</span> Asesores
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.testimonios.index') }}"
+                        class="{{ request()->routeIs('admin.testimonios*') ? 'activo' : '' }}">
+                        ⭐ Testimonios
+                    </a>
+                </li>
             </ul>
         </div>
 

@@ -539,50 +539,32 @@
                 Nuestros clientes nos respaldan
             </h2>
             <div class="testimonios-grid">
-                <div class="testimonio-card">
-                    <div
-                        style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center;">
-                        <span style="font-size:4rem;">👨</span>
+                @forelse($testimonios as $t)
+                    <div class="testimonio-card">
+                        <div
+                            style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                            @if ($t->foto)
+                                <img src="{{ $t->foto }}" style="width:100%; height:100%; object-fit:cover;">
+                            @else
+                                <span style="font-size:4rem;">👤</span>
+                            @endif
+                        </div>
+                        <div style="padding:18px;">
+                            <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">
+                                "{{ $t->titulo }}"
+                            </p>
+                            <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">
+                                {{ $t->comentario }}
+                            </p>
+                            <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">
+                                {{ $t->nombre }}<br>
+                                <span style="color:#888; font-weight:normal;">{{ $t->ubicacion }}</span>
+                            </p>
+                        </div>
                     </div>
-                    <div style="padding:18px;">
-                        <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">"Un hogar
-                            pensando en el futuro"</p>
-                        <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">Compré con Mi Hogar
-                            pensando en el futuro de mis hijos. Me dieron facilidades y logré cumplir el sueño de la casa
-                            propia.</p>
-                        <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">Carlos
-                            Quispe<br><span style="color:#888; font-weight:normal;">Andahuaylas</span></p>
-                    </div>
-                </div>
-                <div class="testimonio-card">
-                    <div
-                        style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center;">
-                        <span style="font-size:4rem;">👩</span>
-                    </div>
-                    <div style="padding:18px;">
-                        <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">"Nuestro
-                            mejor legado familiar"</p>
-                        <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">Con Mi Hogar
-                            logramos un terreno para darles a nuestros hijos un lugar tranquilo. Fue nuestra mejor decisión
-                            en familia.</p>
-                        <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">María Flores<br><span
-                                style="color:#888; font-weight:normal;">Apurímac</span></p>
-                    </div>
-                </div>
-                <div class="testimonio-card">
-                    <div
-                        style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center;">
-                        <span style="font-size:4rem;">👩</span>
-                    </div>
-                    <div style="padding:18px;">
-                        <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">"Mi casa
-                            propia, un sueño cumplido"</p>
-                        <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">Cumplí mi sueño de
-                            tener casa propia. De un cuarto alquilado a un hogar con patio y espacio para mi familia.</p>
-                        <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">Rosa Huamán<br><span
-                                style="color:#888; font-weight:normal;">Andahuaylas</span></p>
-                    </div>
-                </div>
+                @empty
+                    <p style="color:#888; text-align:center; width:100%;">No hay testimonios disponibles.</p>
+                @endforelse
             </div>
         </div>
     </section>
