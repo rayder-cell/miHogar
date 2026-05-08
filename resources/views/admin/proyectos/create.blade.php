@@ -29,8 +29,10 @@
                     <label>Distrito *</label>
                     <select name="distrito" required>
                         <option value="">Selecciona un distrito</option>
-                        <option value="Andahuaylas" {{ old('distrito') == 'Andahuaylas' ? 'selected' : '' }}>Andahuaylas</option>
-                        <option value="San Jerónimo" {{ old('distrito') == 'San Jerónimo' ? 'selected' : '' }}>San Jerónimo</option>
+                        <option value="Andahuaylas" {{ old('distrito') == 'Andahuaylas' ? 'selected' : '' }}>Andahuaylas
+                        </option>
+                        <option value="San Jerónimo" {{ old('distrito') == 'San Jerónimo' ? 'selected' : '' }}>San Jerónimo
+                        </option>
                         <option value="Talavera" {{ old('distrito') == 'Talavera' ? 'selected' : '' }}>Talavera</option>
                     </select>
                 </div>
@@ -47,7 +49,8 @@
 
             <div class="form-group">
                 <label>Precio</label>
-                <input type="text" name="precio" value="{{ old('precio') }}" placeholder="Ej: 150,000">
+                <input type="number" name="precio" value="{{ old('precio', $proyecto->precio ?? '') }}"
+                    placeholder="Ej: 150000" min="0" step="1" style="...tu estilo actual...">
             </div>
 
             <!-- FOTO DEL PROYECTO -->
@@ -143,7 +146,8 @@
         document.getElementById('slider_input').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
-            subirACloudinary(file, 'slider_preview', 'slider_upload_status', 'foto_slider_url', 'slider_preview_container');
+            subirACloudinary(file, 'slider_preview', 'slider_upload_status', 'foto_slider_url',
+                'slider_preview_container');
         });
     </script>
 @endsection

@@ -38,7 +38,7 @@
 
             <div class="form-group">
                 <label>Precio</label>
-                <input type="text" name="precio" value="{{ old('precio', $proyecto->precio) }}" placeholder="Ej: 150,000">
+                <input type="number" name="precio" value="{{ old('precio', $proyecto->precio) }}" placeholder="Ej: 150000" min="0" step="1">
             </div>
 
             <!-- FOTO DEL PROYECTO -->

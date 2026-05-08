@@ -53,10 +53,10 @@ class ProyectoAdminController extends Controller
                 'distrito'        => 'required|string|max:100',
                 'direccion'       => 'required|string|max:255',
                 'descripcion'     => 'nullable|string',
-                'fotos'           => 'nullable|string', // URL de Cloudinary
+                'fotos'           => 'nullable|string',
                 'videos'          => 'nullable|string',
                 'mapa'            => 'nullable|string',
-
+                'precio'          => 'nullable|numeric|min:0', // ← agrega
             ]);
 
             Proyecto::create([
@@ -64,10 +64,11 @@ class ProyectoAdminController extends Controller
                 'distrito'        => $request->distrito,
                 'direccion'       => $request->direccion,
                 'descripcion'     => $request->descripcion,
-                'fotos'           => $request->fotos, // URL directa de Cloudinary
+                'fotos'           => $request->fotos,
                 'videos'          => $this->convertirYoutubeEmbed($request->videos),
                 'mapa'            => $request->mapa,
-                'foto_slider' => $request->foto_slider ?: null,
+                'foto_slider'     => $request->foto_slider ?: null,
+                'precio'          => $request->precio ?: null, // ← agrega
             ]);
 
             return redirect('/admin/proyectos');
@@ -97,7 +98,8 @@ class ProyectoAdminController extends Controller
             'fotos'           => 'nullable|string',
             'videos'          => 'nullable|string',
             'mapa'            => 'nullable|string',
-            
+            'precio'          => 'nullable|numeric|min:0', // ← agrega
+
         ]);
 
         if ($request->filled('fotos')) {
@@ -121,6 +123,7 @@ class ProyectoAdminController extends Controller
             $proyecto->mapa = $request->mapa;
         }
 
+        $proyecto->precio = $request->precio ?: null; // ← agrega
         $proyecto->save();
 
         return redirect()->route('admin.proyectos.index')
