@@ -13,13 +13,13 @@
 
             <div class="form-group">
                 <label>Cargo *</label>
-                <input type="text" name="cargo" value="{{ old('cargo') }}" placeholder="Ej: Asesor de Ventas" required>
+                <input type="text" name="cargo" value="{{ old('cargo') }}" placeholder="Ej: Asesor de Ventas">
             </div>
 
             <div class="form-group">
                 <label>Descripción del Asesor *</label>
                 <textarea name="descripcion" rows="3" placeholder="Ej: Especialista en ventas con 5 años de experiencia..."
-                    required>{{ old('descripcion') }}</textarea>
+                    >{{ old('descripcion') }}</textarea>
             </div>
 
             <div class="form-group">
