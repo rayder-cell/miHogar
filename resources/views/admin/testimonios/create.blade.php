@@ -10,18 +10,18 @@
 
         <div class="form-group">
             <label>Nombre *</label>
-            <input type="text" name="nombre" value="{{ old('nombre') }}" required>
+            <input type="text" name="nombre" value="{{ old('nombre') }}" required placeholder="Ej: Carlos Quispe">
             @error('nombre') <span style="color:red; font-size:0.8rem;">{{ $message }}</span> @enderror
         </div>
 
-        <div style="display:flex; gap:20px;">
-            <div class="form-group" style="flex:1;">
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <div class="form-group" style="flex:1; min-width:200px;">
                 <label>Ubicación</label>
                 <input type="text" name="ubicacion" value="{{ old('ubicacion') }}" placeholder="Ej: Andahuaylas">
             </div>
-            <div class="form-group" style="flex:1;">
+            <div class="form-group" style="flex:1; min-width:200px;">
                 <label>Título / Frase</label>
-                <input type="text" name="titulo" value="{{ old('titulo') }}" placeholder='Ej: "Un hogar pensando en el futuro"'>
+                <input type="text" name="titulo" value="{{ old('titulo') }}" placeholder='Ej: Un hogar pensando en el futuro'>
             </div>
         </div>
 
@@ -36,20 +36,23 @@
             <input type="file" id="foto_input" accept="image/*">
             <small style="color:#888;">Opcional. Formatos: jpg, png, webp.</small>
             <div id="preview_container" style="margin-top:10px; display:none;">
-                <img id="foto_preview" style="height:80px; width:80px; border-radius:50%; object-fit:cover; border:2px solid #c9a84c;">
+                <img id="foto_preview"
+                     style="height:80px; width:80px; border-radius:50%; object-fit:cover; border:2px solid #c9a84c; display:block;">
             </div>
             <p id="upload_status" style="font-size:0.85rem; margin-top:5px;"></p>
             <input type="hidden" name="foto" id="foto_url">
         </div>
 
+        <!-- ACTIVO -->
         <div class="form-group">
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                <input type="checkbox" name="activo" checked>
-                Mostrar en la página web
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:#fff;">
+                <input type="checkbox" name="activo" checked
+                       style="width:18px; height:18px; cursor:pointer;">
+                <span>Mostrar en la página web</span>
             </label>
         </div>
 
-        <div style="display:flex; gap:10px; margin-top:10px;">
+        <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
             <button type="submit" class="btn-gold">💾 Guardar Testimonio</button>
             <a href="{{ route('admin.testimonios.index') }}" class="btn-secondary">Cancelar</a>
         </div>
@@ -57,7 +60,7 @@
 </div>
 
 <script>
-    const CLOUDINARY_CLOUD_NAME   = '{{ env('CLOUDINARY_CLOUD_NAME') }}';
+    const CLOUDINARY_CLOUD_NAME    = '{{ env('CLOUDINARY_CLOUD_NAME') }}';
     const CLOUDINARY_UPLOAD_PRESET = '{{ env('CLOUDINARY_UPLOAD_PRESET') }}';
 
     document.getElementById('foto_input').addEventListener('change', async function(e) {
