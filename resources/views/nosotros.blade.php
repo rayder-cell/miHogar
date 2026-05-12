@@ -179,7 +179,7 @@
                         </svg>
                     </div>
                     <h4 class="text-gold" style="margin-bottom:5px;">WhatsApp</h4>
-                    <a href="https://wa.me/51912345678" target="_blank"
+                    <a href="https://wa.me/51932400015" target="_blank"
                         style="color:#25D366; font-size:0.9rem; text-decoration:none; font-weight:bold;">
                         Escríbenos aquí
                     </a>
