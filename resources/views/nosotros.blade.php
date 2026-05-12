@@ -171,7 +171,7 @@
 
                 <div class="border-gold"
                     style="background:var(--color-black); padding:25px 35px; text-align:center; min-width:180px;">
-                    <div style="margin-bottom:10px;">
+                    <div style="margin-bottom:10px; display:flex; justify-content:center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#25D366"
                             viewBox="0 0 16 16">
                             <path
