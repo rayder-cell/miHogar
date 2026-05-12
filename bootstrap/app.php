@@ -14,8 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(fn () => route('admin.proyectos.index'));
 
-        // Headers de seguridad en todas las respuestas
-        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+        $middleware->web(append: [
+            \App\Http\Middleware\SecurityHeaders::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
