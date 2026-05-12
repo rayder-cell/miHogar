@@ -11,7 +11,6 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Admin\TestimonioAdminController;
 use App\Http\Controllers\BuscadorController;
 
-
 // Página principal
 Route::get('/', [ProyectoController::class, 'index']);
 
@@ -22,18 +21,24 @@ Route::get('/asesores', [AsesorController::class, 'index'])->name('asesores.inde
 Route::get('/nosotros', function () {
     return view('nosotros');
 })->name('nosotros');
+Route::get('/buscar', [BuscadorController::class, 'buscar'])->name('buscar');
 
-// Contacto
-Route::post('/contacto/enviar', [ContactoController::class, 'enviar'])->name('contacto.enviar');
-Route::post('/contacto/verificar', [ContactoController::class, 'verificar'])->name('contacto.verificar');
+// Páginas legales
+Route::get('/condiciones-de-uso', fn() => view('legales.condiciones'))->name('condiciones');
+Route::get('/politicas-de-privacidad', fn() => view('legales.privacidad'))->name('privacidad');
+Route::get('/financiamiento', fn() => view('legales.financiamiento'))->name('financiamiento');
+Route::get('/libro-de-reclamaciones', fn() => view('legales.reclamaciones'))->name('reclamaciones');
 
-// Dashboard de Breeze
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Contacto con rate limiting (máx 5 intentos por minuto)
+Route::middleware(['throttle:5,1'])->group(function () {
+    Route::post('/contacto/enviar', [ContactoController::class, 'enviar'])->name('contacto.enviar');
+    Route::post('/contacto/verificar', [ContactoController::class, 'verificar'])->name('contacto.verificar');
+    Route::post('/contacto/chat', [ContactoController::class, 'chat'])->name('contacto.chat');
+});
 
 // Perfil de usuario
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -46,37 +51,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('asesores', AsesorAdminController::class);
     Route::resource('testimonios', TestimonioAdminController::class);
 });
-
-use Illuminate\Support\Facades\Artisan;
-
-Route::get('/migrar-todo-ya', function () {
-    try {
-        // Esto creará todas las tablas desde cero
-        Artisan::call('migrate', ['--force' => true]);
-        return "Tablas creadas con éxito: " . Artisan::output();
-    } catch (\Exception $e) {
-        return "Error al migrar: " . $e->getMessage();
-    }
-});
-// chat flotante
-Route::post('/contacto/chat', [ContactoController::class, 'chat'])->name('contacto.chat');
-
-Route::get('/condiciones-de-uso', function () {
-    return view('legales.condiciones');
-})->name('condiciones');
-
-Route::get('/politicas-de-privacidad', function () {
-    return view('legales.privacidad');
-})->name('privacidad');
-
-Route::get('/financiamiento', function () {
-    return view('legales.financiamiento');
-})->name('financiamiento');
-
-Route::get('/libro-de-reclamaciones', function () {
-    return view('legales.reclamaciones');
-})->name('reclamaciones');
-
-Route::get('/buscar', [App\Http\Controllers\BuscadorController::class, 'buscar'])->name('buscar');
 
 require __DIR__.'/auth.php';
