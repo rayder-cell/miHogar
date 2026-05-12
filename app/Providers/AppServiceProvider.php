@@ -19,10 +19,6 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
 
-        // Headers de seguridad
-        app()->make(\Illuminate\Contracts\Http\Kernel::class)
-            ->pushMiddleware(\App\Http\Middleware\SecurityHeaders::class);
-
         Auth::provider('custom', function ($app, array $config) {
             return new CustomUserProvider(
                 $app['hash'],
