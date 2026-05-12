@@ -291,7 +291,7 @@
 
         <div class="nav-links" id="nav-links">
             <ul>
-                <li><a href="#"><i class="fas fa-search"></i></a></li>
+                <li><a href="{{ route('buscar') }}"><i class="fas fa-search"></i></a></li>
                 <li><a href="{{ url('/') }}">Inicio</a></li>
 
                 <li class="menu-item-proyectos">

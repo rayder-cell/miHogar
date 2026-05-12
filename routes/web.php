@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\AsesorAdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Admin\TestimonioAdminController;
+use App\Http\Controllers\BuscadorController;
+
 
 // Página principal
 Route::get('/', [ProyectoController::class, 'index']);
@@ -74,5 +76,7 @@ Route::get('/financiamiento', function () {
 Route::get('/libro-de-reclamaciones', function () {
     return view('legales.reclamaciones');
 })->name('reclamaciones');
+
+Route::get('/buscar', [App\Http\Controllers\BuscadorController::class, 'buscar'])->name('buscar');
 
 require __DIR__.'/auth.php';
