@@ -533,30 +533,37 @@
 
     <!-- ===== TESTIMONIOS ===== -->
     <section style="background:#fff; padding:60px 20px;">
-        <div style="max-width:1100px; margin:0 auto;">
+        <div style="max-width:960px; margin:0 auto;">
             <h2
                 style="text-align:center; color:#000; font-size:clamp(1.4rem, 5vw, 2rem); font-weight:900; margin-bottom:40px;">
                 Nuestros clientes nos respaldan
             </h2>
 
-            <!-- Wrapper con overflow hidden y flechas encima -->
-            <div style="position:relative;">
+            <div style="display:flex; align-items:center; gap:15px;">
 
-                <!-- Ventana visible -->
-                <div style="overflow:hidden; margin:0 56px;">
+                <!-- Flecha izquierda -->
+                <button onclick="moverTestimonios(-1)"
+                    style="flex-shrink:0; background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
+                width:42px; height:42px; border-radius:50%; font-size:1.4rem; cursor:pointer;
+                display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&#8249;</button>
+
+                <!-- Ventana -->
+                <div id="ventana-testimonios" style="overflow:hidden; flex:1;">
                     <div id="slider-testimonios" style="display:flex; gap:20px; transition:transform 0.5s ease;">
                         @forelse($testimonios as $t)
-                            <div class="testimonio-card" style="flex-shrink:0;">
-                                <div
-                                    style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                            <div class="testimonio-card t-card"
+                                style="flex-shrink:0; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.1);">
+                                <div style="height:200px; background:#e8e0cc; overflow:hidden;">
                                     @if ($t->foto)
                                         <img src="{{ $t->foto }}"
                                             style="width:100%; height:100%; object-fit:cover;">
                                     @else
-                                        <span style="font-size:4rem;">👤</span>
+                                        <div
+                                            style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;">
+                                            👤</div>
                                     @endif
                                 </div>
-                                <div style="padding:18px;">
+                                <div style="padding:18px; background:#fff;">
                                     <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">
                                         "{{ $t->titulo }}"
                                     </p>
@@ -575,19 +582,11 @@
                     </div>
                 </div>
 
-                <!-- Flecha izquierda pegada al borde del contenedor -->
-                <button onclick="moverTestimonios(-1)"
-                    style="position:absolute; top:50%; left:0; transform:translateY(-50%);
-                background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
-                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
-                display:flex; align-items:center; justify-content:center; transition:all 0.3s; z-index:5;">&#8249;</button>
-
-                <!-- Flecha derecha pegada al borde del contenedor -->
+                <!-- Flecha derecha -->
                 <button onclick="moverTestimonios(1)"
-                    style="position:absolute; top:50%; right:0; transform:translateY(-50%);
-                background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
-                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
-                display:flex; align-items:center; justify-content:center; transition:all 0.3s; z-index:5;">&#8250;</button>
+                    style="flex-shrink:0; background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
+                width:42px; height:42px; border-radius:50%; font-size:1.4rem; cursor:pointer;
+                display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&#8250;</button>
             </div>
 
             <!-- Puntos -->
@@ -736,100 +735,93 @@
             setTimeout(() => enviarFormulario(), 300);
         }
         (function() {
+            const ventana = document.getElementById('ventana-testimonios');
             const track = document.getElementById('slider-testimonios');
-            if (!track) return;
+            if (!track || !ventana) return;
 
-            const cards = Array.from(track.querySelectorAll('.testimonio-card'));
+            const cards = Array.from(track.querySelectorAll('.t-card'));
             const total = cards.length;
             if (total === 0) return;
 
-            let actualT = 0;
-            let autoT;
+            let idx = 0,
+                auto;
 
-            function getVisibles() {
+            function vis() {
                 const w = window.innerWidth;
-                if (w < 500) return 1;
-                if (w < 860) return 2;
-                return 3;
+                return w < 500 ? 1 : w < 820 ? 2 : Math.min(3, total);
             }
 
-            function setCardWidths() {
-                const vis = getVisibles();
+            function calcSizes() {
+                const v = vis();
                 const gap = 20;
-                // Descontamos el margin:0 56px (112px total) del contenedor
-                const trackW = track.parentElement.offsetWidth;
-                const cardW = (trackW - gap * (vis - 1)) / vis;
-                cards.forEach(c => c.style.width = cardW + 'px');
-            }
-
-            function getCardWidth() {
-                return cards[0].offsetWidth + 20;
-            }
-
-            const puntosEl = document.getElementById('puntos-testimonios');
-
-            function crearPuntos() {
-                puntosEl.innerHTML = '';
-                const grupos = Math.ceil(total / getVisibles());
-                for (let i = 0; i < grupos; i++) {
-                    const p = document.createElement('span');
-                    p.style.cssText = `display:inline-block; width:10px; height:10px; border-radius:50%;
-                cursor:pointer; border:2px solid var(--color-gold); transition:background 0.3s;
-                background:${i === 0 ? 'var(--color-gold)' : 'transparent'};`;
-                    p.onclick = () => {
-                        clearInterval(autoT);
-                        irA(i * getVisibles());
-                        iniciarAuto();
-                    };
-                    puntosEl.appendChild(p);
-                }
-            }
-
-            function actualizarPuntos() {
-                const puntos = puntosEl.querySelectorAll('span');
-                const grupo = Math.floor(actualT / getVisibles());
-                puntos.forEach((p, i) => {
-                    p.style.background = i === grupo ? 'var(--color-gold)' : 'transparent';
+                const w = ventana.offsetWidth;
+                const cw = (w - gap * (v - 1)) / v;
+                cards.forEach(c => {
+                    c.style.width = cw + 'px';
                 });
             }
 
-            function irA(n) {
-                const max = Math.max(0, total - getVisibles());
-                actualT = Math.max(0, Math.min(n, max));
-                track.style.transform = `translateX(-${actualT * getCardWidth()}px)`;
-                actualizarPuntos();
+            function cardStep() {
+                return cards.length ? cards[0].offsetWidth + 20 : 0;
+            }
+
+            /* Puntos */
+            const pEl = document.getElementById('puntos-testimonios');
+
+            function buildDots() {
+                pEl.innerHTML = '';
+                const g = Math.ceil(total / vis());
+                for (let i = 0; i < g; i++) {
+                    const d = document.createElement('span');
+                    d.style.cssText = `display:inline-block;width:10px;height:10px;border-radius:50%;
+                cursor:pointer;border:2px solid var(--color-gold);transition:background .3s;
+                background:${i===0?'var(--color-gold)':'transparent'};`;
+                    d.onclick = () => goTo(i * vis());
+                    pEl.appendChild(d);
+                }
+            }
+
+            function updateDots() {
+                const dots = pEl.querySelectorAll('span');
+                const g = Math.floor(idx / vis());
+                dots.forEach((d, i) => d.style.background = i === g ? 'var(--color-gold)' : 'transparent');
+            }
+
+            function goTo(n) {
+                const max = Math.max(0, total - vis());
+                idx = Math.max(0, Math.min(n, max));
+                track.style.transform = `translateX(-${idx * cardStep()}px)`;
+                updateDots();
             }
 
             window.moverTestimonios = function(dir) {
-                clearInterval(autoT);
-                const vis = getVisibles();
-                let siguiente = actualT + dir * vis;
-                if (siguiente >= total) siguiente = 0;
-                if (siguiente < 0) siguiente = Math.max(0, total - vis);
-                irA(siguiente);
-                iniciarAuto();
+                clearInterval(auto);
+                const v = vis();
+                let next = idx + dir * v;
+                if (next >= total) next = 0;
+                if (next < 0) next = Math.max(0, total - v);
+                goTo(next);
+                startAuto();
             };
 
-            function iniciarAuto() {
-                clearInterval(autoT);
-                autoT = setInterval(() => {
-                    const vis = getVisibles();
-                    let sig = actualT + vis;
-                    irA(sig >= total ? 0 : sig);
+            function startAuto() {
+                clearInterval(auto);
+                auto = setInterval(() => {
+                    const v = vis();
+                    goTo(idx + v >= total ? 0 : idx + v);
                 }, 4000);
-            } 
-            
+            }
 
             window.addEventListener('resize', () => {
-                setCardWidths();
-                crearPuntos();
-                irA(0);
+                calcSizes();
+                buildDots();
+                goTo(0);
             });
 
-            setCardWidths();
-            crearPuntos();
-            irA(0);
-            iniciarAuto();
+            calcSizes();
+            buildDots();
+            goTo(0);
+            startAuto();
         })();
     </script>
 @endsection
