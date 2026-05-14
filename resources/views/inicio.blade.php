@@ -532,42 +532,65 @@
     </div>
 
     <!-- ===== TESTIMONIOS ===== -->
-    <section style="background:#fff; padding:60px 20px;">
+    <!-- ===== TESTIMONIOS ===== -->
+    <section style="background:#fff; padding:60px 20px; overflow:hidden;">
         <div style="max-width:1100px; margin:0 auto;">
             <h2
                 style="text-align:center; color:#000; font-size:clamp(1.4rem, 5vw, 2rem); font-weight:900; margin-bottom:40px;">
                 Nuestros clientes nos respaldan
             </h2>
-            <div class="testimonios-grid">
-                @forelse($testimonios as $t)
-                    <div class="testimonio-card">
-                        <div
-                            style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-                            @if ($t->foto)
-                                <img src="{{ $t->foto }}" style="width:100%; height:100%; object-fit:cover;">
-                            @else
-                                <span style="font-size:4rem;">👤</span>
-                            @endif
+
+            <div style="position:relative;">
+                <!-- Track deslizable -->
+                <div id="slider-testimonios"
+                    style="display:flex; gap:25px; transition:transform 0.5s ease; will-change:transform;">
+                    @forelse($testimonios as $t)
+                        <div class="testimonio-card" style="min-width:300px; flex-shrink:0;">
+                            <div
+                                style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                                @if ($t->foto)
+                                    <img src="{{ $t->foto }}" style="width:100%; height:100%; object-fit:cover;">
+                                @else
+                                    <span style="font-size:4rem;">👤</span>
+                                @endif
+                            </div>
+                            <div style="padding:18px;">
+                                <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">
+                                    "{{ $t->titulo }}"
+                                </p>
+                                <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">
+                                    {{ $t->comentario }}
+                                </p>
+                                <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">
+                                    {{ $t->nombre }}<br>
+                                    <span style="color:#888; font-weight:normal;">{{ $t->ubicacion }}</span>
+                                </p>
+                            </div>
                         </div>
-                        <div style="padding:18px;">
-                            <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">
-                                "{{ $t->titulo }}"
-                            </p>
-                            <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">
-                                {{ $t->comentario }}
-                            </p>
-                            <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">
-                                {{ $t->nombre }}<br>
-                                <span style="color:#888; font-weight:normal;">{{ $t->ubicacion }}</span>
-                            </p>
-                        </div>
-                    </div>
-                @empty
-                    <p style="color:#888; text-align:center; width:100%;">No hay testimonios disponibles.</p>
-                @endforelse
+                    @empty
+                        <p style="color:#888; text-align:center; width:100%;">No hay testimonios disponibles.</p>
+                    @endforelse
+                </div>
+
+                <!-- Flechas -->
+                <button onclick="moverTestimonios(-1)"
+                    style="position:absolute; top:50%; left:-20px; transform:translateY(-50%);
+                background:rgba(0,0,0,0.7); border:2px solid var(--color-gold); color:var(--color-gold);
+                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
+                display:flex; align-items:center; justify-content:center; z-index:5; transition:all 0.3s;">&#8249;</button>
+
+                <button onclick="moverTestimonios(1)"
+                    style="position:absolute; top:50%; right:-20px; transform:translateY(-50%);
+                background:rgba(0,0,0,0.7); border:2px solid var(--color-gold); color:var(--color-gold);
+                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
+                display:flex; align-items:center; justify-content:center; z-index:5; transition:all 0.3s;">&#8250;</button>
             </div>
+
+            <!-- Puntos indicadores -->
+            <div id="puntos-testimonios" style="display:flex; justify-content:center; gap:8px; margin-top:25px;"></div>
         </div>
     </section>
+
 
     <script>
         // ===== SLIDER =====
@@ -708,5 +731,91 @@
             cerrarModal();
             setTimeout(() => enviarFormulario(), 300);
         }
+
+        (function() {
+            const track = document.getElementById('slider-testimonios');
+            if (!track) return;
+
+            const cards = track.querySelectorAll('.testimonio-card');
+            const total = cards.length;
+            if (total === 0) return;
+
+            let actualT = 0;
+            let autoT;
+
+            // Calcular cuántas tarjetas caben
+            function visibles() {
+                const ancho = track.parentElement.offsetWidth;
+                if (ancho < 480) return 1;
+                if (ancho < 800) return 2;
+                return 3;
+            }
+
+            // Crear puntos
+            const contenedorPuntos = document.getElementById('puntos-testimonios');
+
+            function crearPuntos() {
+                contenedorPuntos.innerHTML = '';
+                const grupos = Math.ceil(total / visibles());
+                for (let i = 0; i < grupos; i++) {
+                    const p = document.createElement('span');
+                    p.style.cssText = `display:inline-block; width:10px; height:10px; border-radius:50%;
+                    cursor:pointer; border:2px solid var(--color-gold); transition:background 0.3s;
+                    background:${i === 0 ? 'var(--color-gold)' : 'rgba(0,0,0,0.15)'};`;
+                    p.onclick = () => irTestimonio(i * visibles());
+                    contenedorPuntos.appendChild(p);
+                }
+            }
+
+            function actualizarPuntos() {
+                const puntos = contenedorPuntos.querySelectorAll('span');
+                const grupo = Math.floor(actualT / visibles());
+                puntos.forEach((p, i) => {
+                    p.style.background = i === grupo ? 'var(--color-gold)' : 'rgba(0,0,0,0.15)';
+                });
+            }
+
+            function moverA(n) {
+                const max = total - visibles();
+                actualT = Math.max(0, Math.min(n, max));
+                const anchoCard = cards[0].offsetWidth + 25; // ancho + gap
+                track.style.transform = `translateX(-${actualT * anchoCard}px)`;
+                actualizarPuntos();
+            }
+
+            window.moverTestimonios = function(dir) {
+                clearInterval(autoT);
+                moverA(actualT + dir * visibles());
+                // Si llegó al final, vuelve al inicio
+                if (actualT >= total - visibles()) {
+                    setTimeout(() => moverA(0), 3500);
+                }
+                iniciarAuto();
+            };
+
+            window.irTestimonio = function(n) {
+                clearInterval(autoT);
+                moverA(n);
+                iniciarAuto();
+            };
+
+            function iniciarAuto() {
+                clearInterval(autoT);
+                autoT = setInterval(() => {
+                    const siguiente = actualT + visibles();
+                    moverA(siguiente >= total ? 0 : siguiente);
+                }, 4000);
+            }
+
+            // Responsive: recalcular al cambiar tamaño
+            window.addEventListener('resize', () => {
+                crearPuntos();
+                moverA(0);
+            });
+
+            crearPuntos();
+            moverA(0);
+            iniciarAuto();
+        })();
     </script>
 @endsection
