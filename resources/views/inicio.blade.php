@@ -532,62 +532,64 @@
     </div>
 
     <!-- ===== TESTIMONIOS ===== -->
-    <!-- ===== TESTIMONIOS ===== -->
-    <section style="background:#fff; padding:60px 20px; overflow:hidden;">
+    <section style="background:#fff; padding:60px 20px;">
         <div style="max-width:1100px; margin:0 auto;">
             <h2
                 style="text-align:center; color:#000; font-size:clamp(1.4rem, 5vw, 2rem); font-weight:900; margin-bottom:40px;">
                 Nuestros clientes nos respaldan
             </h2>
 
-            <div style="position:relative;">
-                <!-- Track deslizable -->
-                <div id="slider-testimonios"
-                    style="display:flex; gap:25px; transition:transform 0.5s ease; will-change:transform;">
-                    @forelse($testimonios as $t)
-                        <div class="testimonio-card" style="min-width:300px; flex-shrink:0;">
-                            <div
-                                style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-                                @if ($t->foto)
-                                    <img src="{{ $t->foto }}" style="width:100%; height:100%; object-fit:cover;">
-                                @else
-                                    <span style="font-size:4rem;">👤</span>
-                                @endif
+            <!-- Contenedor con flechas DENTRO -->
+            <div style="display:flex; align-items:center; gap:12px;">
+
+                <!-- Flecha izquierda -->
+                <button onclick="moverTestimonios(-1)" id="btn-izq-t"
+                    style="flex-shrink:0; background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
+                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
+                display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&#8249;</button>
+
+                <!-- Ventana visible -->
+                <div style="overflow:hidden; flex:1;">
+                    <div id="slider-testimonios" style="display:flex; gap:20px; transition:transform 0.5s ease;">
+                        @forelse($testimonios as $t)
+                            <div class="testimonio-card" style="flex-shrink:0;">
+                                <div
+                                    style="height:200px; background:#e8e0cc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                                    @if ($t->foto)
+                                        <img src="{{ $t->foto }}"
+                                            style="width:100%; height:100%; object-fit:cover;">
+                                    @else
+                                        <span style="font-size:4rem;">👤</span>
+                                    @endif
+                                </div>
+                                <div style="padding:18px;">
+                                    <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">
+                                        "{{ $t->titulo }}"
+                                    </p>
+                                    <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">
+                                        {{ $t->comentario }}
+                                    </p>
+                                    <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">
+                                        {{ $t->nombre }}<br>
+                                        <span style="color:#888; font-weight:normal;">{{ $t->ubicacion }}</span>
+                                    </p>
+                                </div>
                             </div>
-                            <div style="padding:18px;">
-                                <p class="text-gold" style="font-weight:bold; font-size:0.92rem; margin-bottom:8px;">
-                                    "{{ $t->titulo }}"
-                                </p>
-                                <p style="color:#555; font-size:0.82rem; line-height:1.6; margin-bottom:12px;">
-                                    {{ $t->comentario }}
-                                </p>
-                                <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right;">
-                                    {{ $t->nombre }}<br>
-                                    <span style="color:#888; font-weight:normal;">{{ $t->ubicacion }}</span>
-                                </p>
-                            </div>
-                        </div>
-                    @empty
-                        <p style="color:#888; text-align:center; width:100%;">No hay testimonios disponibles.</p>
-                    @endforelse
+                        @empty
+                            <p style="color:#888; text-align:center; width:100%;">No hay testimonios disponibles.</p>
+                        @endforelse
+                    </div>
                 </div>
 
-                <!-- Flechas -->
-                <button onclick="moverTestimonios(-1)"
-                    style="position:absolute; top:50%; left:-20px; transform:translateY(-50%);
-                background:rgba(0,0,0,0.7); border:2px solid var(--color-gold); color:var(--color-gold);
+                <!-- Flecha derecha -->
+                <button onclick="moverTestimonios(1)" id="btn-der-t"
+                    style="flex-shrink:0; background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
                 width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
-                display:flex; align-items:center; justify-content:center; z-index:5; transition:all 0.3s;">&#8249;</button>
-
-                <button onclick="moverTestimonios(1)"
-                    style="position:absolute; top:50%; right:-20px; transform:translateY(-50%);
-                background:rgba(0,0,0,0.7); border:2px solid var(--color-gold); color:var(--color-gold);
-                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
-                display:flex; align-items:center; justify-content:center; z-index:5; transition:all 0.3s;">&#8250;</button>
+                display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&#8250;</button>
             </div>
 
-            <!-- Puntos indicadores -->
-            <div id="puntos-testimonios" style="display:flex; justify-content:center; gap:8px; margin-top:25px;"></div>
+            <!-- Puntos -->
+            <div id="puntos-testimonios" style="display:flex; justify-content:center; gap:8px; margin-top:20px;"></div>
         </div>
     </section>
 
@@ -736,85 +738,95 @@
             const track = document.getElementById('slider-testimonios');
             if (!track) return;
 
-            const cards = track.querySelectorAll('.testimonio-card');
+            const cards = Array.from(track.querySelectorAll('.testimonio-card'));
             const total = cards.length;
             if (total === 0) return;
 
             let actualT = 0;
             let autoT;
 
-            // Calcular cuántas tarjetas caben
-            function visibles() {
-                const ancho = track.parentElement.offsetWidth;
-                if (ancho < 480) return 1;
-                if (ancho < 800) return 2;
+            function getVisibles() {
+                const w = window.innerWidth;
+                if (w < 500) return 1;
+                if (w < 860) return 2;
                 return 3;
             }
 
-            // Crear puntos
-            const contenedorPuntos = document.getElementById('puntos-testimonios');
+            function setCardWidths() {
+                const vis = getVisibles();
+                const gap = 20;
+                const trackW = track.parentElement.offsetWidth;
+                const cardW = (trackW - gap * (vis - 1)) / vis;
+                cards.forEach(c => c.style.width = cardW + 'px');
+            }
+
+            function getCardWidth() {
+                return cards[0].offsetWidth + 20;
+            }
+
+            // Puntos
+            const puntosEl = document.getElementById('puntos-testimonios');
 
             function crearPuntos() {
-                contenedorPuntos.innerHTML = '';
-                const grupos = Math.ceil(total / visibles());
+                puntosEl.innerHTML = '';
+                const grupos = Math.ceil(total / getVisibles());
                 for (let i = 0; i < grupos; i++) {
                     const p = document.createElement('span');
                     p.style.cssText = `display:inline-block; width:10px; height:10px; border-radius:50%;
-                    cursor:pointer; border:2px solid var(--color-gold); transition:background 0.3s;
-                    background:${i === 0 ? 'var(--color-gold)' : 'rgba(0,0,0,0.15)'};`;
-                    p.onclick = () => irTestimonio(i * visibles());
-                    contenedorPuntos.appendChild(p);
+                cursor:pointer; border:2px solid var(--color-gold); transition:background 0.3s;
+                background:${i === 0 ? 'var(--color-gold)' : 'transparent'};`;
+                    p.onclick = () => {
+                        clearInterval(autoT);
+                        irA(i * getVisibles());
+                        iniciarAuto();
+                    };
+                    puntosEl.appendChild(p);
                 }
             }
 
             function actualizarPuntos() {
-                const puntos = contenedorPuntos.querySelectorAll('span');
-                const grupo = Math.floor(actualT / visibles());
+                const puntos = puntosEl.querySelectorAll('span');
+                const grupo = Math.floor(actualT / getVisibles());
                 puntos.forEach((p, i) => {
-                    p.style.background = i === grupo ? 'var(--color-gold)' : 'rgba(0,0,0,0.15)';
+                    p.style.background = i === grupo ? 'var(--color-gold)' : 'transparent';
                 });
             }
 
-            function moverA(n) {
-                const max = total - visibles();
+            function irA(n) {
+                const max = Math.max(0, total - getVisibles());
                 actualT = Math.max(0, Math.min(n, max));
-                const anchoCard = cards[0].offsetWidth + 25; // ancho + gap
-                track.style.transform = `translateX(-${actualT * anchoCard}px)`;
+                track.style.transform = `translateX(-${actualT * getCardWidth()}px)`;
                 actualizarPuntos();
             }
 
             window.moverTestimonios = function(dir) {
                 clearInterval(autoT);
-                moverA(actualT + dir * visibles());
-                // Si llegó al final, vuelve al inicio
-                if (actualT >= total - visibles()) {
-                    setTimeout(() => moverA(0), 3500);
-                }
-                iniciarAuto();
-            };
-
-            window.irTestimonio = function(n) {
-                clearInterval(autoT);
-                moverA(n);
+                const vis = getVisibles();
+                let siguiente = actualT + dir * vis;
+                if (siguiente >= total) siguiente = 0;
+                if (siguiente < 0) siguiente = Math.max(0, total - vis);
+                irA(siguiente);
                 iniciarAuto();
             };
 
             function iniciarAuto() {
                 clearInterval(autoT);
                 autoT = setInterval(() => {
-                    const siguiente = actualT + visibles();
-                    moverA(siguiente >= total ? 0 : siguiente);
+                    const vis = getVisibles();
+                    let sig = actualT + vis;
+                    irA(sig >= total ? 0 : sig);
                 }, 4000);
             }
 
-            // Responsive: recalcular al cambiar tamaño
             window.addEventListener('resize', () => {
+                setCardWidths();
                 crearPuntos();
-                moverA(0);
+                irA(0);
             });
 
+            setCardWidths();
             crearPuntos();
-            moverA(0);
+            irA(0);
             iniciarAuto();
         })();
     </script>
