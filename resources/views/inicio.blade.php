@@ -543,7 +543,7 @@
         <!-- Slider full-width con flechas encima de la imagen -->
         <div style="position:relative; overflow:hidden;">
 
-            <div id="slider-testimonios" style="display:flex; transition:transform 0.5s ease;">
+            <div id="slider-testimonios" style="display:flex; gap:0; transition:transform 0.5s ease;">
                 @forelse($testimonios as $t)
                     <div class="t-card" style="flex-shrink:0; display:flex; flex-direction:column;">
                         <!-- FOTO grande arriba -->
@@ -745,15 +745,21 @@
             const total = original.length;
             if (!total) return;
 
-            // Clonar tarjetas al inicio y al final para loop infinito
+            const GAP = 20; // px entre tarjetas
+
+            // Clonar para loop infinito
             original.forEach(c => track.appendChild(c.cloneNode(true)));
             original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
 
-            const allCards = () => Array.from(track.querySelectorAll('.t-card'));
+            // Aplicar gap visual via padding
+            Array.from(track.querySelectorAll('.t-card')).forEach(c => {
+                c.style.paddingLeft = (GAP / 2) + 'px';
+                c.style.paddingRight = (GAP / 2) + 'px';
+                c.style.boxSizing = 'border-box';
+            });
 
-            let idx = total; // Empezamos en el bloque del medio (original)
-            let autoT;
-            let animating = false;
+            let idx = total;
+            let autoT, animating = false;
 
             function vis() {
                 return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
@@ -762,38 +768,34 @@
             function setSizes() {
                 const v = vis();
                 const cw = window.innerWidth / v;
-                allCards().forEach(c => c.style.width = cw + 'px');
+                Array.from(track.querySelectorAll('.t-card')).forEach(c => c.style.width = cw + 'px');
             }
 
             function cardW() {
-                return allCards()[0]?.offsetWidth || 0;
+                const c = track.querySelector('.t-card');
+                return c ? c.offsetWidth : 0;
             }
 
-            // Ir a posición SIN animación
             function jumpTo(n) {
                 track.style.transition = 'none';
                 track.style.transform = `translateX(-${n * cardW()}px)`;
                 idx = n;
             }
 
-            // Ir a posición CON animación
             function slideTo(n) {
                 if (animating) return;
                 animating = true;
-                track.style.transition = 'transform 0.5s ease';
+                track.style.transition = 'transform 0.6s ease';
                 track.style.transform = `translateX(-${n * cardW()}px)`;
                 idx = n;
-
                 setTimeout(() => {
-                    // Si llegó al clon del final, saltar al original
                     if (idx >= total * 2) jumpTo(total);
-                    // Si llegó al clon del inicio, saltar al original del final
                     if (idx < total) jumpTo(idx + total);
                     animating = false;
-                }, 520);
+                }, 650);
             }
 
-            // Puntos (solo sobre los originales)
+            // Puntos
             const pEl = document.getElementById('puntos-t');
 
             function buildDots() {
@@ -833,31 +835,25 @@
                 autoT = setInterval(() => {
                     slideTo(idx + vis());
                     updateDots();
-                }, 4500);
+                }, 6000); // ← 6 segundos entre slides
             }
 
             function init() {
                 setSizes();
                 buildDots();
-                // Sin animación al inicio — evita el destello en móvil
                 track.style.transition = 'none';
                 track.style.transform = `translateX(-${idx * cardW()}px)`;
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        startAuto();
-                    });
-                });
+                requestAnimationFrame(() => requestAnimationFrame(() => startAuto()));
             }
 
             window.addEventListener('resize', () => {
                 clearInterval(autoT);
                 setSizes();
                 buildDots();
-                jumpTo(total); // Vuelve al inicio del bloque original
+                jumpTo(total);
                 startAuto();
             });
 
-            // Esperar a que el DOM tenga tamaños reales
             if (document.readyState === 'complete') {
                 init();
             } else {
