@@ -817,7 +817,8 @@
                     let sig = actualT + vis;
                     irA(sig >= total ? 0 : sig);
                 }, 4000);
-            }
+            } 
+            
 
             window.addEventListener('resize', () => {
                 setCardWidths();
