@@ -552,7 +552,7 @@
                     <div id="slider-testimonios" style="display:flex; gap:20px; transition:transform 0.5s ease;">
                         @forelse($testimonios as $t)
                             <div class="testimonio-card t-card"
-                                style="flex-shrink:0; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.1);">
+                                style="flex-shrink:0; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.1); background:#fff;">
                                 <div style="height:200px; background:#e8e0cc; overflow:hidden;">
                                     @if ($t->foto)
                                         <img src="{{ $t->foto }}"
@@ -818,10 +818,12 @@
                 goTo(0);
             });
 
-            calcSizes();
-            buildDots();
-            goTo(0);
-            startAuto();
+            setTimeout(() => {
+                calcSizes();
+                buildDots();
+                goTo(0);
+                startAuto();
+            }, 100);
         })();
     </script>
 @endsection
