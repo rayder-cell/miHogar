@@ -532,45 +532,44 @@
     </div>
 
     <!-- ===== TESTIMONIOS ===== -->
-    <section style="background:#f5f5f5; padding:60px 0;">
-        <div style="max-width:1200px; margin:0 auto; padding:0 20px;">
-            <h2
-                style="text-align:center; color:#000; font-size:clamp(1.4rem, 5vw, 2rem); font-weight:900; margin-bottom:40px;">
-                Nuestros clientes nos respaldan
-            </h2>
-        </div>
+    <section style="background:#f0f0f0; padding:60px 0 40px;">
+        <h2
+            style="text-align:center; color:#000; font-size:clamp(1.4rem, 5vw, 2rem); font-weight:900; margin-bottom:40px; padding:0 20px;">
+            Nuestros clientes nos respaldan
+        </h2>
 
-        <!-- Slider full-width con flechas encima de la imagen -->
         <div style="position:relative; overflow:hidden;">
-
-            <div id="slider-testimonios" style="display:flex; gap:0; transition:transform 0.5s ease;">
+            <div id="slider-testimonios" style="display:flex; transition:transform 0.55s ease; will-change:transform;">
                 @forelse($testimonios as $t)
-                    <div class="t-card" style="flex-shrink:0; display:flex; flex-direction:column;">
-                        <!-- FOTO grande arriba -->
-                        <div style="overflow:hidden; background:#ccc;">
-                            @if ($t->foto)
-                                <img src="{{ $t->foto }}"
-                                    style="width:100%; height:320px; object-fit:cover; object-position:center top; display:block;">
-                            @else
-                                <div
-                                    style="width:100%;height:320px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:#ddd;">
-                                    👤</div>
-                            @endif
-                        </div>
-                        <!-- TEXTO abajo -->
+                    <div class="t-card" style="flex-shrink:0; box-sizing:border-box; padding:0 10px;">
                         <div
-                            style="background:#fff; margin:0 8px; border-radius:12px; padding:20px; position:relative; top:-30px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
-                            <p
-                                style="color:var(--color-gold); font-weight:900; font-size:1rem; margin-bottom:10px; line-height:1.4;">
-                                "{{ $t->titulo }}"
-                            </p>
-                            <p style="color:#555; font-size:0.85rem; line-height:1.7; margin-bottom:15px;">
-                                {{ $t->comentario }}
-                            </p>
-                            <p style="color:#000; font-weight:bold; font-size:0.88rem; text-align:right; margin:0;">
-                                {{ $t->nombre }}<br>
-                                <span style="color:#888; font-weight:normal; font-size:0.8rem;">{{ $t->ubicacion }}</span>
-                            </p>
+                            style="background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.1); height:100%;">
+                            <!-- FOTO -->
+                            <div style="height:260px; overflow:hidden; background:#ddd;">
+                                @if ($t->foto)
+                                    <img src="{{ $t->foto }}"
+                                        style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;">
+                                @else
+                                    <div
+                                        style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;">
+                                        👤</div>
+                                @endif
+                            </div>
+                            <!-- TEXTO -->
+                            <div style="padding:18px;">
+                                <p
+                                    style="color:var(--color-gold); font-weight:900; font-size:0.95rem; margin-bottom:8px; line-height:1.4;">
+                                    "{{ $t->titulo }}"
+                                </p>
+                                <p style="color:#555; font-size:0.83rem; line-height:1.7; margin-bottom:12px;">
+                                    {{ $t->comentario }}
+                                </p>
+                                <p style="color:#000; font-weight:bold; font-size:0.85rem; text-align:right; margin:0;">
+                                    {{ $t->nombre }}<br>
+                                    <span
+                                        style="color:#888; font-weight:normal; font-size:0.78rem;">{{ $t->ubicacion }}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -578,23 +577,22 @@
                 @endforelse
             </div>
 
-            <!-- Flecha izquierda -->
+            <!-- Flechas -->
             <button onclick="moverT(-1)"
-                style="position:absolute; top:140px; left:15px; background:rgba(255,255,255,0.9);
-            border:none; color:#333; width:46px; height:46px; border-radius:50%; font-size:1.6rem;
-            cursor:pointer; display:flex; align-items:center; justify-content:center;
-            box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:5; transition:all 0.3s;">&#8249;</button>
+                style="position:absolute; top:120px; left:10px;
+            background:rgba(0,0,0,0.55); border:none; color:#fff; width:42px; height:42px;
+            border-radius:50%; font-size:1.5rem; cursor:pointer; display:flex; align-items:center;
+            justify-content:center; z-index:5;">&#8249;</button>
 
-            <!-- Flecha derecha -->
             <button onclick="moverT(1)"
-                style="position:absolute; top:140px; right:15px; background:rgba(255,255,255,0.9);
-            border:none; color:#333; width:46px; height:46px; border-radius:50%; font-size:1.6rem;
-            cursor:pointer; display:flex; align-items:center; justify-content:center;
-            box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:5; transition:all 0.3s;">&#8250;</button>
+                style="position:absolute; top:120px; right:10px;
+            background:rgba(0,0,0,0.55); border:none; color:#fff; width:42px; height:42px;
+            border-radius:50%; font-size:1.5rem; cursor:pointer; display:flex; align-items:center;
+            justify-content:center; z-index:5;">&#8250;</button>
         </div>
 
         <!-- Puntos -->
-        <div id="puntos-t" style="display:flex; justify-content:center; gap:8px; margin-top:10px;"></div>
+        <div id="puntos-t" style="display:flex; justify-content:center; gap:8px; margin-top:20px;"></div>
     </section>
 
 
@@ -741,126 +739,121 @@
         (function() {
             const track = document.getElementById('slider-testimonios');
             if (!track) return;
-            const original = Array.from(track.querySelectorAll('.t-card'));
-            const total = original.length;
-            if (!total) return;
 
-            const GAP = 20;
+            // Esperar al DOM antes de clonar
+            function setup() {
+                const original = Array.from(track.querySelectorAll('.t-card'));
+                const total = original.length;
+                if (!total) return;
 
-            original.forEach(c => track.appendChild(c.cloneNode(true)));
-            original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
+                // Clonar para loop infinito
+                original.forEach(c => track.appendChild(c.cloneNode(true)));
+                original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
 
-            Array.from(track.querySelectorAll('.t-card')).forEach(c => {
-                c.style.paddingLeft = (GAP / 2) + 'px';
-                c.style.paddingRight = (GAP / 2) + 'px';
-                c.style.boxSizing = 'border-box';
-            });
+                let idx = total;
+                let autoT, bloqueado = false;
 
-            let idx = total;
-            let autoT;
-            let bloqueado = false;
-
-            function vis() {
-                return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
-            }
-
-            function cardW() {
-                return window.innerWidth / vis();
-            }
-
-            function setSizes() {
-                const cw = cardW();
-                Array.from(track.querySelectorAll('.t-card')).forEach(c => c.style.width = cw + 'px');
-            }
-
-            function jumpTo(n) {
-                idx = n;
-                track.style.transition = 'none';
-                track.style.transform = `translateX(-${n * cardW()}px)`;
-                // Forzar repaint para que el navegador procese el cambio antes de reactivar
-                track.getBoundingClientRect();
-            }
-
-            function slideTo(n) {
-                if (bloqueado) return;
-                bloqueado = true;
-
-                idx = n;
-                track.style.transition = 'transform 0.55s ease';
-                track.style.transform = `translateX(-${n * cardW()}px)`;
-
-                setTimeout(() => {
-                    // Loop: si pasó del final, saltar al inicio del bloque original
-                    if (idx >= total * 2) {
-                        jumpTo(total);
-                    }
-                    // Loop: si fue antes del inicio, saltar al final del bloque original
-                    else if (idx < total) {
-                        jumpTo(total * 2 - vis());
-                    }
-                    bloqueado = false;
-                }, 560);
-            }
-
-            // Puntos
-            const pEl = document.getElementById('puntos-t');
-
-            function buildDots() {
-                pEl.innerHTML = '';
-                const grupos = Math.ceil(total / vis());
-                for (let i = 0; i < grupos; i++) {
-                    const d = document.createElement('span');
-                    d.style.cssText = `display:inline-block;width:12px;height:12px;border-radius:50%;
-                cursor:pointer;transition:background .3s;margin:0 4px;
-                background:${i === 0 ? 'var(--color-gold)' : '#ccc'};`;
-                    d.onclick = () => {
-                        clearInterval(autoT);
-                        slideTo(total + i * vis());
-                        updateDots();
-                        startAuto();
-                    };
-                    pEl.appendChild(d);
+                function vis() {
+                    return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
                 }
-            }
 
-            function updateDots() {
-                const dots = pEl.querySelectorAll('span');
-                const pos = ((idx - total) % total + total) % total;
-                const g = Math.floor(pos / vis());
-                dots.forEach((d, i) => d.style.background = i === g ? 'var(--color-gold)' : '#ccc');
-            }
+                function cardW() {
+                    // Usar clientWidth del contenedor padre para mayor precisión
+                    return track.parentElement.clientWidth / vis();
+                }
 
-            window.moverT = function(dir) {
-                clearInterval(autoT);
-                slideTo(idx + dir * vis());
-                updateDots();
-                startAuto();
-            };
+                function setSizes() {
+                    const cw = cardW();
+                    Array.from(track.querySelectorAll('.t-card')).forEach(c => c.style.width = cw + 'px');
+                }
 
-            function startAuto() {
-                clearInterval(autoT);
-                autoT = setInterval(() => {
-                    slideTo(idx + vis());
+                function jumpTo(n) {
+                    idx = n;
+                    track.style.transition = 'none';
+                    track.style.transform = `translateX(-${n * cardW()}px)`;
+                    track.getBoundingClientRect(); // forzar repaint
+                }
+
+                function slideTo(n) {
+                    if (bloqueado) return;
+                    bloqueado = true;
+                    idx = n;
+                    track.style.transition = 'transform 0.55s ease';
+                    track.style.transform = `translateX(-${n * cardW()}px)`;
+                    setTimeout(() => {
+                        if (idx >= total * 2) jumpTo(total);
+                        else if (idx < total) jumpTo(total * 2 - vis());
+                        bloqueado = false;
+                    }, 580);
+                }
+
+                // Puntos
+                const pEl = document.getElementById('puntos-t');
+
+                function buildDots() {
+                    pEl.innerHTML = '';
+                    const grupos = Math.ceil(total / vis());
+                    for (let i = 0; i < grupos; i++) {
+                        const d = document.createElement('span');
+                        d.style.cssText = `display:inline-block;width:11px;height:11px;border-radius:50%;
+                    cursor:pointer;transition:background .3s;margin:0 4px;
+                    background:${i===0 ? 'var(--color-gold)' : '#bbb'};`;
+                        d.onclick = () => {
+                            clearInterval(autoT);
+                            slideTo(total + i * vis());
+                            updateDots();
+                            startAuto();
+                        };
+                        pEl.appendChild(d);
+                    }
+                }
+
+                function updateDots() {
+                    const dots = pEl.querySelectorAll('span');
+                    const pos = ((idx - total) % total + total) % total;
+                    const g = Math.floor(pos / vis());
+                    dots.forEach((d, i) => d.style.background = i === g ? 'var(--color-gold)' : '#bbb');
+                }
+
+                window.moverT = function(dir) {
+                    clearInterval(autoT);
+                    slideTo(idx + dir * vis());
                     updateDots();
-                }, 6000);
+                    startAuto();
+                };
+
+                function startAuto() {
+                    clearInterval(autoT);
+                    autoT = setInterval(() => {
+                        slideTo(idx + vis());
+                        updateDots();
+                    }, 6000);
+                }
+
+                function init() {
+                    setSizes();
+                    buildDots();
+                    jumpTo(total);
+                    startAuto();
+                }
+
+                window.addEventListener('resize', () => {
+                    clearInterval(autoT);
+                    setSizes();
+                    buildDots();
+                    jumpTo(total);
+                    startAuto();
+                });
+
+                init();
             }
 
-            function init() {
-                setSizes();
-                buildDots();
-                jumpTo(total);
-                setTimeout(startAuto, 300);
+            // Ejecutar cuando el DOM esté listo
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setup);
+            } else {
+                setup();
             }
-
-            window.addEventListener('resize', () => {
-                clearInterval(autoT);
-                setSizes();
-                buildDots();
-                jumpTo(total);
-                startAuto();
-            });
-
-            init();
         })();
     </script>
 @endsection
