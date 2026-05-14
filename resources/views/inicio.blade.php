@@ -741,12 +741,19 @@
         (function() {
             const track = document.getElementById('slider-testimonios');
             if (!track) return;
-            const cards = Array.from(track.querySelectorAll('.t-card'));
-            const total = cards.length;
+            const original = Array.from(track.querySelectorAll('.t-card'));
+            const total = original.length;
             if (!total) return;
 
-            let idx = 0,
-                autoT;
+            // Clonar tarjetas al inicio y al final para loop infinito
+            original.forEach(c => track.appendChild(c.cloneNode(true)));
+            original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
+
+            const allCards = () => Array.from(track.querySelectorAll('.t-card'));
+
+            let idx = total; // Empezamos en el bloque del medio (original)
+            let autoT;
+            let animating = false;
 
             function vis() {
                 return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
@@ -755,14 +762,38 @@
             function setSizes() {
                 const v = vis();
                 const cw = window.innerWidth / v;
-                cards.forEach(c => c.style.width = cw + 'px');
+                allCards().forEach(c => c.style.width = cw + 'px');
             }
 
-            function step() {
-                return cards[0].offsetWidth;
+            function cardW() {
+                return allCards()[0]?.offsetWidth || 0;
             }
 
-            // Puntos
+            // Ir a posición SIN animación
+            function jumpTo(n) {
+                track.style.transition = 'none';
+                track.style.transform = `translateX(-${n * cardW()}px)`;
+                idx = n;
+            }
+
+            // Ir a posición CON animación
+            function slideTo(n) {
+                if (animating) return;
+                animating = true;
+                track.style.transition = 'transform 0.5s ease';
+                track.style.transform = `translateX(-${n * cardW()}px)`;
+                idx = n;
+
+                setTimeout(() => {
+                    // Si llegó al clon del final, saltar al original
+                    if (idx >= total * 2) jumpTo(total);
+                    // Si llegó al clon del inicio, saltar al original del final
+                    if (idx < total) jumpTo(idx + total);
+                    animating = false;
+                }, 520);
+            }
+
+            // Puntos (solo sobre los originales)
             const pEl = document.getElementById('puntos-t');
 
             function buildDots() {
@@ -771,56 +802,67 @@
                 for (let i = 0; i < grupos; i++) {
                     const d = document.createElement('span');
                     d.style.cssText = `display:inline-block;width:12px;height:12px;border-radius:50%;
-                cursor:pointer;transition:background .3s;margin:0 2px;
-                background:${i===0 ? '#1a73e8' : '#ccc'};`;
-                    d.onclick = () => goTo(i * vis());
+                cursor:pointer;transition:background .3s;margin:0 4px;
+                background:${i===0?'#1a73e8':'#ccc'};`;
+                    d.onclick = () => {
+                        clearInterval(autoT);
+                        slideTo(total + i * vis());
+                        updateDots();
+                        startAuto();
+                    };
                     pEl.appendChild(d);
                 }
             }
 
             function updateDots() {
                 const dots = pEl.querySelectorAll('span');
-                const g = Math.floor(idx / vis());
+                const pos = ((idx - total) % total + total) % total;
+                const g = Math.floor(pos / vis());
                 dots.forEach((d, i) => d.style.background = i === g ? '#1a73e8' : '#ccc');
-            }
-
-            function goTo(n) {
-                const max = Math.max(0, total - vis());
-                idx = Math.max(0, Math.min(n, max));
-                track.style.transform = `translateX(-${idx * step()}px)`;
-                updateDots();
             }
 
             window.moverT = function(dir) {
                 clearInterval(autoT);
-                const v = vis();
-                let next = idx + dir * v;
-                if (next >= total) next = 0;
-                if (next < 0) next = Math.max(0, total - v);
-                goTo(next);
+                slideTo(idx + dir * vis());
+                updateDots();
                 startAuto();
             };
 
             function startAuto() {
                 clearInterval(autoT);
                 autoT = setInterval(() => {
-                    const v = vis();
-                    goTo(idx + v >= total ? 0 : idx + v);
+                    slideTo(idx + vis());
+                    updateDots();
                 }, 4500);
             }
 
-            window.addEventListener('resize', () => {
+            function init() {
                 setSizes();
                 buildDots();
-                goTo(0);
+                // Sin animación al inicio — evita el destello en móvil
+                track.style.transition = 'none';
+                track.style.transform = `translateX(-${idx * cardW()}px)`;
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        startAuto();
+                    });
+                });
+            }
+
+            window.addEventListener('resize', () => {
+                clearInterval(autoT);
+                setSizes();
+                buildDots();
+                jumpTo(total); // Vuelve al inicio del bloque original
+                startAuto();
             });
 
-            setTimeout(() => {
-                setSizes();
-                buildDots();
-                goTo(0);
-                startAuto();
-            }, 100);
+            // Esperar a que el DOM tenga tamaños reales
+            if (document.readyState === 'complete') {
+                init();
+            } else {
+                window.addEventListener('load', init);
+            }
         })();
     </script>
 @endsection
