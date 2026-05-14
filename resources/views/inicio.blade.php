@@ -747,7 +747,6 @@
 
             const GAP = 20;
 
-            // Clonar ANTES de calcular tamaños
             original.forEach(c => track.appendChild(c.cloneNode(true)));
             original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
 
@@ -758,7 +757,8 @@
             });
 
             let idx = total;
-            let autoT, animating = false;
+            let autoT;
+            let bloqueado = false;
 
             function vis() {
                 return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
@@ -773,24 +773,33 @@
                 Array.from(track.querySelectorAll('.t-card')).forEach(c => c.style.width = cw + 'px');
             }
 
-            // Posicionar SIN animación ni parpadeo
             function jumpTo(n) {
                 idx = n;
                 track.style.transition = 'none';
                 track.style.transform = `translateX(-${n * cardW()}px)`;
+                // Forzar repaint para que el navegador procese el cambio antes de reactivar
+                track.getBoundingClientRect();
             }
 
             function slideTo(n) {
-                if (animating) return;
-                animating = true;
+                if (bloqueado) return;
+                bloqueado = true;
+
                 idx = n;
                 track.style.transition = 'transform 0.55s ease';
                 track.style.transform = `translateX(-${n * cardW()}px)`;
+
                 setTimeout(() => {
-                    if (idx >= total * 2) jumpTo(total);
-                    if (idx < total) jumpTo(idx + total);
-                    animating = false;
-                }, 600);
+                    // Loop: si pasó del final, saltar al inicio del bloque original
+                    if (idx >= total * 2) {
+                        jumpTo(total);
+                    }
+                    // Loop: si fue antes del inicio, saltar al final del bloque original
+                    else if (idx < total) {
+                        jumpTo(total * 2 - vis());
+                    }
+                    bloqueado = false;
+                }, 560);
             }
 
             // Puntos
@@ -803,7 +812,7 @@
                     const d = document.createElement('span');
                     d.style.cssText = `display:inline-block;width:12px;height:12px;border-radius:50%;
                 cursor:pointer;transition:background .3s;margin:0 4px;
-                background:${i===0?'#1a73e8':'#ccc'};`;
+                background:${i === 0 ? 'var(--color-gold)' : '#ccc'};`;
                     d.onclick = () => {
                         clearInterval(autoT);
                         slideTo(total + i * vis());
@@ -818,7 +827,7 @@
                 const dots = pEl.querySelectorAll('span');
                 const pos = ((idx - total) % total + total) % total;
                 const g = Math.floor(pos / vis());
-                dots.forEach((d, i) => d.style.background = i === g ? '#1a73e8' : '#ccc');
+                dots.forEach((d, i) => d.style.background = i === g ? 'var(--color-gold)' : '#ccc');
             }
 
             window.moverT = function(dir) {
@@ -836,14 +845,10 @@
                 }, 6000);
             }
 
-            // Usar window.innerWidth directamente — no depende del DOM cargado
             function init() {
                 setSizes();
                 buildDots();
-                // Posición inicial instantánea, sin transición
-                track.style.transition = 'none';
-                track.style.transform = `translateX(-${idx * cardW()}px)`;
-                // Pequeño delay solo para que el navegador pinte antes de arrancar el auto
+                jumpTo(total);
                 setTimeout(startAuto, 300);
             }
 
@@ -855,7 +860,6 @@
                 startAuto();
             });
 
-            // Ejecutar inmediatamente — no esperar al load
             init();
         })();
     </script>
