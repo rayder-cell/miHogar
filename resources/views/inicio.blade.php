@@ -745,13 +745,12 @@
             const total = original.length;
             if (!total) return;
 
-            const GAP = 20; // px entre tarjetas
+            const GAP = 20;
 
-            // Clonar para loop infinito
+            // Clonar ANTES de calcular tamaños
             original.forEach(c => track.appendChild(c.cloneNode(true)));
             original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
 
-            // Aplicar gap visual via padding
             Array.from(track.querySelectorAll('.t-card')).forEach(c => {
                 c.style.paddingLeft = (GAP / 2) + 'px';
                 c.style.paddingRight = (GAP / 2) + 'px';
@@ -765,34 +764,33 @@
                 return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
             }
 
+            function cardW() {
+                return window.innerWidth / vis();
+            }
+
             function setSizes() {
-                const v = vis();
-                const cw = window.innerWidth / v;
+                const cw = cardW();
                 Array.from(track.querySelectorAll('.t-card')).forEach(c => c.style.width = cw + 'px');
             }
 
-            function cardW() {
-                const c = track.querySelector('.t-card');
-                return c ? c.offsetWidth : 0;
-            }
-
+            // Posicionar SIN animación ni parpadeo
             function jumpTo(n) {
+                idx = n;
                 track.style.transition = 'none';
                 track.style.transform = `translateX(-${n * cardW()}px)`;
-                idx = n;
             }
 
             function slideTo(n) {
                 if (animating) return;
                 animating = true;
-                track.style.transition = 'transform 0.6s ease';
-                track.style.transform = `translateX(-${n * cardW()}px)`;
                 idx = n;
+                track.style.transition = 'transform 0.55s ease';
+                track.style.transform = `translateX(-${n * cardW()}px)`;
                 setTimeout(() => {
                     if (idx >= total * 2) jumpTo(total);
                     if (idx < total) jumpTo(idx + total);
                     animating = false;
-                }, 650);
+                }, 600);
             }
 
             // Puntos
@@ -835,15 +833,18 @@
                 autoT = setInterval(() => {
                     slideTo(idx + vis());
                     updateDots();
-                }, 6000); // ← 6 segundos entre slides
+                }, 6000);
             }
 
+            // Usar window.innerWidth directamente — no depende del DOM cargado
             function init() {
                 setSizes();
                 buildDots();
+                // Posición inicial instantánea, sin transición
                 track.style.transition = 'none';
                 track.style.transform = `translateX(-${idx * cardW()}px)`;
-                requestAnimationFrame(() => requestAnimationFrame(() => startAuto()));
+                // Pequeño delay solo para que el navegador pinte antes de arrancar el auto
+                setTimeout(startAuto, 300);
             }
 
             window.addEventListener('resize', () => {
@@ -854,11 +855,8 @@
                 startAuto();
             });
 
-            if (document.readyState === 'complete') {
-                init();
-            } else {
-                window.addEventListener('load', init);
-            }
+            // Ejecutar inmediatamente — no esperar al load
+            init();
         })();
     </script>
 @endsection
