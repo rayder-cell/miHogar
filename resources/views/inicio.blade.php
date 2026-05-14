@@ -539,17 +539,11 @@
                 Nuestros clientes nos respaldan
             </h2>
 
-            <!-- Contenedor con flechas DENTRO -->
-            <div style="display:flex; align-items:center; gap:12px;">
-
-                <!-- Flecha izquierda -->
-                <button onclick="moverTestimonios(-1)" id="btn-izq-t"
-                    style="flex-shrink:0; background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
-                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
-                display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&#8249;</button>
+            <!-- Wrapper con overflow hidden y flechas encima -->
+            <div style="position:relative;">
 
                 <!-- Ventana visible -->
-                <div style="overflow:hidden; flex:1;">
+                <div style="overflow:hidden; margin:0 56px;">
                     <div id="slider-testimonios" style="display:flex; gap:20px; transition:transform 0.5s ease;">
                         @forelse($testimonios as $t)
                             <div class="testimonio-card" style="flex-shrink:0;">
@@ -581,11 +575,19 @@
                     </div>
                 </div>
 
-                <!-- Flecha derecha -->
-                <button onclick="moverTestimonios(1)" id="btn-der-t"
-                    style="flex-shrink:0; background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
+                <!-- Flecha izquierda pegada al borde del contenedor -->
+                <button onclick="moverTestimonios(-1)"
+                    style="position:absolute; top:50%; left:0; transform:translateY(-50%);
+                background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
                 width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
-                display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&#8250;</button>
+                display:flex; align-items:center; justify-content:center; transition:all 0.3s; z-index:5;">&#8249;</button>
+
+                <!-- Flecha derecha pegada al borde del contenedor -->
+                <button onclick="moverTestimonios(1)"
+                    style="position:absolute; top:50%; right:0; transform:translateY(-50%);
+                background:#000; border:2px solid var(--color-gold); color:var(--color-gold);
+                width:44px; height:44px; border-radius:50%; font-size:1.5rem; cursor:pointer;
+                display:flex; align-items:center; justify-content:center; transition:all 0.3s; z-index:5;">&#8250;</button>
             </div>
 
             <!-- Puntos -->
@@ -733,7 +735,6 @@
             cerrarModal();
             setTimeout(() => enviarFormulario(), 300);
         }
-
         (function() {
             const track = document.getElementById('slider-testimonios');
             if (!track) return;
@@ -755,6 +756,7 @@
             function setCardWidths() {
                 const vis = getVisibles();
                 const gap = 20;
+                // Descontamos el margin:0 56px (112px total) del contenedor
                 const trackW = track.parentElement.offsetWidth;
                 const cardW = (trackW - gap * (vis - 1)) / vis;
                 cards.forEach(c => c.style.width = cardW + 'px');
@@ -764,7 +766,6 @@
                 return cards[0].offsetWidth + 20;
             }
 
-            // Puntos
             const puntosEl = document.getElementById('puntos-testimonios');
 
             function crearPuntos() {
