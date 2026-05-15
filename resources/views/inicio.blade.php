@@ -424,7 +424,7 @@
                         </svg>
                         Instagram
                     </a>
-                    <a href="#" target="_blank"
+                    <a href="https://www.youtube.com/@InmobiliariaMiHogarPeru" target="_blank"
                         style="display:flex; align-items:center; gap:6px; background:#FF0000; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.82rem;">
                         <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
                             <path
@@ -507,7 +507,7 @@
         </div>
     </section>
 
-    <!-- MODAL VERIFICACIÓN -->
+    <!-- MODAL VERIFICACIÓN 
     <div id="modal-verificacion"
         style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center; overflow-y:auto; padding:15px;">
         <div class="modal-inner border-gold">
@@ -556,7 +556,7 @@
             <button onclick="cerrarModal()"
                 style="background:transparent; color:var(--color-gray); padding:10px; border:none; font-size:0.85rem; cursor:pointer; width:100%; margin-top:5px;">Cancelar</button>
         </div>
-    </div>
+    </div> -->
 
     <!-- ===== TESTIMONIOS ===== -->
     <section style="background:#f0f0f0; padding:60px 0 40px;">
