@@ -396,7 +396,7 @@
             <div style="min-width:200px;">
                 <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar" style="height:85px; margin-bottom:15px;">
                 <p style="font-size:0.85rem; color:var(--color-gray); line-height:1.8;">
-                    Razón Social: Inmobiliaria Mi Hogar S.A.C.<br>RUC: 20XXXXXXXXX
+                    Razón Social: Inmobiliaria Mi Hogar S.A.C.<br>RUC: 20615528421
                 </p>
                 <div style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
                     <a href="https://www.facebook.com/share/1AkTFM81Dk/" target="_blank"
