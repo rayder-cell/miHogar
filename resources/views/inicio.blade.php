@@ -194,6 +194,7 @@
         .contacto-texto {
             flex: 1;
             min-width: 260px;
+            max-width: 420px;
         }
 
         .contacto-form {
@@ -390,7 +391,7 @@
 
     <!-- ===== FORMULARIO DE CONTACTO ===== -->
     <section style="background:var(--color-dark); padding:60px 20px;">
-        <div class="contacto-wrapper">
+        <div class="contacto-wrapper" style="align-items:center;">
             <div class="contacto-texto">
                 <p class="text-gold"
                     style="font-size:0.9rem; letter-spacing:4px; text-transform:uppercase; margin-bottom:10px;">Contáctanos
@@ -450,10 +451,51 @@
                 </div>
             </div>
 
-            <!-- FORMULARIO PASO 1 -->
+            <!-- FORMULARIO PASO 1
+                <div id="form-paso1" class="bg-gold contacto-form">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                        <div style="width:28px; height:28px; background:#000; color:var(--color-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">1</div>
+                        <div style="flex:1; height:2px; background:#000; opacity:0.3;"></div>
+                        <div style="width:28px; height:28px; background:#fff; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; border:2px solid #000;">2</div>
+                    </div>
+                    <h3 style="color:#000; font-weight:900; font-size:1.1rem; margin-bottom:20px; text-align:center;">Quiero recibir información</h3>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <div class="nombre-row">
+                            <input id="nombre" type="text" placeholder="Nombre*"
+                                style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                            <input id="apellidos" type="text" placeholder="Apellidos*"
+                                style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                        </div>
+                        <input id="dni" type="text" placeholder="DNI*"
+                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                        <input id="telefono" type="tel" placeholder="Teléfono*"
+                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                        <input id="correo" type="email" placeholder="Correo electrónico*"
+                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                        <select id="proyecto"
+                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                            <option value="">Proyecto de interés</option>
+                            {{--
+                            @foreach ($proyectos as $p)
+                            <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
+                            @endforeach
+                            --}}
+                        </select>
+                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#000; cursor:pointer;">
+                            <input type="checkbox" id="acepto" style="margin-top:2px;">
+                            Acepto el tratamiento de mis datos personales.
+                        </label>
+                        <button onclick="enviarFormulario()"
+                            style="background:#000; color:var(--color-gold); padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%;">
+                            Solicitar información
+                        </button>
+                        <p id="msg-error" style="color:red; font-size:0.8rem; display:none; text-align:center;"></p>
+                    </div>
+                </div> -->
+
             <!-- VIDEO YOUTUBE -->
             <div
-                style="flex-shrink:0; width:min(500px, 100%); border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.4);">
+                style="flex-shrink:0; width:min(600px, 100%); border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.4);">
                 <div style="position:relative; width:100%; padding-bottom:56.25%; height:0;">
                     <iframe src="https://www.youtube.com/embed/NsiD4-48oc0?rel=0&modestbranding=1"
                         title="Inmobiliaria Mi Hogar" frameborder="0"
@@ -478,8 +520,8 @@
                     style="width:28px; height:28px; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">
                     2</div>
             </div>
-            <p style="color:var(--color-white); font-size:0.9rem; margin-bottom:5px;">Hemos enviado un código de 4 dígitos a
-                tu correo:</p>
+            <p style="color:var(--color-white); font-size:0.9rem; margin-bottom:5px;">Hemos enviado un código de 4 dígitos
+                a tu correo:</p>
             <p id="correo-mostrado" class="text-gold" style="font-size:1rem; font-weight:bold; margin-bottom:20px;"></p>
             <div class="codigo-inputs">
                 <input id="c1" type="text" maxlength="1" class="codigo-input"
