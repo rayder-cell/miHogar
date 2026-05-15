@@ -2,8 +2,7 @@
 
 @section('content')
     <style>
-        html,
-        body {
+        html, body {
             overflow-x: hidden;
             max-width: 100vw;
         }
@@ -20,23 +19,19 @@
 
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             transition: opacity 1s ease;
             background-color: #000;
         }
 
         .slide img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             object-position: center center;
             display: block;
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             z-index: 0;
         }
 
@@ -46,7 +41,7 @@
             color: var(--color-white);
             font-weight: 900;
             text-transform: uppercase;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
             margin-bottom: 15px;
         }
 
@@ -57,7 +52,6 @@
             max-width: min(500px, 90%);
         }
 
-        /* Info esquina — oculta en móvil */
         .hero-info-slide {
             position: absolute;
             bottom: 60px;
@@ -70,11 +64,10 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             border: 2px solid var(--color-gold);
             color: var(--color-gold);
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 50%;
             font-size: 1.8rem;
             cursor: pointer;
@@ -85,11 +78,7 @@
             transition: all 0.3s;
         }
 
-        .btn-flecha:hover {
-            background: var(--color-gold);
-            color: #000;
-        }
-
+        .btn-flecha:hover { background: var(--color-gold); color: #000; }
         .btn-flecha-izq { left: 15px; }
         .btn-flecha-der { right: 15px; }
 
@@ -105,8 +94,7 @@
 
         .slider-punto {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid var(--color-gold);
@@ -115,38 +103,44 @@
 
         /* ===== MÓVIL ===== */
         @media (max-width: 768px) {
-            .hero-section {
-                height: 56vw;
-            }
+            .hero-section { height: 56vw; }
 
             .slide img {
                 object-fit: cover;
                 object-position: center top;
             }
 
-            /* OCULTAR info de proyecto en móvil */
+            /* Info slide compacto pero visible */
             .hero-info-slide {
-                display: none !important;
+                bottom: 30px;
+                left: 6px;
+                max-width: 140px;
             }
 
-            .btn-flecha {
-                width: 34px;
-                height: 34px;
-                font-size: 1.2rem;
+            .hero-info-slide h2 {
+                font-size: 0.65rem !important;
+                margin-bottom: 2px !important;
             }
 
+            .hero-info-slide p {
+                font-size: 0.6rem !important;
+                margin-bottom: 2px !important;
+            }
+
+            .hero-info-slide .btn-gold {
+                padding: 4px 8px !important;
+                font-size: 0.65rem !important;
+            }
+
+            .btn-flecha { width: 28px; height: 28px; font-size: 1rem; }
             .btn-flecha-izq { left: 6px; }
             .btn-flecha-der { right: 6px; }
 
-            .hero-titulo {
-                font-size: clamp(1.2rem, 1.5vw, 1.8rem);
-            }
+            .hero-titulo { font-size: clamp(1.2rem, 4vw, 1.8rem); }
         }
 
         @media (max-width: 480px) {
-            .hero-section {
-                height: 58vw;
-            }
+            .hero-section { height: 58vw; }
         }
 
         /* ===== CONTACTO ===== */
@@ -160,10 +154,7 @@
             justify-content: center;
         }
 
-        .contacto-texto {
-            flex: 1;
-            min-width: 260px;
-        }
+        .contacto-texto { flex: 1; min-width: 260px; }
 
         .contacto-form {
             border-radius: 12px;
@@ -208,8 +199,7 @@
         }
 
         .t-foto img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             object-position: center top;
             display: block;
@@ -240,10 +230,7 @@
 
         /* ===== FOOTER MOBILE ===== */
         @media (max-width: 768px) {
-            footer > div:first-child {
-                flex-direction: column !important;
-                gap: 25px !important;
-            }
+            footer > div:first-child { flex-direction: column !important; gap: 25px !important; }
             footer { padding: 30px 20px 0 !important; }
         }
 
@@ -282,7 +269,10 @@
             <p class="hero-subtitulo">
                 Encuentra el hogar de tus sueños en Andahuaylas, Apurímac
             </p>
-            <a href="{{ route('proyectos.index') }}" class="btn-gold">Ver Proyectos</a>
+            <a href="{{ route('proyectos.index') }}" class="btn-gold"
+                style="font-size:clamp(0.65rem, 2vw, 1rem); padding:clamp(6px, 1.5vw, 14px) clamp(12px, 3vw, 28px);">
+                Ver Proyectos
+            </a>
         </div>
 
         <!-- FLECHAS -->
@@ -299,7 +289,7 @@
             @endforeach
         </div>
 
-        <!-- INFO PROYECTO ESQUINA (solo desktop) -->
+        <!-- INFO PROYECTO ESQUINA -->
         <div class="hero-info-slide">
             @foreach ($proyectos as $index => $proyecto)
                 <div class="info-slide" style="display:{{ $index === 0 ? 'block' : 'none' }};">
@@ -494,7 +484,6 @@
                 @endforelse
             </div>
 
-            <!-- Flechas -->
             <button onclick="moverT(-1)"
                 style="position:absolute; top:120px; left:10px; background:rgba(0,0,0,0.6);
                 border:none; color:#fff; width:44px; height:44px; border-radius:50%; font-size:1.6rem;
@@ -537,14 +526,14 @@
 
         // ===== FORMULARIO =====
         function enviarFormulario() {
-            const nombre   = document.getElementById('nombre').value.trim();
-            const apellidos= document.getElementById('apellidos').value.trim();
-            const dni      = document.getElementById('dni').value.trim();
-            const telefono = document.getElementById('telefono').value.trim();
-            const correo   = document.getElementById('correo').value.trim();
-            const proyecto = document.getElementById('proyecto').value;
-            const acepto   = document.getElementById('acepto').checked;
-            const error    = document.getElementById('msg-error');
+            const nombre    = document.getElementById('nombre').value.trim();
+            const apellidos = document.getElementById('apellidos').value.trim();
+            const dni       = document.getElementById('dni').value.trim();
+            const telefono  = document.getElementById('telefono').value.trim();
+            const correo    = document.getElementById('correo').value.trim();
+            const proyecto  = document.getElementById('proyecto').value;
+            const acepto    = document.getElementById('acepto').checked;
+            const error     = document.getElementById('msg-error');
 
             if (!nombre || !apellidos || !dni || !telefono || !correo || !proyecto) {
                 error.textContent = 'Por favor completa todos los campos.';
@@ -579,9 +568,9 @@
         }
 
         function verificarCodigo() {
-            const msg    = document.getElementById('msg-verificacion');
-            const exito  = document.getElementById('msg-exito');
-            const horario= document.getElementById('horario').value;
+            const msg     = document.getElementById('msg-verificacion');
+            const exito   = document.getElementById('msg-exito');
+            const horario = document.getElementById('horario').value;
             if (!horario) { msg.textContent = '⚠️ Por favor elige un horario.'; msg.style.display = 'block'; return; }
 
             fetch('{{ route('contacto.verificar') }}', {
@@ -630,11 +619,11 @@
                 const total    = original.length;
                 if (!total) return;
 
-                // Clonar al final y al inicio para loop infinito
+                // Clonar para loop infinito
                 original.forEach(c => track.appendChild(c.cloneNode(true)));
                 original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
 
-                let idx      = total; // empezar en bloque original
+                let idx       = total;
                 let autoT;
                 let bloqueado = false;
 
@@ -671,7 +660,6 @@
                     }, 580);
                 }
 
-                // Puntos
                 const pEl = document.getElementById('puntos-t');
 
                 function buildDots() {
