@@ -222,13 +222,13 @@
             Contáctanos
         </a>
 
-        <!-- CHAT -->
+        <!-- CHAT 
         <button onclick="toggleChat()"
             style="background:var(--color-gold); color:#000; border:none; padding:14px 20px; border-radius:50px; font-weight:900; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px;">
             💬 <span id="btn-texto">Déjanos un mensaje</span>
-        </button>
+        </button> -->
 
-        <!-- FORMULARIO CHAT -->
+        <!-- FORMULARIO CHAT 
         <div id="chat-form"
             style="display:none; position:fixed; bottom:80px; right:20px;
                    width:min(320px, calc(100vw - 40px));
@@ -261,10 +261,11 @@
                     <select id="chat-proyecto"
                         style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:0.85rem;">
                         <option value="">Proyecto de interés</option>
-                        @php $proyectosChat = App\Models\Proyecto::all(); @endphp
+                        {{--@php $proyectosChat = App\Models\Proyecto::all(); @endphp
                         @foreach ($proyectosChat as $p)
                             <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
                         @endforeach
+                        --}}
                     </select>
                     <input id="chat-asunto" type="text" placeholder="Asunto"
                         style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:0.85rem;">
@@ -278,7 +279,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- ===== NAVBAR ===== -->
@@ -414,11 +415,11 @@
                         </svg>
                         Instagram
                     </a>
-                    <a href="#" target="_blank"
+                    <a href="https://www.youtube.com/@InmobiliariaMiHogarPeru" target="_blank"
                         style="display:flex; align-items:center; gap:6px; background:#FF0000; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.82rem; white-space:nowrap;">
                         <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
                             <path
-                                d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
+                                d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.5₀6 ₀ 9.396-.5₀₂a3.₀₀₇ 3.₀₀₇ ₀ ₀₀₂.₀₈₈-₂.₀₈₈ 3₁.₂₄₇ 3₁.₂₄₇ ₀ ₀₀₀.5-5.783 3₁.₂₄₇ 3₁.₂₄₇ ₀ ₀₀₀-.5-5.8₀₅zM9.6₀₉ 15.6₀₁V8.4₀₈l6.264 3.6₀₂z" />
                         </svg>
                         YouTube
                     </a>
