@@ -159,7 +159,7 @@
                     style="background:var(--color-black); padding:25px 35px; text-align:center; min-width:180px;">
                     <div style="font-size:2rem; margin-bottom:10px;">📞</div>
                     <h4 class="text-gold" style="margin-bottom:5px;">Teléfono</h4>
-                    <p style="color:var(--color-gray-light); font-size:0.9rem;">Cel. 912345678</p>
+                    <p style="color:var(--color-gray-light); font-size:0.9rem;">Cel. 932 400 015</p>
                 </div>
 
                 <div class="border-gold"
