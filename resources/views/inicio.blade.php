@@ -103,44 +103,54 @@
 
         /* ===== MÓVIL ===== */
         @media (max-width: 768px) {
-            .hero-section { height: 56vw; }
+            /* Hero más alto para que se vea el texto */
+            .hero-section {
+                height: 0 !important;
+                padding-bottom: 75% !important;
+            }
 
             .slide img {
                 object-fit: cover;
                 object-position: center top;
             }
 
-            /* Info slide compacto pero visible */
+            /* Ocultar info de proyecto en móvil */
             .hero-info-slide {
-                bottom: 30px;
-                left: 6px;
-                max-width: 140px;
+                display: none !important;
             }
 
-            .hero-info-slide h2 {
-                font-size: 0.65rem !important;
-                margin-bottom: 2px !important;
+            /* Texto hero más legible */
+            .hero-titulo {
+                font-size: clamp(1rem, 5vw, 1.6rem);
+                letter-spacing: 2px;
+                margin-bottom: 8px;
             }
 
-            .hero-info-slide p {
-                font-size: 0.6rem !important;
-                margin-bottom: 2px !important;
+            .hero-subtitulo {
+                font-size: clamp(0.7rem, 3.5vw, 0.9rem);
+                margin-bottom: 15px;
+                display: block !important;
+                text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
             }
 
-            .hero-info-slide .btn-gold {
-                padding: 4px 8px !important;
-                font-size: 0.65rem !important;
+            /* "Bienvenido a" con fondo para legibilidad */
+            .bienvenido-txt {
+                color: #000 !important;
+                background: rgba(255,255,255,0.75);
+                padding: 2px 10px;
+                border-radius: 4px;
+                text-shadow: none !important;
             }
 
             .btn-flecha { width: 28px; height: 28px; font-size: 1rem; }
             .btn-flecha-izq { left: 6px; }
             .btn-flecha-der { right: 6px; }
-
-            .hero-titulo { font-size: clamp(1.2rem, 4vw, 1.8rem); }
         }
 
         @media (max-width: 480px) {
-            .hero-section { height: 58vw; }
+            .hero-section {
+                padding-bottom: 82% !important;
+            }
         }
 
         /* ===== CONTACTO ===== */
@@ -260,9 +270,9 @@
         <!-- TEXTO CENTRAL -->
         <div style="position:absolute; top:0; left:0; width:100%; height:100%;
             display:flex; flex-direction:column; align-items:center; justify-content:center;
-            z-index:5; text-align:center; padding:20px 20px 70px;">
-            <p class="text-gold"
-                style="font-size:clamp(0.7rem, 2vw, 0.9rem); letter-spacing:4px; text-transform:uppercase; margin-bottom:8px;">
+            z-index:5; text-align:center; padding:10px 15px 60px;">
+            <p class="text-gold bienvenido-txt"
+                style="font-size:clamp(0.7rem, 2vw, 0.9rem); letter-spacing:4px; text-transform:uppercase; margin-bottom:6px;">
                 Bienvenido a
             </p>
             <h1 class="hero-titulo">Inmobiliaria Mi Hogar</h1>
@@ -289,7 +299,7 @@
             @endforeach
         </div>
 
-        <!-- INFO PROYECTO ESQUINA -->
+        <!-- INFO PROYECTO ESQUINA (solo desktop) -->
         <div class="hero-info-slide">
             @foreach ($proyectos as $index => $proyecto)
                 <div class="info-slide" style="display:{{ $index === 0 ? 'block' : 'none' }};">
@@ -619,7 +629,6 @@
                 const total    = original.length;
                 if (!total) return;
 
-                // Clonar para loop infinito
                 original.forEach(c => track.appendChild(c.cloneNode(true)));
                 original.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
 
@@ -644,7 +653,7 @@
                     idx = n;
                     track.style.transition = 'none';
                     track.style.transform  = `translateX(-${n * cardW()}px)`;
-                    track.getBoundingClientRect(); // forzar repaint
+                    track.getBoundingClientRect();
                 }
 
                 function slideTo(n) {
