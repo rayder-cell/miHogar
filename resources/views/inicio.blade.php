@@ -405,7 +405,7 @@
                 <p style="color:var(--color-gray); font-size:0.95rem; line-height:2;">
                     📍 Andahuaylas, Apurímac<br>
                     📞 912 345 678<br>
-                    ✉️ info@mihogar.pe
+                    ✉️ inmobiliariamihogar25@gmail.com
                 </p>
                 <div class="redes-sociales" style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
                     <a href="https://www.facebook.com/share/1AkTFM81Dk/" target="_blank"

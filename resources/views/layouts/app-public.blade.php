@@ -436,7 +436,7 @@
             <div style="min-width:160px;">
                 <h4 style="margin-bottom:15px;">Contacto</h4>
                 <p style="color:var(--color-gray); font-size:0.85rem; line-height:2;">
-                    📞 932 400 015<br>📍 Andahuaylas, Apurímac<br>✉️ info@mihogar.pe
+                    📞 932 400 015<br>📍 Andahuaylas, Apurímac<br>✉️ inmobiliariamihogar25@gmail.com
                 </p>
             </div>
             <div style="min-width:160px;">
@@ -446,8 +446,6 @@
                             class="footer-link">Condiciones de Uso</a></li>
                     <li style="margin-bottom:8px;"><a href="{{ route('privacidad') }}" class="footer-link">Políticas
                             de Privacidad</a></li>
-                    <li style="margin-bottom:8px;"><a href="{{ route('financiamiento') }}"
-                            class="footer-link">Financiamiento</a></li>
                     <li style="margin-bottom:8px;"><a href="{{ route('reclamaciones') }}" class="footer-link">Libro
                             de Reclamaciones</a></li>
                 </ul>
