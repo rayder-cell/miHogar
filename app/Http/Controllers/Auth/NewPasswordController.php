@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class NewPasswordController extends Controller
@@ -22,26 +21,19 @@ class NewPasswordController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'token'                 => ['required'],
-            'email'                 => ['required', 'email'],
-            'password'              => ['required', 'confirmed', 'min:8'],
+            'token'    => ['required'],
+            'email'    => ['required', 'email'],
+            'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        // Buscar el token en la tabla
         $resetRecord = DB::table('password_reset_tokens')
                          ->where('email', $request->email)
                          ->first();
 
-        if (!$resetRecord) {
+        if (!$resetRecord || !Hash::check($request->token, $resetRecord->token)) {
             return back()->withErrors(['email' => 'Token inválido o expirado.']);
         }
 
-        // Verificar el token
-        if (!Hash::check($request->token, $resetRecord->token)) {
-            return back()->withErrors(['email' => 'Token inválido o expirado.']);
-        }
-
-        // Actualizar la contraseña
         $usuario = User::where('correo', $request->email)->first();
 
         if (!$usuario) {
@@ -51,7 +43,6 @@ class NewPasswordController extends Controller
         $usuario->contrasena = Hash::make($request->password);
         $usuario->save();
 
-        // Eliminar el token usado
         DB::table('password_reset_tokens')
           ->where('email', $request->email)
           ->delete();
