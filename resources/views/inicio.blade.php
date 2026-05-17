@@ -452,46 +452,53 @@
             </div>
 
             <!-- FORMULARIO PASO 1-->
-                <div id="form-paso1" class="bg-gold contacto-form">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-                        <div style="width:28px; height:28px; background:#000; color:var(--color-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">1</div>
-                        <div style="flex:1; height:2px; background:#000; opacity:0.3;"></div>
-                        <div style="width:28px; height:28px; background:#fff; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; border:2px solid #000;">2</div>
+            <div id="form-paso1" class="bg-gold contacto-form">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                    <div
+                        style="width:28px; height:28px; background:#000; color:var(--color-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">
+                        1</div>
+                    <div style="flex:1; height:2px; background:#000; opacity:0.3;"></div>
+                    <div
+                        style="width:28px; height:28px; background:#fff; color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; border:2px solid #000;">
+                        2</div>
+                </div>
+                <h3 style="color:#000; font-weight:900; font-size:1.1rem; margin-bottom:20px; text-align:center;">Quiero
+                    recibir información</h3>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div class="nombre-row">
+                        <input id="nombre" type="text" placeholder="Nombre*"
+                            style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                        <input id="apellidos" type="text" placeholder="Apellidos*"
+                            style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
                     </div>
-                    <h3 style="color:#000; font-weight:900; font-size:1.1rem; margin-bottom:20px; text-align:center;">Quiero recibir información</h3>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <div class="nombre-row">
-                            <input id="nombre" type="text" placeholder="Nombre*"
-                                style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                            <input id="apellidos" type="text" placeholder="Apellidos*"
-                                style="width:50%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                        </div>
-                        <input id="dni" type="text" placeholder="DNI*"
-                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                        <input id="telefono" type="tel" placeholder="Teléfono*"
-                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                        <input id="correo" type="email" placeholder="Correo electrónico*"
-                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                        <select id="proyecto"
-                            style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
-                            <option value="">Proyecto de interés</option>
-                            
-                            @foreach ($proyectos as $p)
+                    <input id="dni" type="text" placeholder="DNI*"
+                        style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                    <input id="telefono" type="tel" placeholder="Teléfono*"
+                        style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                    <input id="correo" type="email" placeholder="Correo electrónico*"
+                        style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                    <select id="proyecto"
+                        style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                        <option value="">Proyecto de interés</option>
+
+                        @foreach ($proyectos as $p)
                             <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
-                            @endforeach
-                            
-                        </select>
-                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#000; cursor:pointer;">
-                            <input type="checkbox" id="acepto" style="margin-top:2px;">
-                            Acepto el tratamiento de mis datos personales.
-                        </label>
-                        <button onclick="enviarFormulario()"
-                            style="background:#000; color:var(--color-gold); padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%;">
-                            Solicitar información
-                        </button>
-                        <p id="msg-error" style="color:red; font-size:0.8rem; display:none; text-align:center;"></p>
-                    </div>
-                </div> -->
+                        @endforeach
+
+                    </select>
+                    <label
+                        style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#000; cursor:pointer;">
+                        <input type="checkbox" id="acepto"
+                            style="margin-top:2px; cursor:pointer; width:16px; height:16px;">
+                        Acepto el tratamiento de mis datos personales.
+                    </label>
+                    <button onclick="enviarFormulario()"
+                        style="background:#000; color:var(--color-gold); padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%;">
+                        Solicitar información
+                    </button>
+                    <p id="msg-error" style="color:red; font-size:0.8rem; display:none; text-align:center;"></p>
+                </div>
+            </div>
 
             <!-- VIDEO YOUTUBE -->
             <div
@@ -556,7 +563,7 @@
             <button onclick="cerrarModal()"
                 style="background:transparent; color:var(--color-gray); padding:10px; border:none; font-size:0.85rem; cursor:pointer; width:100%; margin-top:5px;">Cancelar</button>
         </div>
-    </div> 
+    </div>
 
     <!-- ===== TESTIMONIOS ===== -->
     <section style="background:#f0f0f0; padding:60px 0 40px;">
