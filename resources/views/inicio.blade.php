@@ -492,7 +492,7 @@
                             style="margin-top:2px; cursor:pointer; width:16px; height:16px;">
                         Acepto el tratamiento de mis datos personales.
                     </label>
-                    
+
                     <button onclick="enviarFormulario()"
                         style="background:#000; color:var(--color-gold); padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%;">
                         Solicitar información
@@ -643,10 +643,17 @@
                 .then(r => r.json())
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('modal-verificacion').style.display = 'flex';
-                        document.querySelector('.codigo-inputs').style.display = 'none';
-                        document.getElementById('correo-mostrado').style.display = 'none';
+                        error.style.color = 'green';
+                        error.textContent = '✅ ¡Mensaje enviado! Te contactaremos pronto.';
+                        error.style.display = 'block';
+                        // Limpiar campos
+                        ['nombre', 'apellidos', 'dni', 'telefono', 'correo'].forEach(id =>
+                            document.getElementById(id).value = ''
+                        );
+                        document.getElementById('proyecto').value = '';
+                        document.getElementById('acepto').checked = false;
                     } else {
+                        error.style.color = 'red';
                         error.textContent = data.message || 'Error al enviar.';
                         error.style.display = 'block';
                     }
