@@ -222,13 +222,13 @@
             Contáctanos
         </a>
 
-        <!-- CHAT
+        <!-- CHAT -->
         <button onclick="toggleChat()"
             style="background:var(--color-gold); color:#000; border:none; padding:14px 20px; border-radius:50px; font-weight:900; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px;">
             💬 <span id="btn-texto">Déjanos un mensaje</span>
         </button> -->
 
-        <!-- FORMULARIO CHAT
+        <!-- FORMULARIO CHAT -->
         <div id="chat-form"
             style="display:none; position:fixed; bottom:80px; right:20px;
                    width:min(320px, calc(100vw - 40px));
@@ -261,11 +261,11 @@
                     <select id="chat-proyecto"
                         style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:0.85rem;">
                         <option value="">Proyecto de interés</option>
-                        {{-- @php $proyectosChat = App\Models\Proyecto::all(); @endphp
+                        @php $proyectosChat = App\Models\Proyecto::all(); @endphp
                         @foreach ($proyectosChat as $p)
                             <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
                         @endforeach
-                        --}}
+                        
                     </select>
                     <input id="chat-asunto" type="text" placeholder="Asunto"
                         style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:0.85rem;">
@@ -279,7 +279,7 @@
                     </button>
                 </div>
             </div>
-        </div> -->
+        </div> 
     </div>
 
     <!-- ===== NAVBAR ===== -->
