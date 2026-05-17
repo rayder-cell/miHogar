@@ -24,11 +24,17 @@ class NewPasswordController extends Controller
             'token'    => ['required'],
             'email'    => ['required', 'email'],
             'password' => ['required', 'confirmed', 'min:8'],
+        ], [
+            'password.required'  => 'La contraseña es obligatoria.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
+            'password.min'       => 'La contraseña debe tener al menos 8 caracteres.',
+            'email.required'     => 'El correo es obligatorio.',
+            'email.email'        => 'Ingresa un correo válido.',
         ]);
 
         $resetRecord = DB::table('password_reset_tokens')
-                         ->where('email', $request->email)
-                         ->first();
+            ->where('email', $request->email)
+            ->first();
 
         if (!$resetRecord || !Hash::check($request->token, $resetRecord->token)) {
             return back()->withErrors(['email' => 'Token inválido o expirado.']);
@@ -44,12 +50,12 @@ class NewPasswordController extends Controller
         $usuario->save();
 
         DB::table('password_reset_tokens')
-          ->where('email', $request->email)
-          ->delete();
+            ->where('email', $request->email)
+            ->delete();
 
         event(new PasswordReset($usuario));
 
         return redirect()->route('login')
-                         ->with('status', '✅ Contraseña restablecida correctamente. Ya puedes iniciar sesión.');
+            ->with('status', '✅ Contraseña restablecida correctamente. Ya puedes iniciar sesión.');
     }
 }
