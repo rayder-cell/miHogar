@@ -492,16 +492,7 @@
                             style="margin-top:2px; cursor:pointer; width:16px; height:16px;">
                         Acepto el tratamiento de mis datos personales.
                     </label>
-                    <p style="color:var(--color-white); font-size:0.9rem; margin-bottom:8px; text-align:left;">¿En qué
-                        horario
-                        prefieres que te llamemos?</p>
-                    <select id="horario" class="border-gold"
-                        style="width:100%; padding:10px 14px; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box; background:#fff; color:#000; margin-bottom:15px;">
-                        <option value="">Elige el horario de tu preferencia</option>
-                        <option value="Mañana (8am - 12pm)">Mañana (8am - 12pm)</option>
-                        <option value="Tarde (12pm - 6pm)">Tarde (12pm - 6pm)</option>
-                        <option value="Noche (6pm - 9pm)">Noche (6pm - 9pm)</option>
-                    </select>
+                    
                     <button onclick="enviarFormulario()"
                         style="background:#000; color:var(--color-gold); padding:14px; border:none; border-radius:8px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px; width:100%;">
                         Solicitar información
@@ -523,8 +514,6 @@
             </div>
         </div>
     </section>
-
-    
 
     <!-- ===== TESTIMONIOS ===== -->
     <section style="background:#f0f0f0; padding:60px 0 40px;">
