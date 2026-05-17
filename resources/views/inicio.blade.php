@@ -310,6 +310,23 @@
                 display: none;
             }
         }
+
+        #acepto:checked {
+            background: #000 !important;
+            border-color: #000 !important;
+        }
+
+        #acepto:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-gold);
+            font-size: 13px;
+            font-weight: 900;
+            line-height: 1;
+        }
     </style>
 
     <!-- ===== HERO ===== -->
@@ -493,7 +510,7 @@
                         <label
                             style="display:flex; align-items:center; gap:8px; font-size:0.78rem; color:#000; cursor:pointer;">
                             <input type="checkbox" id="acepto"
-                                style="cursor:pointer; width:18px; height:18px; accent-color:#000; flex-shrink:0;">
+                                style="cursor:pointer; width:18px; height:18px; flex-shrink:0; appearance:none; -webkit-appearance:none; background:#fff; border:2px solid #000; border-radius:3px; position:relative;">
                             Acepto el tratamiento de mis datos personales.
                         </label>
                         <button onclick="enviarFormulario()"
