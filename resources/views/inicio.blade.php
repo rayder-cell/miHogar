@@ -451,7 +451,7 @@
                 </div>
             </div>
 
-            <!-- FORMULARIO PASO 1
+            <!-- FORMULARIO PASO 1-->
                 <div id="form-paso1" class="bg-gold contacto-form">
                     <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
                         <div style="width:28px; height:28px; background:#000; color:var(--color-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">1</div>
@@ -475,11 +475,11 @@
                         <select id="proyecto"
                             style="width:100%; padding:10px 14px; border:none; border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
                             <option value="">Proyecto de interés</option>
-                            {{--
+                            
                             @foreach ($proyectos as $p)
                             <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
                             @endforeach
-                            --}}
+                            
                         </select>
                         <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#000; cursor:pointer;">
                             <input type="checkbox" id="acepto" style="margin-top:2px;">
@@ -507,7 +507,7 @@
         </div>
     </section>
 
-    <!-- MODAL VERIFICACIÓN 
+    <!-- MODAL VERIFICACIÓN -->
     <div id="modal-verificacion"
         style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center; overflow-y:auto; padding:15px;">
         <div class="modal-inner border-gold">
@@ -556,7 +556,7 @@
             <button onclick="cerrarModal()"
                 style="background:transparent; color:var(--color-gray); padding:10px; border:none; font-size:0.85rem; cursor:pointer; width:100%; margin-top:5px;">Cancelar</button>
         </div>
-    </div> -->
+    </div> 
 
     <!-- ===== TESTIMONIOS ===== -->
     <section style="background:#f0f0f0; padding:60px 0 40px;">
