@@ -693,8 +693,9 @@
                 .then(r => r.json())
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('correo-mostrado').textContent = correo;
                         document.getElementById('modal-verificacion').style.display = 'flex';
+                        document.querySelector('.codigo-inputs').style.display = 'none';
+                        document.getElementById('correo-mostrado').style.display = 'none';
                     } else {
                         error.textContent = data.message || 'Error al enviar.';
                         error.style.display = 'block';

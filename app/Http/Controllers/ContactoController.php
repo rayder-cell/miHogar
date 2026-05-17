@@ -10,7 +10,6 @@ class ContactoController extends Controller
 {
     public function enviar(Request $request)
     {
-        // Honeypot anti-spam
         if ($request->website) {
             return response()->json(['success' => true]);
         }
@@ -25,7 +24,6 @@ class ContactoController extends Controller
                 'proyecto'  => 'required|string|max:200',
             ]);
 
-            // Sanitizar datos
             $nombre    = strip_tags(trim($request->nombre));
             $apellidos = strip_tags(trim($request->apellidos));
             $dni       = strip_tags(trim($request->dni));
@@ -33,13 +31,8 @@ class ContactoController extends Controller
             $correo    = strip_tags(trim($request->correo));
             $proyecto  = strip_tags(trim($request->proyecto));
 
-            $codigo = rand(1000, 9999);
-
-            session([
-                'codigo_verificacion' => $codigo,
-                'correo_cliente'      => $correo,
-                'datos_contacto'      => $request->all(),
-            ]);
+            // Guardar datos en sesión para el paso 2
+            session(['datos_contacto' => $request->all()]);
 
             $emailEmpresa = config('mail.empresa');
 
@@ -57,18 +50,6 @@ class ContactoController extends Controller
                 }
             );
 
-            // Email al cliente con código
-            Mail::raw(
-                "Hola {$nombre},\n\n" .
-                "Tu código de verificación de Inmobiliaria Mi Hogar es:\n\n" .
-                "🔐 {$codigo}\n\n" .
-                "Este código es válido por 10 minutos.",
-                function ($message) use ($correo, $nombre) {
-                    $message->to($correo)
-                        ->subject('Tu código de verificación - Mi Hogar');
-                }
-            );
-
             return response()->json(['success' => true]);
 
         } catch (\Exception $e) {
@@ -82,42 +63,39 @@ class ContactoController extends Controller
 
     public function verificar(Request $request)
     {
-        $codigoIngresado = $request->codigo1 . $request->codigo2 . $request->codigo3 . $request->codigo4;
-        $codigoGuardado  = session('codigo_verificacion');
-        $datos           = session('datos_contacto');
-        $horario         = $request->horario;
+        $datos   = session('datos_contacto');
+        $horario = $request->horario;
 
-        if ($codigoIngresado == $codigoGuardado) {
-            try {
-                $emailEmpresa = config('mail.empresa');
-
-                Mail::raw(
-                    "✅ CLIENTE VERIFICADO - Inmobiliaria Mi Hogar\n\n" .
-                    "Nombre: {$datos['nombre']} {$datos['apellidos']}\n" .
-                    "DNI: {$datos['dni']}\n" .
-                    "Teléfono: {$datos['telefono']}\n" .
-                    "Correo: {$datos['correo']}\n" .
-                    "Proyecto: {$datos['proyecto']}\n\n" .
-                    "📞 Horario preferido para llamar: {$horario}",
-                    function ($message) use ($emailEmpresa, $horario) {
-                        $message->to($emailEmpresa)
-                            ->subject('✅ Cliente verificado - Llamar a ' . $horario);
-                    }
-                );
-            } catch (\Exception $e) {
-                Log::error('Error email verificacion: ' . $e->getMessage());
-            }
-
-            session()->forget(['codigo_verificacion', 'correo_cliente', 'datos_contacto']);
-            return response()->json(['success' => true]);
+        if (!$horario) {
+            return response()->json(['success' => false, 'message' => 'Elige un horario']);
         }
 
-        return response()->json(['success' => false, 'message' => 'Código incorrecto']);
+        try {
+            $emailEmpresa = config('mail.empresa');
+
+            Mail::raw(
+                "✅ HORARIO CONFIRMADO - Inmobiliaria Mi Hogar\n\n" .
+                "Nombre: {$datos['nombre']} {$datos['apellidos']}\n" .
+                "DNI: {$datos['dni']}\n" .
+                "Teléfono: {$datos['telefono']}\n" .
+                "Correo: {$datos['correo']}\n" .
+                "Proyecto: {$datos['proyecto']}\n\n" .
+                "📞 Horario preferido para llamar: {$horario}",
+                function ($message) use ($emailEmpresa, $horario) {
+                    $message->to($emailEmpresa)
+                        ->subject('📞 Llamar a cliente - ' . $horario);
+                }
+            );
+        } catch (\Exception $e) {
+            Log::error('Error email verificacion: ' . $e->getMessage());
+        }
+
+        session()->forget('datos_contacto');
+        return response()->json(['success' => true]);
     }
 
     public function chat(Request $request)
     {
-        // Honeypot anti-spam
         if ($request->website) {
             return response()->json(['success' => true]);
         }
@@ -128,11 +106,11 @@ class ContactoController extends Controller
                 'correo' => 'required|email|max:150',
             ]);
 
-            $nombre  = strip_tags(trim($request->nombre));
-            $correo  = strip_tags(trim($request->correo));
+            $nombre   = strip_tags(trim($request->nombre));
+            $correo   = strip_tags(trim($request->correo));
             $proyecto = strip_tags(trim($request->proyecto ?? 'No especificado'));
-            $asunto  = strip_tags(trim($request->asunto ?? 'No especificado'));
-            $mensaje = strip_tags(trim($request->mensaje ?? 'Sin mensaje'));
+            $asunto   = strip_tags(trim($request->asunto ?? 'No especificado'));
+            $mensaje  = strip_tags(trim($request->mensaje ?? 'Sin mensaje'));
 
             $emailEmpresa = config('mail.empresa');
 
