@@ -411,8 +411,7 @@
         <div style="max-width:1100px; margin:0 auto;">
 
             <!-- FILA SUPERIOR: TEXTO + FORMULARIO -->
-            <div
-                style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap; justify-content:center; margin-bottom:50px;">
+            <div style="display:flex; gap:80px; align-items:flex-start; flex-wrap:wrap; justify-content:center; margin-bottom:50px;">
 
                 <!-- TEXTO IZQUIERDA -->
                 <div style="flex:1; min-width:260px; max-width:420px;">
