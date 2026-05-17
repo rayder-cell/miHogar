@@ -489,7 +489,7 @@
                     <label
                         style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#000; cursor:pointer;">
                         <input type="checkbox" id="acepto"
-                            style="margin-top:2px; cursor:pointer; width:16px; height:16px;">
+                            style="margin-top:2px; cursor:pointer; width:18px; height:18px; accent-color:#000; flex-shrink:0;">
                         Acepto el tratamiento de mis datos personales.
                     </label>
 
