@@ -388,7 +388,8 @@
                             {{ $proyecto->nombre_proyecto }}
                         </h2>
                         <p style="color:var(--color-gray-light); font-size:0.75rem; margin-bottom:3px;">
-                            📍 {{ $proyecto->distrito }} - {{ $proyecto->direccion }}
+                            <i class="fas fa-map-marker-alt" style="color:var(--color-gold); font-size:0.85rem;"></i>
+                            {{ $proyecto->distrito }} - {{ $proyecto->direccion }}
                         </p>
                         @if ($proyecto->precio)
                             <p class="text-gold" style="font-weight:bold; font-size:0.82rem; margin-bottom:6px;">
@@ -411,7 +412,8 @@
         <div style="max-width:1100px; margin:0 auto;">
 
             <!-- FILA SUPERIOR: TEXTO + FORMULARIO -->
-            <div style="display:flex; gap:80px; align-items:flex-start; flex-wrap:wrap; justify-content:center; margin-bottom:50px;">
+            <div
+                style="display:flex; gap:80px; align-items:flex-start; flex-wrap:wrap; justify-content:center; margin-bottom:50px;">
 
                 <!-- TEXTO IZQUIERDA -->
                 <div style="flex:1; min-width:260px; max-width:420px;">
