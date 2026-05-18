@@ -70,6 +70,6 @@ return [
     ],
 
     // Correo de la empresa
-    'empresa' => env('EMAIL_EMPRESA', 'mrayderalfredo@gmail.com'),
+    'empresa' => env('EMAIL_EMPRESA', 'inmobiliariamihogar25@gmail.com'),
 
 ];
