@@ -226,7 +226,7 @@
         <button onclick="toggleChat()"
             style="background:var(--color-gold); color:#000; border:none; padding:14px 20px; border-radius:50px; font-weight:900; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px;">
             💬 <span id="btn-texto">Déjanos un mensaje</span>
-        </button> -->
+        </button>
 
         <!-- FORMULARIO CHAT -->
         <div id="chat-form"
