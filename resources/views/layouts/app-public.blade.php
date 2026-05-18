@@ -266,7 +266,7 @@
                         @foreach ($proyectosChat as $p)
                             <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
                         @endforeach
-                        
+
                     </select>
                     <input id="chat-asunto" type="text" placeholder="Asunto"
                         style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:0.85rem;">
@@ -280,7 +280,7 @@
                     </button>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 
     <!-- ===== NAVBAR ===== -->
@@ -437,7 +437,9 @@
             <div style="min-width:160px;">
                 <h4 style="margin-bottom:15px;">Contacto</h4>
                 <p style="color:var(--color-gray); font-size:0.85rem; line-height:2;">
-                    📞 932 400 015<br>📍 Andahuaylas, Apurímac<br>✉️ inmobiliariamihogar25@gmail.com
+                    <i class="fas fa-phone" style="color:var(--color-gold);"></i> 932 400 015<br>
+                    <i class="fas fa-map-marker-alt" style="color:var(--color-gold);"></i> Andahuaylas, Apurímac<br>
+                    <i class="fas fa-envelope" style="color:var(--color-gold);"></i> inmobiliariamihogar25@gmail.com
                 </p>
             </div>
             <div style="min-width:160px;">
