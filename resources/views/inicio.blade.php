@@ -426,7 +426,7 @@
                     </h2>
                     <p style="color:var(--color-gray); font-size:0.95rem; line-height:2;">
                         📍 Andahuaylas, Apurímac<br>
-                        📞 912 345 678<br>
+                        📞 932 400 015<br>
                         ✉️ inmobiliariamihogar25@gmail.com
                     </p>
                     <div class="redes-sociales" style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
