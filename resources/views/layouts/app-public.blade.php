@@ -437,7 +437,7 @@
             <div style="min-width:160px;">
                 <h4 style="margin-bottom:15px;">Contacto</h4>
                 <p style="color:var(--color-gray); font-size:0.85rem; line-height:2;">
-                    <i class="fas fa-phone" style="color:var(--color-gold);"></i> 932 400 015<br>
+                    <i class="fas fa-phone" style="color:red;"></i> 932 400 015<br>
                     <i class="fas fa-map-marker-alt" style="color:var(--color-gold);"></i> Andahuaylas, Apurímac<br>
                     <i class="fas fa-envelope" style="color:var(--color-gold);"></i> inmobiliariamihogar25@gmail.com
                 </p>
