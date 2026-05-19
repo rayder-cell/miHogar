@@ -765,7 +765,7 @@
                 let bloqueado = false;
 
                 function vis() {
-                    return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
+                    return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 3 : 4;
                 }
 
                 function cardW() {
