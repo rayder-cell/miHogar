@@ -253,7 +253,7 @@
         .t-foto {
             background: #ddd;
             width: 100%;
-            height: 100%;
+            height: 60%;
             /* ← altura fija */
             overflow: hidden;
             display: block;
