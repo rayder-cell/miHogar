@@ -255,7 +255,7 @@
             width: 100%;
             height: 55%;
             display: block;
-            
+
         }
 
         .t-foto img {
@@ -326,6 +326,23 @@
             font-size: 13px;
             font-weight: 900;
             line-height: 1;
+        }
+
+        .t-card-inner {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .t-card-inner>div:last-child {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
     </style>
 
