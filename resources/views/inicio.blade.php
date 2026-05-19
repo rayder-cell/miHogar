@@ -252,7 +252,7 @@
 
         .t-foto {
             background: #ddd;
-            width: 100%;
+            width: 80%;
             height: 55%;
             display: block;
         }
