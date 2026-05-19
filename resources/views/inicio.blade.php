@@ -294,58 +294,21 @@
         @media (max-width: 768px) {
             .hero-section {
                 height: 0 !important;
-                padding-bottom: 90% !important;
+                padding-bottom: 100% !important;
+                /* proporción cuadrada para imagen 1090x1080 */
             }
 
             .slide img {
-                object-fit: cover;
+                object-fit: contain;
+                /* muestra la imagen completa sin cortar */
                 object-position: center center;
-            }
-
-            .hero-info-slide {
-                display: none !important;
-            }
-
-            .hero-titulo {
-                font-size: clamp(1rem, 5vw, 1.6rem);
-                letter-spacing: 2px;
-                margin-bottom: 8px;
-            }
-
-            .hero-subtitulo {
-                font-size: clamp(0.7rem, 3.5vw, 0.9rem);
-                margin-bottom: 15px;
-                display: block !important;
-                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-            }
-
-            .bienvenido-txt {
-                color: #000 !important;
-                background: rgba(255, 255, 255, 0.75);
-                padding: 2px 10px;
-                border-radius: 4px;
-                text-shadow: none !important;
-            }
-
-            .btn-flecha {
-                width: 28px;
-                height: 28px;
-                font-size: 1rem;
-            }
-
-            .btn-flecha-izq {
-                left: 6px;
-            }
-
-            .btn-flecha-der {
-                right: 6px;
+                background: #000;
             }
         }
 
-        /* ===== CHAT FLOTANTE ===== */
         @media (max-width: 480px) {
             .hero-section {
-                padding-bottom: 110% !important;
+                padding-bottom: 100% !important;
             }
         }
 
