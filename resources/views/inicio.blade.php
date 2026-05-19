@@ -254,7 +254,7 @@
             background: #ddd;
             width: 100%;
             height: 90%;
-
+            display: block;
         }
 
         .t-foto img {
