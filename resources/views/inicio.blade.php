@@ -258,7 +258,7 @@
         }
 
         .t-foto img {
-            width: 70%;
+            width: 100%;
             height: 70%;
             display: block;
         }
