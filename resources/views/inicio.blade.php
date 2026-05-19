@@ -253,14 +253,17 @@
         .t-foto {
             overflow: hidden;
             background: #ddd;
+            max-height: 220px;
         }
 
         .t-foto img {
             width: 100%;
-            height: auto;
-            /* ← altura automática según la imagen */
-            object-fit: contain;
-            /* ← muestra imagen completa */
+            height: 100%;
+            max-height: 220px;
+            /* ← agrega esto */
+            object-fit: cover;
+            /* ← vuelve a cover para que llene bien */
+            object-position: center top;
             display: block;
         }
 
