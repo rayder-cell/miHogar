@@ -85,6 +85,83 @@
         </div>
     </div>
 
+    <!-- EQUIPO / SOCIOS -->
+    <div style="background:var(--color-black); padding:60px 20px; border-top:1px solid #222;">
+        <div style="max-width:1100px; margin:0 auto;">
+            <div style="text-align:center; margin-bottom:40px;">
+                <p class="text-gold" style="font-size:0.9rem; letter-spacing:4px; text-transform:uppercase;">Conoce a</p>
+                <h2
+                    style="color:var(--color-white); font-size:2rem; font-weight:900; text-transform:uppercase; letter-spacing:3px; margin:8px 0;">
+                    Nuestro Equipo</h2>
+                <div class="bg-gold" style="width:60px; height:3px; margin:0 auto;"></div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
+
+                <!-- SOCIO 1 -->
+                <div style="text-align:center; width:280px;">
+                    <div
+                        style="width:180px; height:180px; border-radius:50%; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
+                        <img src="FOTO_SOCIO_1" alt="Socio 1"
+                            style="width:100%; height:100%; object-fit:cover; object-position:center top;">
+                    </div>
+                    <h3
+                        style="color:var(--color-white); font-size:1.1rem; font-weight:900; margin-bottom:6px; text-transform:uppercase;">
+                        Nombre Socio 1
+                    </h3>
+                    <p class="text-gold"
+                        style="font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">
+                        Cargo Socio 1
+                    </p>
+                    <p style="color:#888; font-size:0.82rem; line-height:1.6;">
+                        Breve descripción del socio 1.
+                    </p>
+                </div>
+
+                <!-- SOCIO 2 -->
+                <div style="text-align:center; width:280px;">
+                    <div
+                        style="width:180px; height:180px; border-radius:50%; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
+                        <img src="FOTO_SOCIO_2" alt="Socio 2"
+                            style="width:100%; height:100%; object-fit:cover; object-position:center top;">
+                    </div>
+                    <h3
+                        style="color:var(--color-white); font-size:1.1rem; font-weight:900; margin-bottom:6px; text-transform:uppercase;">
+                        Nombre Socio 2
+                    </h3>
+                    <p class="text-gold"
+                        style="font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">
+                        Cargo Socio 2
+                    </p>
+                    <p style="color:#888; font-size:0.82rem; line-height:1.6;">
+                        Breve descripción del socio 2.
+                    </p>
+                </div>
+
+                <!-- SOCIO 3 -->
+                <div style="text-align:center; width:280px;">
+                    <div
+                        style="width:180px; height:180px; border-radius:50%; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
+                        <img src="FOTO_SOCIO_3" alt="Socio 3"
+                            style="width:100%; height:100%; object-fit:cover; object-position:center top;">
+                    </div>
+                    <h3
+                        style="color:var(--color-white); font-size:1.1rem; font-weight:900; margin-bottom:6px; text-transform:uppercase;">
+                        Nombre Socio 3
+                    </h3>
+                    <p class="text-gold"
+                        style="font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">
+                        Cargo Socio 3
+                    </p>
+                    <p style="color:#888; font-size:0.82rem; line-height:1.6;">
+                        Breve descripción del socio 3.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- VALORES -->
     <div style="padding:60px 20px; background:var(--color-black);">
         <div style="max-width:1100px; margin:0 auto;">
@@ -123,7 +200,8 @@
                 <div class="proyecto-card" style="padding:30px 25px; width:200px; text-align:center;">
                     <div style="font-size:2.5rem; margin-bottom:15px;">❤️</div>
                     <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Compromiso</h3>
-                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Nos comprometemos con cada cliente para hacer
+                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Nos comprometemos con cada cliente para
+                        hacer
                         realidad su sueño.</p>
                 </div>
 
@@ -142,7 +220,8 @@
     <div style="background:var(--color-dark-2); padding:60px 20px; border-top:2px solid var(--color-gold);">
         <div style="max-width:1100px; margin:0 auto; text-align:center;">
             <h2 class="text-gold"
-                style="font-size:1.8rem; margin-bottom:15px; text-transform:uppercase; letter-spacing:3px;">Contáctanos</h2>
+                style="font-size:1.8rem; margin-bottom:15px; text-transform:uppercase; letter-spacing:3px;">Contáctanos
+            </h2>
             <p style="color:var(--color-gray); margin-bottom:30px;">Estamos aquí para ayudarte. No dudes en comunicarte con
                 nosotros.</p>
 

@@ -251,19 +251,13 @@
         }
 
         .t-foto {
-            overflow: hidden;
             background: #ddd;
-            max-height: 220px;
+
         }
 
         .t-foto img {
             width: 100%;
-            height: 100%;
-            max-height: 220px;
-            /* ← agrega esto */
-            object-fit: cover;
-            /* ← vuelve a cover para que llene bien */
-            object-position: center top;
+            height: auto;
             display: block;
         }
 
@@ -765,7 +759,7 @@
                 let bloqueado = false;
 
                 function vis() {
-                    return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 3 : 4;
+                    return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
                 }
 
                 function cardW() {
