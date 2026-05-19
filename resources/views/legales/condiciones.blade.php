@@ -24,7 +24,7 @@
         <p>Nos reservamos el derecho de actualizar estas condiciones en cualquier momento. Le recomendamos revisar esta página periódicamente para estar informado de cualquier cambio.</p>
 
         <h2 style="color:#c9a84c; font-size:1.2rem; margin:25px 0 10px;">7. Contacto</h2>
-        <p>Para cualquier consulta relacionada con estas condiciones, puede contactarnos a través de: <span style="color:#c9a84c;">info@mihogar.pe</span> o llamar al <span style="color:#c9a84c;">912 345 678</span>.</p>
+        <p>Para cualquier consulta relacionada con estas condiciones, puede contactarnos a través de: <span style="color:#c9a84c;">inmobiliariamihogarperu@gmail.com</span> o llamar al <span style="color:#c9a84c;">912 345 678</span>.</p>
     </div>
 
     <div style="margin-top:40px;">

@@ -152,7 +152,7 @@
                     style="background:var(--color-black); padding:25px 35px; text-align:center; min-width:180px;">
                     <div style="font-size:2rem; margin-bottom:10px;">📍</div>
                     <h4 class="text-gold" style="margin-bottom:5px;">Dirección</h4>
-                    <p style="color:var(--color-gray-light); font-size:0.9rem;">Andahuaylas, Apurímac, Perú</p>
+                    <p style="color:var(--color-gray-light); font-size:0.9rem;">AV. ANDAHUAYLAS 485</p>
                 </div>
 
                 <div class="border-gold"
@@ -166,7 +166,7 @@
                     style="background:var(--color-black); padding:25px 35px; text-align:center; min-width:180px;">
                     <div style="font-size:2rem; margin-bottom:10px;">📧</div>
                     <h4 class="text-gold" style="margin-bottom:5px;">Correo</h4>
-                    <p style="color:var(--color-gray-light); font-size:0.9rem;">inmobiliariamihogar25@gmail.com</p>
+                    <p style="color:var(--color-gray-light); font-size:0.9rem;">inmobiliariamihogarperu@gmail.com</p>
                 </div>
 
                 <div class="border-gold"

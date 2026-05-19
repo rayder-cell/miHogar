@@ -6,7 +6,7 @@
 
     <div style="color:#ddd; line-height:1.9; font-size:0.95rem;">
         <h2 style="color:#c9a84c; font-size:1.2rem; margin:25px 0 10px;">1. Responsable del tratamiento</h2>
-        <p>Inmobiliaria Mi Hogar S.A.C., con RUC 20XXXXXXXXX, con domicilio en Andahuaylas, Apurímac, Perú, es la empresa responsable del tratamiento de sus datos personales.</p>
+        <p>Inmobiliaria Mi Hogar S.A.C., con RUC 20600777777, con dirección en AV. ANDAHUAYLAS 485, Apurímac, Perú, es la empresa responsable del tratamiento de sus datos personales.</p>
 
         <h2 style="color:#c9a84c; font-size:1.2rem; margin:25px 0 10px;">2. Datos que recopilamos</h2>
         <p>Recopilamos los siguientes datos personales cuando usted completa nuestros formularios de contacto: nombre completo, DNI, número de teléfono, correo electrónico y proyecto de interés. Estos datos son proporcionados voluntariamente por usted.</p>

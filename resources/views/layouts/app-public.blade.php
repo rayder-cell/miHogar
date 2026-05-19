@@ -408,7 +408,7 @@
                         </svg>
                         Facebook
                     </a>
-                    <a href="#" target="_blank"
+                    <a href="https://www.instagram.com/inmobiliaria.mi.hogar?igsh=cW5vajI2M2tocTIx" target="_blank"
                         style="display:flex; align-items:center; gap:6px; background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.82rem; white-space:nowrap;">
                         <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
                             <path
@@ -439,7 +439,7 @@
                 <p style="color:var(--color-gray); font-size:0.85rem; line-height:2;">
                     <i class="fas fa-phone" style="color:red;"></i> 932 400 015<br>
                     <i class="fas fa-map-marker-alt" style="color:var(--color-gold);"></i> Andahuaylas, Apurímac<br>
-                    <i class="fas fa-envelope" style="color:var(--color-gold);"></i> inmobiliariamihogar25@gmail.com
+                    <i class="fas fa-envelope" style="color:var(--color-gold);"></i> inmobiliariamihogarperu@gmail.com
                 </p>
             </div>
             <div style="min-width:160px;">
