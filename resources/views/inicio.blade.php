@@ -252,12 +252,14 @@
 
         .t-foto {
             background: #ddd;
+            width: 100%;
+            height: 100%;
 
         }
 
         .t-foto img {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
         }
 

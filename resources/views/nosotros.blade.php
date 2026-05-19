@@ -100,8 +100,7 @@
 
                 <!-- SOCIO 1 -->
                 <div style="text-align:center; width:280px;">
-                    <div
-                        style="width:180px; height:180px; border-radius:50%; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
+                    <div style="width:220px; height:220px; border-radius:10px; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
                         <img src="FOTO_SOCIO_1" alt="Socio 1"
                             style="width:100%; height:100%; object-fit:cover; object-position:center top;">
                     </div>
@@ -121,7 +120,7 @@
                 <!-- SOCIO 2 -->
                 <div style="text-align:center; width:280px;">
                     <div
-                        style="width:180px; height:180px; border-radius:50%; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
+                        style="width:220px; height:220px; border-radius:10px; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
                         <img src="FOTO_SOCIO_2" alt="Socio 2"
                             style="width:100%; height:100%; object-fit:cover; object-position:center top;">
                     </div>
@@ -141,7 +140,7 @@
                 <!-- SOCIO 3 -->
                 <div style="text-align:center; width:280px;">
                     <div
-                        style="width:180px; height:180px; border-radius:50%; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
+                        style="width:220px; height:220px; border-radius:10px; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
                         <img src="FOTO_SOCIO_3" alt="Socio 3"
                             style="width:100%; height:100%; object-fit:cover; object-position:center top;">
                     </div>
