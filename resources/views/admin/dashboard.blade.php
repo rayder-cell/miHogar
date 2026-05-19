@@ -169,13 +169,6 @@
         </div>
     </div>
 
-    <div class="stat-card" style="border-left-color:#a855f7;">
-        <div class="stat-icon" style="background:#faf5ff;">📋</div>
-        <div>
-            <div class="stat-number">0</div>
-            <div class="stat-label">Contactos</div>
-        </div>
-    </div>
 
 </div>
 
@@ -227,27 +220,7 @@
     </div>
 
     <!-- ÚLTIMOS CONTACTOS -->
-    <div class="card" style="flex:1; min-width:250px;">
-        <div class="card-title">
-            <span style="background:#faf5ff; padding:6px 8px; border-radius:8px;">📩</span>
-            Últimos contactos
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="2" style="padding:40px; text-align:center; color:#ccc; font-size:0.85rem;">
-                        Sin contactos aún
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    
 
 </div>
 
