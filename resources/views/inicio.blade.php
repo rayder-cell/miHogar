@@ -252,15 +252,16 @@
 
         .t-foto {
             background: #ddd;
-            width: 100%;
-            height: 55%;
-            display: block;
-
+            height: 280px;
+            /* ← altura fija */
+            overflow: hidden;
         }
 
         .t-foto img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            object-position: center top;
             display: block;
         }
 
