@@ -58,12 +58,12 @@
                     style="flex:1; min-width:280px; background:var(--color-dark-2); padding:35px 30px; position:relative;">
                     <div class="bg-gold"
                         style="position:absolute; top:-20px; left:30px; color:#000; padding:8px 20px; font-weight:900; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px;">
-                        🎯 Misión
+                        Misión
                     </div>
                     <p style="color:var(--color-gray-light); line-height:1.9; margin-top:15px; font-size:0.95rem;">
-                        Brindar soluciones inmobiliarias integrales y accesibles a las familias de Andahuaylas y Apurímac,
-                        ofreciendo proyectos de vivienda de calidad, con transparencia, honestidad y compromiso,
-                        contribuyendo al desarrollo de nuestra región.
+                        Nuestra misión es Brindar terrenos independizados, trabajando como un equipo comprometido que
+                        entrega resultados reales y oportunidades de crecimiento para cada familia y emprendedor que confía
+                        en nosotros.
                     </p>
                 </div>
 
@@ -72,12 +72,12 @@
                     style="flex:1; min-width:280px; background:var(--color-dark-2); padding:35px 30px; position:relative;">
                     <div class="bg-gold"
                         style="position:absolute; top:-20px; left:30px; color:#000; padding:8px 20px; font-weight:900; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px;">
-                        🔭 Visión
+                        Visión
                     </div>
                     <p style="color:var(--color-gray-light); line-height:1.9; margin-top:15px; font-size:0.95rem;">
-                        Ser la inmobiliaria líder en la región de Apurímac para el año 2030, reconocida por la calidad de
-                        nuestros proyectos, la satisfacción de nuestros clientes y nuestro aporte al desarrollo urbano
-                        sostenible de Andahuaylas.
+                        Convertirnos en una inmobiliaria líder en el mercado, reconocida por su seriedad y cumplimiento,
+                        expandiéndonos a nivel provincial y regional hasta posicionarnos como una empresa confiable,
+                        impulsando proyectos que mejoren el bienestar y promuevan el desarrollo sostenible del país.
                     </p>
                 </div>
 
@@ -100,7 +100,8 @@
 
                 <!-- SOCIO 1 -->
                 <div style="text-align:center; width:280px;">
-                    <div style="width:220px; height:220px; border-radius:10px; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
+                    <div
+                        style="width:220px; height:220px; border-radius:10px; overflow:hidden; margin:0 auto 20px; border:3px solid var(--color-gold);">
                         <img src="FOTO_SOCIO_1" alt="Socio 1"
                             style="width:100%; height:100%; object-fit:cover; object-position:center top;">
                     </div>
@@ -176,39 +177,33 @@
             <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
 
                 <div class="proyecto-card" style="padding:30px 25px; width:200px; text-align:center;">
+                    <div style="font-size:2.5rem; margin-bottom:15px;">✅</div>
+                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Responsabilidad y transparencia: </h3>
+                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Actuamos con claridad y seriedad en cada proceso.</p>
+                </div>
+
+                <div class="proyecto-card" style="padding:30px 25px; width:200px; text-align:center;">
                     <div style="font-size:2.5rem; margin-bottom:15px;">🤝</div>
-                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Confianza</h3>
-                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Construimos relaciones basadas en la
-                        honestidad y transparencia.</p>
+                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Compromiso con el cliente: </h3>
+                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Acompañamos cada paso hasta la entrega segura del terreno.</p>
                 </div>
 
                 <div class="proyecto-card" style="padding:30px 25px; width:200px; text-align:center;">
-                    <div style="font-size:2.5rem; margin-bottom:15px;">⭐</div>
-                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Calidad</h3>
-                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Ofrecemos proyectos con los más altos
-                        estándares de construcción.</p>
+                    <div style="font-size:2.5rem; margin-bottom:15px;">🏛️</div>
+                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Honestidad y cumplimiento: </h3>
+                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Garantizamos procesos formales, confiables y dentro de los plazos establecidos.</p>
                 </div>
 
                 <div class="proyecto-card" style="padding:30px 25px; width:200px; text-align:center;">
-                    <div style="font-size:2.5rem; margin-bottom:15px;">💡</div>
-                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Innovación</h3>
-                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Buscamos nuevas soluciones para mejorar la
-                        experiencia de compra.</p>
+                    <div style="font-size:2.5rem; margin-bottom:15px;">👑</div>
+                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Liderazgo: </h3>
+                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Contamos con la capacidad de guiar e influir en cada uno de nuestros clientes.</p>
                 </div>
 
                 <div class="proyecto-card" style="padding:30px 25px; width:200px; text-align:center;">
-                    <div style="font-size:2.5rem; margin-bottom:15px;">❤️</div>
-                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Compromiso</h3>
-                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Nos comprometemos con cada cliente para
-                        hacer
-                        realidad su sueño.</p>
-                </div>
-
-                <div class="proyecto-card" style="padding:30px 25px; width:200px; text-align:center;">
-                    <div style="font-size:2.5rem; margin-bottom:15px;">🏆</div>
-                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Excelencia</h3>
-                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Superamos las expectativas en cada proyecto
-                        que desarrollamos.</p>
+                    <div style="font-size:2.5rem; margin-bottom:15px;">💼</div>
+                    <h3 class="text-gold" style="margin-bottom:10px; font-size:1rem;">Profesionalismo: </h3>
+                    <p style="color:#888; font-size:0.85rem; line-height:1.6;">Actuamos con integridad, ética y profesionalismo en todo momento.</p>
                 </div>
 
             </div>
