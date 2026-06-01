@@ -5,7 +5,7 @@
     <div style="width:80px; height:3px; background:#c9a84c; margin-bottom:30px;"></div>
 
     <div style="color:#ddd; line-height:1.9; font-size:0.95rem;">
-        <p style="font-size:1.05rem; margin-bottom:20px;">Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571), Inmobiliaria Mi Hogar S.A.C. pone a disposición de sus clientes el presente Libro de Reclamaciones Virtual.</p>
+        <p style="font-size:1.05rem; margin-bottom:20px;">Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571), Inmobiliaria Mi Hogar Real State Perú S.A.C. pone a disposición de sus clientes el presente Libro de Reclamaciones Virtual.</p>
 
         <div style="background:#111; border:1px solid #c9a84c; border-radius:8px; padding:30px; margin-bottom:30px;">
             <h2 style="color:#c9a84c; font-size:1.2rem; margin-bottom:20px;">📋 Registrar una reclamación</h2>
@@ -33,22 +33,35 @@
                         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                         style="width:100%; padding:10px 14px; border:1px solid #333; border-radius:6px; background:#1a1a1a; color:#fff; font-size:0.9rem; box-sizing:border-box;">
                 </div>
+
+                <!-- ── Tipo con opción "Otros" ── -->
                 <div>
                     <label style="color:#c9a84c; font-size:0.85rem; font-weight:bold; display:block; margin-bottom:5px;">Tipo *</label>
-                    <select id="rec-tipo"
+                    <select id="rec-tipo" onchange="toggleOtroTipo(this.value)"
                         style="width:100%; padding:10px 14px; border:1px solid #333; border-radius:6px; background:#1a1a1a; color:#fff; font-size:0.9rem; box-sizing:border-box;">
                         <option value="">Selecciona el tipo</option>
                         <option value="Queja">Queja (malestar sin afectación económica)</option>
                         <option value="Reclamo">Reclamo (disconformidad con producto o servicio)</option>
+                        <option value="Otros">Otros</option>
                     </select>
+                    <!-- Campo visible solo cuando se elige "Otros" -->
+                    <div id="rec-tipo-otro-wrap" style="display:none; margin-top:10px;">
+                        <input type="text" id="rec-tipo-otro"
+                            placeholder="Especifica el tipo de reclamación..."
+                            style="width:100%; padding:10px 14px; border:1px solid #c9a84c55; border-radius:6px;
+                                   background:#1a1a1a; color:#fff; font-size:0.9rem; box-sizing:border-box;">
+                    </div>
                 </div>
+
                 <div>
                     <label style="color:#c9a84c; font-size:0.85rem; font-weight:bold; display:block; margin-bottom:5px;">Detalle de la reclamación *</label>
                     <textarea id="rec-detalle" rows="4" placeholder="Describe detalladamente tu queja o reclamo..."
                         style="width:100%; padding:10px 14px; border:1px solid #333; border-radius:6px; background:#1a1a1a; color:#fff; font-size:0.9rem; box-sizing:border-box; resize:none;"></textarea>
                 </div>
+
                 <p id="rec-error" style="color:red; font-size:0.82rem; display:none;"></p>
                 <p id="rec-exito" style="color:#28a745; font-size:0.82rem; display:none;"></p>
+
                 <button onclick="enviarReclamacion()"
                     style="background:#c9a84c; color:#000; border:none; padding:14px; border-radius:6px; font-weight:900; font-size:1rem; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">
                     Enviar Reclamación
@@ -65,26 +78,56 @@
 </div>
 
 <script>
-function enviarReclamacion() {
-    const nombre = document.getElementById('rec-nombre').value.trim();
-    const dni = document.getElementById('rec-dni').value.trim();
-    const correo = document.getElementById('rec-correo').value.trim();
-    const telefono = document.getElementById('rec-telefono').value.trim();
-    const tipo = document.getElementById('rec-tipo').value;
-    const detalle = document.getElementById('rec-detalle').value.trim();
-    const error = document.getElementById('rec-error');
-    const exito = document.getElementById('rec-exito');
+// Muestra/oculta el campo de texto libre cuando se elige "Otros"
+function toggleOtroTipo(value) {
+    const wrap = document.getElementById('rec-tipo-otro-wrap');
+    const input = document.getElementById('rec-tipo-otro');
+    if (value === 'Otros') {
+        wrap.style.display = 'block';
+        input.focus();
+    } else {
+        wrap.style.display = 'none';
+        input.value = '';
+    }
+}
 
-    if (!nombre || !dni || !correo || !telefono || !tipo || !detalle) {
+function enviarReclamacion() {
+    const nombre   = document.getElementById('rec-nombre').value.trim();
+    const dni      = document.getElementById('rec-dni').value.trim();
+    const correo   = document.getElementById('rec-correo').value.trim();
+    const telefono = document.getElementById('rec-telefono').value.trim();
+    const tipoSel  = document.getElementById('rec-tipo').value;
+    const tipoOtro = document.getElementById('rec-tipo-otro').value.trim();
+    const detalle  = document.getElementById('rec-detalle').value.trim();
+    const error    = document.getElementById('rec-error');
+    const exito    = document.getElementById('rec-exito');
+
+    // Determina el tipo final
+    const tipo = tipoSel === 'Otros' ? tipoOtro : tipoSel;
+
+    // Validaciones
+    if (!nombre || !dni || !correo || !telefono || !tipoSel || !detalle) {
         error.textContent = '⚠️ Por favor completa todos los campos.';
         error.style.display = 'block';
+        exito.style.display = 'none';
         return;
     }
+    if (tipoSel === 'Otros' && !tipoOtro) {
+        error.textContent = '⚠️ Por favor especifica el tipo de reclamación.';
+        error.style.display = 'block';
+        exito.style.display = 'none';
+        return;
+    }
+
     error.style.display = 'none';
     exito.textContent = '✅ Tu reclamación ha sido registrada. Nos comunicaremos contigo pronto.';
     exito.style.display = 'block';
-    ['rec-nombre','rec-dni','rec-correo','rec-telefono','rec-tipo','rec-detalle']
+
+    // Limpiar formulario
+    ['rec-nombre','rec-dni','rec-correo','rec-telefono','rec-detalle','rec-tipo-otro']
         .forEach(id => document.getElementById(id).value = '');
+    document.getElementById('rec-tipo').value = '';
+    document.getElementById('rec-tipo-otro-wrap').style.display = 'none';
 }
 </script>
 @endsection

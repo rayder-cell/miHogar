@@ -6,7 +6,7 @@
 
     <div style="color:#ddd; line-height:1.9; font-size:0.95rem;">
         <h2 style="color:#c9a84c; font-size:1.2rem; margin:25px 0 10px;">1. Responsable del tratamiento</h2>
-        <p>Inmobiliaria Mi Hogar S.A.C., con RUC 20600777777, con dirección en AV. ANDAHUAYLAS 485, Apurímac, Perú, es la empresa responsable del tratamiento de sus datos personales.</p>
+        <p>Inmobiliaria Mi Hogar Real State Perú S.A.C., con RUC 20615528421, con dirección en AV. ANDAHUAYLAS 485, Andahuaylas, Apurímac, Perú, es la empresa responsable del tratamiento de sus datos personales.</p>
 
         <h2 style="color:#c9a84c; font-size:1.2rem; margin:25px 0 10px;">2. Datos que recopilamos</h2>
         <p>Recopilamos los siguientes datos personales cuando usted completa nuestros formularios de contacto: nombre completo, DNI, número de teléfono, correo electrónico y proyecto de interés. Estos datos son proporcionados voluntariamente por usted.</p>
@@ -21,7 +21,7 @@
         <p>Sus datos personales serán conservados durante el tiempo necesario para cumplir con la finalidad para la que fueron recopilados, o hasta que usted solicite su eliminación.</p>
 
         <h2 style="color:#c9a84c; font-size:1.2rem; margin:25px 0 10px;">6. Sus derechos</h2>
-        <p>Usted tiene derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos personales (derechos ARCO). Para ejercer estos derechos, puede escribirnos a <span style="color:#c9a84c;">info@mihogar.pe</span>.</p>
+        <p>Usted tiene derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos personales (derechos ARCO). Para ejercer estos derechos, puede escribirnos a <span style="color:#c9a84c;">inmobiliariamihogarperu@gmail.com</span>.</p>
 
         <h2 style="color:#c9a84c; font-size:1.2rem; margin:25px 0 10px;">7. Seguridad</h2>
         <p>Implementamos medidas técnicas y organizativas apropiadas para proteger sus datos personales contra el acceso no autorizado, pérdida o destrucción.</p>
