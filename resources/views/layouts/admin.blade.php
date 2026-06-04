@@ -337,8 +337,15 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.testimonios.index') }}"
-                        class="{{ request()->routeIs('admin.testimonios*') ? 'activo' : '' }}">
-                        ⭐ Testimonios
+                        class="{{ request()->routeIs('admin.testimonios*') ? 'active' : '' }}">
+                        <span>⭐</span> Testimonios
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.reclamaciones.index') }}"
+                        class="{{ request()->is('admin/reclamaciones*') ? 'active' : '' }}">
+                        <span>📋</span> Reclamaciones
+                        <span class="badge">{{ \App\Models\Reclamacion::count() }}</span>
                     </a>
                 </li>
             </ul>
