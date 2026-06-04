@@ -15,7 +15,7 @@ class ReclamacionController extends Controller
             'dni'      => 'required|digits:8',
             'correo'   => 'required|email|max:150',
             'telefono' => 'required|digits:9',
-            'tipo'     => 'required|string|in:Queja,Reclamo,Otros|max:200',  // ← solo valores permitidos
+            'tipo'     => 'required|string|max:200',  // ← sin in: para permitir texto libre de "Otros"
             'detalle'  => 'required|string|min:10|max:3000',
         ], [
             'nombre.required'   => 'El nombre es obligatorio.',
@@ -26,7 +26,6 @@ class ReclamacionController extends Controller
             'telefono.required' => 'El teléfono es obligatorio.',
             'telefono.digits'   => 'El teléfono debe tener exactamente 9 dígitos.',
             'tipo.required'     => 'Debes seleccionar o especificar el tipo.',
-            'tipo.in'           => 'El tipo seleccionado no es válido.',
             'detalle.required'  => 'El detalle de la reclamación es obligatorio.',
             'detalle.min'       => 'El detalle debe tener al menos 10 caracteres.',
         ]);
@@ -39,12 +38,12 @@ class ReclamacionController extends Controller
         }
 
         Reclamacion::create([
-            'nombre'   => strip_tags($request->nombre),    // ← elimina HTML/JS
+            'nombre'   => strip_tags($request->nombre),
             'dni'      => $request->dni,
             'correo'   => $request->correo,
             'telefono' => $request->telefono,
-            'tipo'     => strip_tags($request->tipo),      // ← elimina HTML/JS
-            'detalle'  => strip_tags($request->detalle),   // ← elimina HTML/JS
+            'tipo'     => strip_tags($request->tipo),
+            'detalle'  => strip_tags($request->detalle),
             'ip'       => $request->ip(),
         ]);
 
