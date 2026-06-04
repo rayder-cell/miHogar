@@ -391,12 +391,12 @@
     </main>
 
     <!-- FOOTER -->
-    <footer style="background:var(--color-dark-2); color:var(--color-white); padding:50px 40px 0;">
+    <footer style="background:#111; color:#fff; padding:50px 40px 0;">
         <div
             style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; padding-bottom:40px; border-bottom:1px solid #333;">
             <div style="min-width:200px;">
                 <img src="{{ asset('img/LOGO1.png') }}" alt="Mi Hogar" style="height:85px; margin-bottom:15px;">
-                <p style="font-size:0.85rem; color:var(--color-gray); line-height:1.8;">
+                <p style="font-size:0.85rem; color:#aaa; line-height:1.8;">
                     Razón Social: Inmobiliaria Mi Hogar S.A.C.<br>RUC: 20615528421
                 </p>
                 <div style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
@@ -436,7 +436,7 @@
             </div>
             <div style="min-width:160px;">
                 <h4 style="margin-bottom:15px;">Contacto</h4>
-                <p style="color:var(--color-gray); font-size:0.85rem; line-height:2;">
+                <p style="color:#aaa; font-size:0.85rem; line-height:2;">
                     <i class="fas fa-phone" style="color:red;"></i> 932 400 015<br>
                     <i class="fas fa-map-marker-alt" style="color:var(--color-gold);"></i> Andahuaylas, Apurímac<br>
                     <i class="fas fa-envelope" style="color:var(--color-gold);"></i> inmobiliariamihogarperu@gmail.com
