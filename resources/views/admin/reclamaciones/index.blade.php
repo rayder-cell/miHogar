@@ -6,7 +6,7 @@
     {{-- Cabecera --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-white">📋 Libro de Reclamaciones</h1>
+            <h1 class="text-2xl font-bold text-black">📋 Libro de Reclamaciones</h1>
             <p class="text-sm text-gray-400 mt-1">
                 Total registradas: <span class="text-yellow-400 font-semibold">{{ $total }}</span>
             </p>
