@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Admin\TestimonioAdminController;
 use App\Http\Controllers\BuscadorController;
+use App\Http\Controllers\ReclamacionController;               // ← NUEVO
+use App\Http\Controllers\Admin\ReclamacionAdminController;    // ← NUEVO
 
 // Página principal
 Route::get('/', [ProyectoController::class, 'index']);
@@ -29,11 +31,12 @@ Route::get('/politicas-de-privacidad', fn() => view('legales.privacidad'))->name
 Route::get('/financiamiento', fn() => view('legales.financiamiento'))->name('financiamiento');
 Route::get('/libro-de-reclamaciones', fn() => view('legales.reclamaciones'))->name('reclamaciones');
 
-// Contacto con rate limiting (máx 5 intentos por minuto)
+// Contacto y reclamaciones con rate limiting (máx 5 intentos por minuto)
 Route::middleware(['throttle:5,1'])->group(function () {
-    Route::post('/contacto/enviar', [ContactoController::class, 'enviar'])->name('contacto.enviar');
-    Route::post('/contacto/verificar', [ContactoController::class, 'verificar'])->name('contacto.verificar');
-    Route::post('/contacto/chat', [ContactoController::class, 'chat'])->name('contacto.chat');
+    Route::post('/contacto/enviar',    [ContactoController::class,    'enviar']   )->name('contacto.enviar');
+    Route::post('/contacto/verificar', [ContactoController::class,    'verificar'])->name('contacto.verificar');
+    Route::post('/contacto/chat',      [ContactoController::class,    'chat']     )->name('contacto.chat');
+    Route::post('/libro-de-reclamaciones/enviar', [ReclamacionController::class, 'enviar'])->name('reclamacion.enviar'); // ← NUEVO
 });
 
 // Perfil de usuario
@@ -46,10 +49,14 @@ Route::middleware('auth')->group(function () {
 
 // Panel de administración
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('proyectos', ProyectoAdminController::class);
-    Route::resource('asesores', AsesorAdminController::class);
-    Route::resource('testimonios', TestimonioAdminController::class);
+    Route::get('/',  [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('proyectos',    ProyectoAdminController::class);
+    Route::resource('asesores',     AsesorAdminController::class);
+    Route::resource('testimonios',  TestimonioAdminController::class);
+
+    // Reclamaciones — solo index y destroy          // ← NUEVO
+    Route::get('/reclamaciones',           [ReclamacionAdminController::class, 'index']  )->name('reclamaciones.index');
+    Route::delete('/reclamaciones/{reclamacion}', [ReclamacionAdminController::class, 'destroy'])->name('reclamaciones.destroy');
 });
 
 require __DIR__.'/auth.php';
