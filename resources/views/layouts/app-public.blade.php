@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Inmobiliaria Mi Hogar | Terrenos y Casas en Andahuaylas</title>
     <meta name="description"
         content="Encuentra el hogar de tus sueños en Andahuaylas, Apurímac con Inmobiliaria Mi Hogar.">
@@ -266,7 +267,6 @@
                         @foreach ($proyectosChat as $p)
                             <option value="{{ $p->nombre_proyecto }}">{{ $p->nombre_proyecto }}</option>
                         @endforeach
-
                     </select>
                     <input id="chat-asunto" type="text" placeholder="Asunto"
                         style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:0.85rem;">
@@ -495,7 +495,6 @@
                 const nav = document.querySelector('nav');
                 const navBottom = nav.getBoundingClientRect().bottom;
                 const viewportWidth = window.innerWidth;
-                const dropdownWidth = Math.min(750, viewportWidth * 0.95);
 
                 dropdown.style.position = 'fixed';
                 dropdown.style.top = navBottom + 'px';
@@ -543,15 +542,9 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
-                    body: JSON.stringify({
-                        nombre,
-                        correo,
-                        proyecto,
-                        asunto,
-                        mensaje
-                    })
+                    body: JSON.stringify({ nombre, correo, proyecto, asunto, mensaje })
                 })
                 .then(r => r.json())
                 .then(data => {
@@ -562,7 +555,7 @@
                             toggleChat();
                             exito.style.display = 'none';
                             ['chat-nombre', 'chat-correo', 'chat-proyecto', 'chat-asunto', 'chat-mensaje']
-                            .forEach(id => document.getElementById(id).value = '');
+                                .forEach(id => document.getElementById(id).value = '');
                         }, 2500);
                     } else {
                         error.textContent = data.message || 'Error al enviar.';
